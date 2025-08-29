@@ -1,12 +1,17 @@
-name: Sync staging -> main (sin workflows) a Repo B
+name: Mirror A:staging -> B:main (FF, strip .github)
 
 on:
   push:
     branches: [staging]
   workflow_dispatch:
 
+# evita que corran dos mirrors a la vez
+concurrency:
+  group: mirror-staging-to-main
+  cancel-in-progress: true
+
 jobs:
-  sync:
+  mirror:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,54 +21,64 @@ jobs:
           ref: staging
           fetch-depth: 0
 
-      - name: Push a Repo B sin .github/workflows
+      - name: Build FF commit and push to Repo B:main (no force)
         env:
           TOKEN: ${{ secrets.GCCONTRACTS_MIRROR_STAGING_SECRET }}
         run: |
-          set -e
+          set -euo pipefail
 
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
-          # 1) Quitar el header del GITHUB_TOKEN (evita usar github-actions[bot])
+          # Usar tu PAT (no el GITHUB_TOKEN)
           git config --unset-all http.https://github.com/.extraheader || true
           git config --global --unset-all http.https://github.com/.extraheader || true
           sudo git config --system --unset-all http.https://github.com/.extraheader || true
 
-          # 2) Crear un commit temporal SIN workflows (no se empuja a Repo A)
-          # if [ -d ".github/workflows" ]; then
-          #   rm -rf .github/workflows
-          #   git add -A
-          #   # solo commitea si hubo cambios
-          #   if ! git diff --cached --quiet; then
-          #     git commit -m "chore(sync): strip .github/workflows for mirror to Repo B"
-          #   fi
-          # fi
+          # 1) Preparar el árbol de A:staging SIN .github
+          rm -rf .github || true
+          git add -A
+          TREE="$(git write-tree)"
 
+          # Metadatos del último commit de A:staging (para replicar mensaje/autor/fecha)
+          MSG="$(git log -1 --pretty=%B)"
+          AN="$(git log -1 --format='%an')"
+          AE="$(git log -1 --format='%ae')"
+          AD="$(git log -1 --format='%ad' --date=iso-strict)"
 
-          MSG_FILE="$(mktemp)"
-          git log -1 --pretty=%B > "$MSG_FILE"
-          ORIG_AUTHOR="$(git log -1 --format='%an <%ae>')"
-          ORIG_DATE="$(git log -1 --format='%ad' --date=iso-strict)"
-
-          # Quitar .github completo del árbol para el mirror a Repo B
-          if [ -d ".github" ]; then
-            rm -rf .github
-            git add -A
-            # Commit temporal SOLO si hubo cambios
-            if ! git diff --cached --quiet; then
-              git commit --author="$ORIG_AUTHOR" --date="$ORIG_DATE" -F "$MSG_FILE"
-            fi
-          fi
-
-          # 3) Agregar remoto destino con PAT
+          # 2) Conectar Repo B y traer su main
           git remote remove mirror 2>/dev/null || true
           git remote add mirror "https://x-access-token:${TOKEN}@github.com/fhidalgoGC/testbranch.git"
 
-          # 4) (opcional) probar acceso
-          git ls-remote mirror -h
+          attempt=0
+          while [ $attempt -lt 3 ]; do
+            # Traer última punta de main de B
+            git fetch mirror main:mirror-main
 
-          # 5) Forzar push del HEAD actual -> main en Repo B
-          git push mirror HEAD:main --force
-          # git push --force-with-lease mirror HEAD:main
+            # Si el árbol es idéntico, no hay nada que empujar
+            BASE_TREE="$(git show -s --format=%T mirror-main || echo '')"
+            if [ "$TREE" = "$BASE_TREE" ]; then
+              echo "Sin cambios (tras quitar .github); nada que empujar."
+              exit 0
+            fi
+
+            # 3) Crear commit NUEVO con padre = B:main y tree = A:staging sin .github
+            export GIT_AUTHOR_NAME="$AN" GIT_AUTHOR_EMAIL="$AE" GIT_AUTHOR_DATE="$AD"
+            export GIT_COMMITTER_NAME="GitHub Actions" GIT_COMMITTER_EMAIL="actions@github.com" GIT_COMMITTER_DATE="$AD"
+            NEW_COMMIT="$(printf "%s" "$MSG" | git commit-tree "$TREE" -p mirror-main)"
+
+            # 4) Avanzar ref local y empujar en fast-forward (SIN --force)
+            git update-ref refs/heads/ff-main "$NEW_COMMIT"
+            if git push mirror refs/heads/ff-main:refs/heads/main; then
+              echo "Push en fast-forward OK."
+              exit 0
+            fi
+
+            echo "El remoto avanzó entre fetch y push; reintentando..."
+            attempt=$((attempt+1))
+            sleep 2
+          done
+
+          echo "No se pudo empujar en fast-forward tras reintentos." >&2
+          exit 1
