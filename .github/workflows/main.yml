@@ -65,4 +65,5 @@ jobs:
           git ls-remote mirror -h
 
           # 5) Forzar push del HEAD actual -> main en Repo B
-          git push mirror HEAD:main --force
+          # git push mirror HEAD:main --force
+          git push --force-with-lease mirror HEAD:main
