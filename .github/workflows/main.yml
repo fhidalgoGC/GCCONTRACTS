@@ -49,7 +49,7 @@ jobs:
 
           # 2) Conectar Repo B y traer su main
           git remote remove mirror 2>/dev/null || true
-          git remote add mirror "https://x-access-token:${TOKEN}@github.com/fhidalgoGC/testbranch.git"
+          git remote add mirror "https://x-access-token:${TOKEN}@github.com/fhidalgoGC/contracts_deploy_stg.git"
 
           attempt=0
           while [ $attempt -lt 3 ]; do
