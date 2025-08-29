@@ -20,7 +20,6 @@ jobs:
         with:
           ref: staging
           fetch-depth: 0
->>>>>>> main
 
       - name: Build FF commit and push to Repo B:main (no force)
         env:
