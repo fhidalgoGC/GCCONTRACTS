@@ -158,6 +158,11 @@ export default function LoginForm() {
             </Button>
             </fieldset>
           </form>
+
+          {/* App Version */}
+          <div className="text-center mt-6 pt-4 border-t border-gray-200">
+            <p className="text-xs text-gray-500">Version 1.0.0</p>
+          </div>
         </CardContent>
       </Card>
     </div>
