@@ -32,12 +32,28 @@ jobs:
           sudo git config --system --unset-all http.https://github.com/.extraheader || true
 
           # 2) Crear un commit temporal SIN workflows (no se empuja a Repo A)
-          if [ -d ".github/workflows" ]; then
-            rm -rf .github/workflows
+          # if [ -d ".github/workflows" ]; then
+          #   rm -rf .github/workflows
+          #   git add -A
+          #   # solo commitea si hubo cambios
+          #   if ! git diff --cached --quiet; then
+          #     git commit -m "chore(sync): strip .github/workflows for mirror to Repo B"
+          #   fi
+          # fi
+
+
+          MSG_FILE="$(mktemp)"
+          git log -1 --pretty=%B > "$MSG_FILE"
+          ORIG_AUTHOR="$(git log -1 --format='%an <%ae>')"
+          ORIG_DATE="$(git log -1 --format='%ad' --date=iso-strict)"
+
+          # Quitar .github completo del árbol para el mirror a Repo B
+          if [ -d ".github" ]; then
+            rm -rf .github
             git add -A
-            # solo commitea si hubo cambios
+            # Commit temporal SOLO si hubo cambios
             if ! git diff --cached --quiet; then
-              git commit -m "chore(sync): strip .github/workflows for mirror to Repo B"
+              git commit --author="$ORIG_AUTHOR" --date="$ORIG_DATE" -F "$MSG_FILE"
             fi
           fi
 
