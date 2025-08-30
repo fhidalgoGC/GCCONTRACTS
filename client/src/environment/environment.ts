@@ -5,7 +5,6 @@ export const environment = {
   // Base URLs
   CRM_BASE_URL:
     import.meta.env.VITE_URL_CRM ||
-    import.meta.env.CRM_BASE_URL ||
     "https://crm-develop.grainchain.io/api/v1",
 
   TRM_BASE_URL:
@@ -14,7 +13,6 @@ export const environment = {
 
   IDENTITY_BASE_URL:
     import.meta.env.VITE_URL_IDENTITY ||
-    import.meta.env.VITE_IDENTITY_BASE_URL ||
     "https://un4grlwfx2.execute-api.us-west-2.amazonaws.com/dev",
 
   UNIT_CONVERSIONS_ENDPOINT: "/unit-conversions/units",
