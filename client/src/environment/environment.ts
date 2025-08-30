@@ -3,50 +3,31 @@ export const environment = {
   API_LIMIT: Number(import.meta.env.VITE_API_LIMIT) || 100,
 
   // Base URLs
-  CRM_BASE_URL:
-    import.meta.env.VITE_URL_CRM ||
-    "https://crm-develop.grainchain.io/api/v1",
+  CRM_BASE_URL: import.meta.env.VITE_URL_CRM,
 
-  TRM_BASE_URL:
-    import.meta.env.VITE_TRM_BASE_URL ||
-    "https://trm-develop.grainchain.io/api/v1",
+  TRM_BASE_URL: import.meta.env.VITE_TRM_BASE_URL,
 
-  IDENTITY_BASE_URL:
-    import.meta.env.VITE_URL_IDENTITY ||
-    "https://un4grlwfx2.execute-api.us-west-2.amazonaws.com/dev",
+  IDENTITY_BASE_URL: import.meta.env.VITE_URL_IDENTITY,
 
   UNIT_CONVERSIONS_ENDPOINT: "/unit-conversions/units",
 
-  CRAFTMYPDF_BASE_URL:
-    import.meta.env.VITE_CRAFTMYPDF_BASE_URL || "https://api.craftmypdf.com/v1",
+  CRAFTMYPDF_BASE_URL: import.meta.env.VITE_CRAFTMYPDF_BASE_URL,
 
-  SSM_BASE_URL:
-    import.meta.env.VITE_SSM_BASE_URL ||
-    "https://ssm-develop.grainchain.io/silosys-service/api/v1",
+  SSM_BASE_URL: import.meta.env.VITE_SSM_BASE_URL,
 
   // Origins for CORS
-  CONTRACTS_ORIGIN:
-    import.meta.env.VITE_CONTRACTS_ORIGIN ||
-    "https://contracts-develop.grainchain.io",
+  CONTRACTS_ORIGIN: import.meta.env.VITE_CONTRACTS_ORIGIN,
 
   // Auth0 Config
-  AUTH0_URL:
-    import.meta.env.VITE_AUTH0_URL ||
-    "https://grainchaindev.auth0.com/oauth/token",
+  AUTH0_URL: import.meta.env.VITE_AUTH0_URL,
 
-  AUTH0_AUDIENCE:
-    import.meta.env.VITE_AUTH0_AUDIENCE ||
-    "https://grainchaindev.auth0.com/userinfo",
+  AUTH0_AUDIENCE: import.meta.env.VITE_AUTH0_AUDIENCE,
 
-  AUTH0_GRANT_TYPE:
-    import.meta.env.VITE_AUTH0_GRANT_TYPE ||
-    "http://auth0.com/oauth/grant-type/password-realm",
+  AUTH0_GRANT_TYPE: import.meta.env.VITE_AUTH0_GRANT_TYPE,
 
-  AUTH0_REALM:
-    import.meta.env.VITE_AUTH0_REALM || "Username-Password-Authentication",
+  AUTH0_REALM: import.meta.env.VITE_AUTH0_REALM,
 
-  AUTH0_CLIENT_ID:
-    import.meta.env.VITE_AUTH0_CLIENT_ID || "f9jw9xsL2Sje2LwHsEZSxnpMupH0QiNJ",
+  AUTH0_CLIENT_ID: import.meta.env.VITE_AUTH0_CLIENT_ID,
 
   AUTH0_SCOPE: import.meta.env.VITE_AUTH0_SCOPE || "openid offline_access",
 
@@ -54,11 +35,9 @@ export const environment = {
   DEFAULT_CURRENCY: import.meta.env.VITE_DEFAULT_CURRENCY || "usd",
 
   // CraftMyPDF Config
-  TEMPLATE_ID: import.meta.env.VITE_TEMPLATE_ID || "5e177b2393797a28",
+  TEMPLATE_ID: import.meta.env.VITE_TEMPLATE_ID,
 
-  CRAFTMYPDF_API_KEY:
-    import.meta.env.VITE_CRAFTMYPDF_API_KEY ||
-    "3364MTI3MTk6MTI3NzI6TDMwNjZMaG9odGhNMFg1bA=",
+  CRAFTMYPDF_API_KEY: import.meta.env.VITE_CRAFTMYPDF_API_KEY,
 
   // Number Formatting
   NUMBER_FORMAT_PATTERN:
