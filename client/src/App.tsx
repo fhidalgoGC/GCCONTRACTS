@@ -11,7 +11,7 @@ import { useEffect } from "react";
 import "./common/utils/i18n";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { useStateRestoration } from "@/hooks/usePageState";
-import { SessionValidator } from "@/components/SessionValidator";
+import { SessionValidator } from "@/components/general/SessionValidator";
 import { useLocation } from "wouter";
 import AppRoutes from "@/routes";
 
