@@ -107,6 +107,13 @@ export const addAuthInHeader = (
     }
 
     // Agregar partition key si está disponible
+    if (partitionKey) {
+      headers.set("_partitionkey", partitionKey);
+      headers.set("bt-organization", partitionKey);
+      headers.set("bt-uid", partitionKey);
+      headers.set("organization_id", partitionKey);
+      headers.set("pk-organization", partitionKey);
+    }
   }
 
   return {
@@ -144,9 +151,21 @@ export const addJwtPk = (
     const jwt = localStorage.getItem("jwt") || localStorage.getItem("id_token");
     const partitionKey = localStorage.getItem("partition_key");
 
+    console.log("🔍 DEBUG INTERCEPTOR:", {
+      url,
+      shouldExcludeAuth,
+      jwt: jwt ? "✅ Token presente" : "❌ No token",
+      partitionKey: partitionKey ? "✅ PartitionKey presente" : "❌ No partitionKey",
+      jwtLength: jwt?.length || 0,
+      partitionKeyValue: partitionKey
+    });
+
     // Agregar JWT token si está disponible
     if (jwt) {
       headers.set("authorization", `Bearer ${jwt}`);
+      console.log("✅ Header Authorization agregado");
+    } else {
+      console.log("❌ No se pudo agregar Authorization header - no hay JWT token");
     }
 
     // Agregar partition key si está disponible
@@ -156,7 +175,12 @@ export const addJwtPk = (
       headers.set("bt-uid", partitionKey);
       headers.set("organization_id", partitionKey);
       headers.set("pk-organization", partitionKey);
+      console.log("✅ Headers de PartitionKey agregados");
+    } else {
+      console.log("❌ No se pudieron agregar headers de PartitionKey - no hay partitionKey");
     }
+  } else {
+    console.log("🚫 AUTH EXCLUIDA para URL:", url);
   }
 
   return {
