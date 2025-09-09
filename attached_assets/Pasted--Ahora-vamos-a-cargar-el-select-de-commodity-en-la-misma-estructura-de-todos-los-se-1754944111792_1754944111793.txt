@@ -1,0 +1,175 @@
+—----------------
+Ahora vamos a cargar el select de commodity en la misma estructura de todos los select
+[
+   {
+       "key": "", -> este es el valor que se usara para guardar o mandar al api
+       "value": "",-> este se usara para mostrar la seleccion
+       "label": "" -> este se usara para mostrar la seleccion
+   }
+]
+curl 'https://crm-develop.grainchain.io/api/v1/commodities/commodities?page=1&limit=20&filter=%7B%22_partitionKey%22%3A%2268534bd2bbd1909dc855048b%22%7D' \
+  -H '_partitionkey: 68534bd2bbd1909dc855048b' \
+  -H 'accept: */*' \
+  -H 'accept-language: es-419,es;q=0.9' \
+  -H 'authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5EUkJSRVUxTXpCRVF6STRNRGd6T1RCRU1EZ3hOVGRFTlROR1JUazNORU0xTnpJeE16STROZyJ9.eyJodHRwOi8vd3d3LmdyYWluY2hhaW4uaW8vcm9sZXMiOlsicGFydGljaXBhbnQiXSwiaXNzIjoiaHR0cHM6Ly9ncmFpbmNoYWluZGV2LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2ODU0ODM0OTY5YmI1MWVlMTg1YTk3MjAiLCJhdWQiOiJodHRwczovL2dyYWluY2hhaW5kZXYuYXV0aDAuY29tL2FwaS92Mi8iLCJpYXQiOjE3NTQ5NDI4NDgsImV4cCI6MTc1NzUzNDg0OCwic2NvcGUiOiJyZWFkOmN1cnJlbnRfdXNlciB1cGRhdGU6Y3VycmVudF91c2VyX21ldGFkYXRhIGRlbGV0ZTpjdXJyZW50X3VzZXJfbWV0YWRhdGEgY3JlYXRlOmN1cnJlbnRfdXNlcl9tZXRhZGF0YSBjcmVhdGU6Y3VycmVudF91c2VyX2RldmljZV9jcmVkZW50aWFscyBkZWxldGU6Y3VycmVudF91c2VyX2RldmljZV9jcmVkZW50aWFscyB1cGRhdGU6Y3VycmVudF91c2VyX2lkZW50aXRpZXMiLCJndHkiOiJwYXNzd29yZCIsImF6cCI6InNZcXh2QWcyTTJCYktyekRkOUZHa3Y1TnZhQU54UllwIn0.oXfH0BYhNQTgc-PD6OzEM0_lcIEuOxrAZz_5B1lHcnZQwbhBH413FdOydOzhUNo-svlNM-oaWWpUJszmv8omAzPGW--_tqDQwI24ALVZOPPljqwCuehTpd7dZgyUxHDt1T8XGmvJR6rjscmGECRaFLpFAmgybWPCXfqYtEbLFmiz0AXaLVbe7UGFsVq6m3KYO22BVJ5QbI4Bgc2rypegyxYAaLrkUWxZRk2OoCamDPsJiDs5BN1O1FlxPimgG3TUIXxoq9o9ai2IxHfkFn4P6Xt9JQnHWTqWHMX-AzD692-lDjYe_iRYYf9aQOafiIG8QwtsAD6U3m8w30eB7GkV5g' \
+  -H 'bt-organization: 68534bd2bbd1909dc855048b' \
+  -H 'bt-uid: 68534bd2bbd1909dc855048b' \
+  -H 'if-none-match: W/"41c2b-pOYXMgIYfVAju5RI0lDip67jfnQ"' \
+  -H 'organization_id: 68534bd2bbd1909dc855048b' \
+  -H 'origin: https://contracts-develop.grainchain.io' \
+  -H 'pk-organization: 68534bd2bbd1909dc855048b' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://contracts-develop.grainchain.io/' \
+  -H 'sec-ch-ua: "Not)A;Brand";v="8", "Chromium";v="138", "Google Chrome";v="138"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "macOS"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-site' \
+  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36'
+
+
+
+
+Tambien se debe reemplazar el token y el partitionkey tanto en el header como en la variable filter, 
+
+
+La respuesta del endpoint es {
+   "data": [
+       {
+           "updated_at": "2025-03-10T17:09:36.771Z",
+           "_id": "68534cd39cd9b42bbdd669fa",
+           "_partitionKey": "68534bd2bbd1909dc855048b",
+           "active": true,
+           "created_at": "2025-06-18T23:33:39.763Z",
+           "is_subcommodity": false,
+           "name": "Maíz Blanco",
+           "original_name_id": {
+               "_id": "a5afb4459af940f266449d38",
+               "names": {
+                   "es": "Maíz Blanco",
+                   "en": "White Corn",
+                   "default": "White Corn"
+               },
+               "subcategory": {
+                   "_id": "88bfe3e90e6c1aa9f3fff882",
+                   "labels": {
+                       "en": "Corn",
+                       "es": "Maíz",
+                       "default": "Corn"
+                   },
+                   "externals": [],
+                   "names": [
+                       "3ec51c683ae365e3ca8ccd60",
+                       "a5afb4459af940f266449d38",
+                       "c41f4b59efc41a59b1b0c2f2",
+                       "5cf6386bdd55c43f89d189e0",
+                       "0379ba29fa5b155d51023029"
+                   ],
+                   "extras": [
+                       {
+                           "key": "code",
+                           "values": [
+                               {
+                                   "value": "1005",
+                                   "value_type": "string"
+                               }
+                           ]
+                       },
+                       {
+                           "key": "picture",
+                           "values": [
+                               {
+                                   "value": "https://harvex-platform-dev.s3-us-west-2.amazonaws.com/images/subcategorycommodities/maiz.png",
+                                   "value_type": "string"
+                               }
+                           ]
+                       },
+                       {
+                           "key": "classification",
+                           "values": [
+                               {
+                                   "value": "H0,H1,H2,H3,H4,H5",
+                                   "value_type": "string"
+                               }
+                           ]
+                       }
+                   ],
+                   "active": true,
+                   "status": "ready",
+                   "created_at": "2022-07-04T21:03:26.999Z",
+                   "updated_at": "2022-07-04T21:03:26.999Z",
+                   "_partitionKey": "public",
+                   "icon": {
+                       "name_react": "maiz",
+                       "type": "commodities"
+                   }
+               },
+               "category": {
+                   "_id": "8803e31c13d3fe8859fb89f7",
+                   "labels": {
+                       "en": "Cereals",
+                       "es": "Cereales",
+                       "default": "Cereals"
+                   },
+                   "externals": [],
+                   "subcategories": [
+                       "88bfe3e90e6c1aa9f3fff882",
+                       "c66a58f1c48db0c93ae8ec2b",
+                       "f919c639b2842c7ed35b8956",
+                       "f854a5d69e2ed5e4d2a00a3d",
+                       "f8a66673ea72e98c41fccf8f"
+                   ],
+                   "extras": [
+                       {
+                           "key": "code",
+                           "values": [
+                               {
+                                   "value": "10",
+                                   "value_type": "string"
+                               }
+                           ]
+                       },
+                       {
+                           "key": "classification",
+                           "values": [
+                               {
+                                   "value": "H0,H1,H2,H3,H4,H5",
+                                   "value_type": "string"
+                               }
+                           ]
+                       }
+                   ],
+                   "active": true,
+                   "status": "ready",
+                   "created_at": "2022-07-04T21:03:54.942Z",
+                   "updated_at": "2022-07-04T21:03:54.942Z",
+                   "_partitionKey": "public"
+               },
+               "externals": [],
+               "extras": [],
+               "active": true,
+               "status": "ready",
+               "created_at": "2022-07-04T21:04:25.093Z",
+               "updated_at": "2022-07-04T21:04:25.093Z",
+               "_partitionKey": "public"
+           },
+           "partition_reference_name": "public",
+           "externals": [],
+           "extras": []
+       }]
+}
+
+
+El mapeo sera de la siguiente manera 
+
+
+Key -> _id
+value-> name
+label -> name
+
+
+
+
+
+

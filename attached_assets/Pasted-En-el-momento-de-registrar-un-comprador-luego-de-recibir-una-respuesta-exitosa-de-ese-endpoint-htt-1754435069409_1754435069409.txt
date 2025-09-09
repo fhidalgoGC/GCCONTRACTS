@@ -1,0 +1,26 @@
+En el momento de registrar un comprador, luego de recibir una respuesta exitosa de ese endpoint (https://crm-develop.grainchain.io/api/v1/crm-people/people/) donde recibiras un payload de esta forma 
+
+{
+    "name": "Freddy",
+    "email": "fredyy@gmail.com",
+    "phone": "3212321",
+    "address": "12312 Cuajimalpa de Morelos Ciudad de México Mexico",
+    "contact": "Fred Hidalgo",
+    "people_id": "6892795fcdc78a668e974d5b"
+}
+
+Se va a tomar el key people_id y se llamara otro endpoint https://crm-develop.grainchain.io/api/v1/crm-locations para registrar la location de de ese people pasandole el people_id en el key owner_id  y los demas datos de los selectores como este ejemplo 
+
+curl 'https://crm-develop.grainchain.io/api/v1/crm-locations/address' \
+  -H '_partitionkey: 68534bd2bbd1909dc855048b' \
+  -H 'accept: */*' \
+  -H 'accept-language: es-419,es;q=0.9' \
+  -H 'authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5EUkJSRVUxTXpCRVF6STRNRGd6T1RCRU1EZ3hOVGRFTlROR1JUazNORU0xTnpJeE16STROZyJ9.eyJodHRwOi8vd3d3LmdyYWluY2hhaW4uaW8vcm9sZXMiOlsicGFydGljaXBhbnQiXSwiaXNzIjoiaHR0cHM6Ly9ncmFpbmNoYWluZGV2LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2ODU0ODM0OTY5YmI1MWVlMTg1YTk3MjAiLCJhdWQiOiJodHRwczovL2dyYWluY2hhaW5kZXYuYXV0aDAuY29tL2FwaS92Mi8iLCJpYXQiOjE3NTQ0Mjk3MzMsImV4cCI6MTc1NzAyMTczMywic2NvcGUiOiJyZWFkOmN1cnJlbnRfdXNlciB1cGRhdGU6Y3VycmVudF91c2VyX21ldGFkYXRhIGRlbGV0ZTpjdXJyZW50X3VzZXJfbWV0YWRhdGEgY3JlYXRlOmN1cnJlbnRfdXNlcl9tZXRhZGF0YSBjcmVhdGU6Y3VycmVudF91c2VyX2RldmljZV9jcmVkZW50aWFscyBkZWxldGU6Y3VycmVudF91c2VyX2RldmljZV9jcmVkZW50aWFscyB1cGRhdGU6Y3VycmVudF91c2VyX2lkZW50aXRpZXMiLCJndHkiOiJwYXNzd29yZCIsImF6cCI6InNZcXh2QWcyTTJCYktyekRkOUZHa3Y1TnZhQU54UllwIn0.N9RyzIyh20aKIqV-FE25fGMxCewAc3GzUnI_xdHNmkW6hQB5Accy00cu-mAmeMFnVqk5Q42o7FrBwLCmLyn_1hsCnoGw8DgUAqBAJWaTI-uUHx6v635kh7KUOFUqD-gDL8ZuzAaNBZIbtXkg_q2bSVuQiG1gt2MNdiebr65ibc_f0pnqSNFwdN3WbguHe7v_kU5lOpusKG1Ej8nWL3MDerxoBoRzBZM7IcbYxzeCf0r2XugQkleuEG1bwhulMcFRSXdlwfCEK9tMPICl76wxWQqzkfcfZK2P4LXTzmDO9Veup3E54fy1LBOhHo4kj88rA8TmNANZWv47n6aP5asXSg' \
+  -H 'bt-organization: 68534bd2bbd1909dc855048b' \
+  -H 'bt-uid: 68534bd2bbd1909dc855048b' \
+  -H 'content-type: application/json; charset=utf-8' \
+  -H 'organization_id: 68534bd2bbd1909dc855048b' \
+  -H 'pk-organization: 68534bd2bbd1909dc855048b' \
+  --data-raw $'{\n  "owner_id": "6892795fcdc78a668e974d5b",\n  "type": [\n    "personal"\n  ],\n  "address_line_1": "12312",\n  "address_line_2": "",\n  "country_id": "3423662de464f9c723254315",\n  "country": "Mexico",\n  "state_id": "803de85af143dcee5bb74821",\n  "state": "Ciudad de México",\n  "city_id": "f8ad9b4463d648c3c2c4b2ab",\n  "city": "Cuajimalpa de Morelos",\n  "neighborhood": "",\n  "zip_code": "123213",\n  "latitude": "",\n  "longitude": "",\n  "elevation": "",\n  "_partitionKey": "68534bd2bbd1909dc855048b"\n}'  
+
+Recuerda reemplazar el token y el pk-organization, con el partitionkey que se tenga seleccionado en el sistema, si la respuesta es positiva  regresar al listado 

@@ -1,0 +1,20 @@
+Ahora vamos a cargar la data este endpoint traer la data de tipo contratos
+curl --location --globoff 'https://trm-develop.grainchain.io/api/v1/contracts/sp-contracts?all=true&filter={%0A%20%20%22type%22%3A%20%22purchase%22%0A}&page=1&limit=10&sort[created_at]=-1' \
+--header '_partitionkey: 68534bd2bbd1909dc855048b' \
+--header 'accept: */*' \
+--header 'accept-language: es-419,es;q=0.9' \
+--header 'authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5EUkJSRVUxTXpCRVF6STRNRGd6T1RCRU1EZ3hOVGRFTlROR1JUazNORU0xTnpJeE16STROZyJ9.eyJodHRwOi8vd3d3LmdyYWluY2hhaW4uaW8vcm9sZXMiOlsicGFydGljaXBhbnQiXSwiaXNzIjoiaHR0cHM6Ly9ncmFpbmNoYWluZGV2LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2ODU0ODM0OTY5YmI1MWVlMTg1YTk3MjAiLCJhdWQiOiJodHRwczovL2dyYWluY2hhaW5kZXYuYXV0aDAuY29tL2FwaS92Mi8iLCJpYXQiOjE3NTUwMTQ0MzcsImV4cCI6MTc1NzYwNjQzNywic2NvcGUiOiJyZWFkOmN1cnJlbnRfdXNlciB1cGRhdGU6Y3VycmVudF91c2VyX21ldGFkYXRhIGRlbGV0ZTpjdXJyZW50X3VzZXJfbWV0YWRhdGEgY3JlYXRlOmN1cnJlbnRfdXNlcl9tZXRhZGF0YSBjcmVhdGU6Y3VycmVudF91c2VyX2RldmljZV9jcmVkZW50aWFscyBkZWxldGU6Y3VycmVudF91c2VyX2RldmljZV9jcmVkZW50aWFscyB1cGRhdGU6Y3VycmVudF91c2VyX2lkZW50aXRpZXMiLCJndHkiOiJwYXNzd29yZCIsImF6cCI6InNZcXh2QWcyTTJCYktyekRkOUZHa3Y1TnZhQU54UllwIn0.npo5ewZGvgBrybBdTHhP4z8VL797_bKavkTZNgh0ijOgbImAxp2JJVzIsRDC2X1M3smtr7oC85gha4pggN-o_DR_SyKK0uyIDIdbEl3Sa2I2yTzFwqTnkH-7LZD0F8bdyVpOb-1c3GFzOJWF0AHJVRSXQfKQDEFZHby_yv-VFOqZkitXY-7r30i9zBo--y7fxJ0A2L6KfvPhk4HFE_O4WMe-VpmEY0MXyBDxpT_RbaQoSjkvH7ZgUq6T44CRp3bJbsR0Q5hqdpE5xN29dSg8MXIneqOKkrTFsKuLybpaLrD7l2cnvTc8llFCX-UNuUOxq7gaNtLX3g8z1spBP3xWnw' \
+--header 'bt-organization: 68534bd2bbd1909dc855048b' \
+--header 'bt-uid: 68534bd2bbd1909dc855048b' \
+--header 'organization_id: 68534bd2bbd1909dc855048b' \
+--header 'origin: https://contracts-develop.grainchain.io' \
+--header 'pk-organization: 68534bd2bbd1909dc855048b'
+
+
+Vamos a cambiar los parametros
+
+All = true
+filter={"type":"purchase"}  aqui se agrega el tipo y los commodities si estan seleccionado uno o varios asi
+{"type": "purchase","commodity.commodity_id":{$in:["6839ef25edc3c27f091bdfc0"]}}, sino esta seleccionado no se manda el de commodities que por defecto trae todo
+page=1 la pagina seleccionada de la tabla
+limit=10 -> este en la cantidad por pagina que dice la tabla

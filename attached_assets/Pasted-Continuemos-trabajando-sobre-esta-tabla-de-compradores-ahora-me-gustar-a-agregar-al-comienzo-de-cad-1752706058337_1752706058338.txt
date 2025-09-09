@@ -1,0 +1,12 @@
+Continuemos trabajando sobre esta tabla de compradores, ahora me gustaría agregar al comienzo de cada fila un avatar circular con un icono de información para que cuando se pose el puntero del mouse sobre este icono se muestre un Tooltip, Hover Card / Details Card o Popover lo que consideres más adecuado para mostrar información detallada del registro en la fila.  
+
+Por favor incluye en este componente que se despliega la siguiente información:
+
+ID, tómalo del key “_id” en la raíz del objeto que le corresponde a la fila y aplica las mismas reglas para darle formato que ya le aplicaste cuando lo muestras en la tabla. De ser posible crea una función y úsala en ambos lados, si esta función no existe creala debido a que estas mismas reglas se aplicarán en diversas pantallas de la solución que estamos construyendo.  
+Fecha de registro, tómala del key “created_at” en la raíz del objeto, dale un formato legible, amigable y considera el idioma en que se está mostrando la solución.
+Nombre, tomalo del key “full_name” en la raíz del objeto.
+Tipo de persona, tomalo del key “person_type” en la raiz del objeto, si el value es “juridical_person” cambialo por “Persona Jurídica” y si el value es “natural_person” cambialo por “Persona Moral”.
+Correo Electrónico, para obtener este valor debes buscar el key “emails” que es de tipo array, es posible que un comprador tenga más de un email, por esta razón hay varios objetos, de cada objeto toma el key “value”, también es posible que el comprador no tenga registrado ningún email en cuyo caso debes hacer las validaciones pertinentes para que no falle la app.
+Teléfono, para obtener este valor debes buscar el key “phones” que es de tipo array, es posible que un comprador tenga más de un teléfono, por esta razón hay varios objetos, de cada objeto toma los key “calling_code” y “phone_number” y concatenalos dejando un espacio en blanco entre ellos, también es posible que el comprador no tenga registrado ningún teléfono en cuyo caso debes hacer las validaciones pertinentes para que no falle la app.
+
+Aplica un estilo elegante y minimalista a este panel que se despliega, haciendo todo lo posible para que luzca como las interfaces Fluent UI de Microsoft. Mientras el puntero del mouse se mantenga sobre el icono de información o sobre el panel que se despliega con el detalle mantenlo visible, cuando el puntero salga de esta superficie ocultas de nuevo el panel. Haz las validaciones necesarias para que nunca se muestren dos de estos paneles a la vez. 

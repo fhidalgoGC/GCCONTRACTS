@@ -8,6 +8,66 @@ export interface InterceptorOptions {
 }
 
 /**
+ * Función standalone para logout automático (sin hooks)
+ * Se ejecuta cuando se recibe un 401 desde el interceptor
+ * Emite un evento personalizado para que los componentes de React manejen la redirección
+ */
+export const performAutoLogout = () => {
+  console.log('🔐 AUTO-LOGOUT: Sesión expirada (401), realizando logout automático...');
+  
+  // Clear tokens from localStorage
+  localStorage.removeItem("jwt");
+  localStorage.removeItem("id_token");
+  localStorage.removeItem("refresh_token");
+  localStorage.removeItem("access_token");
+
+  // Clear user data from localStorage
+  localStorage.removeItem("user_name");
+  localStorage.removeItem("user_lastname");
+  localStorage.removeItem("user_id");
+  localStorage.removeItem("user_email");
+  localStorage.removeItem("partition_key");
+  localStorage.removeItem("representative_people_id");
+  localStorage.removeItem("representative_people_full_name");
+  localStorage.removeItem("representative_people_first_name");
+  localStorage.removeItem("representative_people_last_name");
+  localStorage.removeItem("representative_people_email");
+  localStorage.removeItem("representative_people_calling_code");
+  localStorage.removeItem("representative_people_phone_number");
+
+  // Clear company data from localStorage
+  localStorage.removeItem("company_business_name");
+  localStorage.removeItem("company_business_type");
+  localStorage.removeItem("company_calling_code");
+  localStorage.removeItem("company_phone_number");
+  localStorage.removeItem("company_address_line");
+  
+  // Clear organization data from localStorage
+  localStorage.removeItem("current_organization_id");
+  localStorage.removeItem("current_organization_name");
+  localStorage.removeItem("organization_details");
+  localStorage.removeItem("last_activity");
+  localStorage.removeItem("login_time");
+
+  // Notificar a otras pestañas sobre el logout
+  try {
+    const channel = new BroadcastChannel('session_sync');
+    channel.postMessage({ type: 'AUTO_LOGOUT', timestamp: Date.now() });
+    channel.close();
+    console.log('📡 AUTO-LOGOUT: Logout notificado a otras pestañas');
+  } catch (error) {
+    console.log('📻 AUTO-LOGOUT: No se pudo notificar a otros tabs:', error);
+  }
+
+  // Emitir evento personalizado para que los componentes React manejen la redirección con Wouter
+  const autoLogoutEvent = new CustomEvent('autoLogout', {
+    detail: { reason: 'unauthorized', timestamp: Date.now() }
+  });
+  window.dispatchEvent(autoLogoutEvent);
+  console.log('🔄 AUTO-LOGOUT: Evento emitido para redirección con Wouter');
+};
+
+/**
  * Interceptor que agrega JWT token y partition key automáticamente
  * a las peticiones HTTP, excepto para endpoints específicos que no los necesitan
  */
@@ -106,10 +166,11 @@ export const addJwtPk = (
 };
 
 /**
- * Wrapper de fetch que aplica automáticamente el interceptor addJwtPk
- * y agrega created_by_id y created_by_name para métodos PUT y POST
+ * Wrapper de fetch que aplica automáticamente el interceptor addJwtPk,
+ * agrega created_by_id y created_by_name para métodos PUT y POST,
+ * y maneja automáticamente errores 401 (Unauthorized)
  */
-export const authenticatedFetch = (
+export const authenticatedFetch = async (
   url: string,
   options: RequestInit & InterceptorOptions = {},
 ): Promise<Response> => {
@@ -180,7 +241,23 @@ export const authenticatedFetch = (
     }
   }
 
-  return fetch(url, modifiedOptions);
+  // Realizar la petición
+  const response = await fetch(url, modifiedOptions);
+
+  // Interceptar respuestas 401 (Unauthorized) para logout automático
+  if (response.status === 401 && !shouldExcludeAuth) {
+    console.error('🚫 UNAUTHORIZED: Recibido 401 desde', url);
+    
+    // Ejecutar logout automático de forma async para no bloquear
+    setTimeout(() => {
+      performAutoLogout();
+    }, 100);
+    
+    // Retornar la respuesta original para que el código cliente pueda manejarla
+    return response;
+  }
+
+  return response;
 };
 
 

@@ -1,0 +1,467 @@
+
+
+Ahora vamos a cargar los 2 select de mesurement unit con un endpoint, 
+
+curl 'https://crm-develop.grainchain.io/api/v1/unit-conversions/units?limit=100&language=es&filter=%7B%22type%22%3A%7B%22%24in%22%3A%5B%22weight%22%2C%22volume%22%5D%7D%7D' \
+  -H '_partitionkey: 68534bd2bbd1909dc855048b' \
+  -H 'accept: */*' \
+  -H 'accept-language: es-419,es;q=0.9' \
+  -H 'authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5EUkJSRVUxTXpCRVF6STRNRGd6T1RCRU1EZ3hOVGRFTlROR1JUazNORU0xTnpJeE16STROZyJ9.eyJodHRwOi8vd3d3LmdyYWluY2hhaW4uaW8vcm9sZXMiOlsicGFydGljaXBhbnQiXSwiaXNzIjoiaHR0cHM6Ly9ncmFpbmNoYWluZGV2LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2ODU0ODM0OTY5YmI1MWVlMTg1YTk3MjAiLCJhdWQiOiJodHRwczovL2dyYWluY2hhaW5kZXYuYXV0aDAuY29tL2FwaS92Mi8iLCJpYXQiOjE3NTQ5MjY0NDQsImV4cCI6MTc1NzUxODQ0NCwic2NvcGUiOiJyZWFkOmN1cnJlbnRfdXNlciB1cGRhdGU6Y3VycmVudF91c2VyX21ldGFkYXRhIGRlbGV0ZTpjdXJyZW50X3VzZXJfbWV0YWRhdGEgY3JlYXRlOmN1cnJlbnRfdXNlcl9tZXRhZGF0YSBjcmVhdGU6Y3VycmVudF91c2VyX2RldmljZV9jcmVkZW50aWFscyBkZWxldGU6Y3VycmVudF91c2VyX2RldmljZV9jcmVkZW50aWFscyB1cGRhdGU6Y3VycmVudF91c2VyX2lkZW50aXRpZXMiLCJndHkiOiJwYXNzd29yZCIsImF6cCI6InNZcXh2QWcyTTJCYktyekRkOUZHa3Y1TnZhQU54UllwIn0.lP-4NlOgNPV94JLXt3OP9bNtlMlItvSIpeCWsGnLWs0O_s5-yP9BWzi0GWHtmDoJ_MYAuWAzgemDL-N3GBeYcnY9EaLv1PkQFZIvFzkGqpm-Ky5SsRR9ezJWEJhIvOq4JucNpQcxSEzo2XMK6liCxFCRCvN-G_AuEAAs_-ItQl9RBsKYIz-3DjlZemUE90yBoFKfT3E3DXscZtC7-H9Rvby8rZBm02i7sr4xLlCLmROUeXS4rYMOWZdKyNyIACBsaNzoXn6DRJkJrrcu0Uioq7j2B7BwVoJPgDNfULmbwl4HEp8TjDr0UXTkFFeD0gxCdQc-IMswoIrMB78lrxHcxg' \
+  -H 'bt-organization: 68534bd2bbd1909dc855048b' \
+  -H 'bt-uid: 68534bd2bbd1909dc855048b' \
+  -H 'organization_id: 68534bd2bbd1909dc855048b' \
+  -H 'origin: https://contracts-develop.grainchain.io' \
+  -H 'pk-organization: 68534bd2bbd1909dc855048b' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://contracts-develop.grainchain.io/' \
+  -H 'sec-ch-ua: "Not)A;Brand";v="8", "Chromium";v="138", "Google Chrome";v="138"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "macOS"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-site' \
+  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36'
+
+
+Igual debes sobresecrir el parttitionkey como tambien el token como en los otros endpoints, tambien se debe remplazar el language que sera el que este seleccionado en el sistema entendiendo que es es espanol y en es ingles, el limit sera una variable de entorno configurada en client/src/environment/environment.ts
+ la respuesta de ese endpoint sera como esto 
+
+[
+    {
+        "_id": "68421a4060fd7f15273452f7",
+        "_partitionKey": "68534bd2bbd1909dc855048b",
+        "active": true,
+        "conversions": {
+            "lb": 45,
+            "wt100": 0.992079,
+            "long100wt": 0.8857848213,
+            "shortTon": 0.0225,
+            "longTon": 0.020089287,
+            "kg": 20.4118660981584,
+            "tonne": 0.020411658,
+            "qq": 0.45,
+            "bu45": 1
+        },
+        "created_at": "2025-06-05T22:29:21.186Z",
+        "etl": true,
+        "extras": [
+            {
+                "key": "isClone",
+                "values": [
+                    {
+                        "value_type": "string",
+                        "value": "true"
+                    }
+                ]
+            }
+        ],
+        "is_clone": true,
+        "names": {
+            "default": "Bushel 45"
+        },
+        "slug": "bu45",
+        "type": "weight"
+    },
+    {
+        "_id": "68421a2f60fd7f15273452f0",
+        "_partitionKey": "68534bd2bbd1909dc855048b",
+        "active": true,
+        "conversions": {
+            "lb": 50,
+            "wt100": 1.10231,
+            "long100wt": 0.984205357,
+            "shortTon": 0.025,
+            "longTon": 0.02232143,
+            "kg": 22.679851220176,
+            "tonne": 0.02267962,
+            "qq": 0.5,
+            "bu50": 1
+        },
+        "created_at": "2025-06-05T22:29:03.906Z",
+        "etl": true,
+        "extras": [
+            {
+                "key": "isClone",
+                "values": [
+                    {
+                        "value_type": "string",
+                        "value": "true"
+                    }
+                ]
+            }
+        ],
+        "is_clone": true,
+        "names": {
+            "default": "Bushel 50"
+        },
+        "slug": "bu50",
+        "type": "weight"
+    },
+    {
+        "_id": "684219cf60fd7f15273452dd",
+        "_partitionKey": "68534bd2bbd1909dc855048b",
+        "active": true,
+        "conversions": {
+            "lb": 32,
+            "wt100": 0.7054784,
+            "long100wt": 0.62989142848,
+            "shortTon": 0.016,
+            "longTon": 0.0142857152,
+            "kg": 14.51510478091264,
+            "tonne": 0.0145149568,
+            "qq": 0.32,
+            "bu32": 1
+        },
+        "created_at": "2025-06-05T22:27:58.669Z",
+        "etl": true,
+        "extras": [
+            {
+                "key": "isClone",
+                "values": [
+                    {
+                        "value_type": "string",
+                        "value": "true"
+                    }
+                ]
+            }
+        ],
+        "is_clone": true,
+        "names": {
+            "default": "Bushel 32"
+        },
+        "slug": "bu32",
+        "type": "weight"
+    },
+    {
+        "_id": "684219e660fd7f15273452e4",
+        "_partitionKey": "68534bd2bbd1909dc855048b",
+        "active": true,
+        "conversions": {
+            "lb": 48,
+            "wt100": 1.0582176,
+            "long100wt": 0.94483714272,
+            "shortTon": 0.024,
+            "longTon": 0.0214285728,
+            "kg": 21.77265717136896,
+            "tonne": 0.0217724352,
+            "qq": 0.48,
+            "bu48": 1
+        },
+        "created_at": "2025-06-05T22:27:50.833Z",
+        "etl": true,
+        "extras": [
+            {
+                "key": "isClone",
+                "values": [
+                    {
+                        "value_type": "string",
+                        "value": "true"
+                    }
+                ]
+            }
+        ],
+        "is_clone": true,
+        "names": {
+            "default": "Bushel 48"
+        },
+        "slug": "bu48",
+        "type": "weight"
+    },
+    {
+        "_id": "6840d47e60fd7f1527345265",
+        "_partitionKey": "68534bd2bbd1909dc855048b",
+        "active": true,
+        "conversions": {
+            "lb": 60,
+            "wt100": 1.322772,
+            "long100wt": 1.1810464284,
+            "shortTon": 0.03,
+            "longTon": 0.026785716,
+            "kg": 27.2158214642112,
+            "tonne": 0.027215544,
+            "qq": 0.6,
+            "bu60": 1
+        },
+        "created_at": "2025-06-04T23:55:52.961Z",
+        "etl": true,
+        "extras": [
+            {
+                "key": "isClone",
+                "values": [
+                    {
+                        "value_type": "string",
+                        "value": "true"
+                    }
+                ]
+            }
+        ],
+        "is_clone": true,
+        "names": {
+            "default": "Bushel 60"
+        },
+        "slug": "bu60",
+        "type": "weight"
+    },
+    {
+        "_id": "6840d42d60fd7f152734525e",
+        "_partitionKey": "68534bd2bbd1909dc855048b",
+        "active": true,
+        "conversions": {
+            "lb": 56,
+            "wt100": 1.2345872,
+            "long100wt": 1.10230999984,
+            "shortTon": 0.028,
+            "longTon": 0.0250000016,
+            "kg": 25.40143336659712,
+            "tonne": 0.0254011744,
+            "qq": 0.56,
+            "bu56": 1
+        },
+        "created_at": "2025-06-04T23:18:05.858Z",
+        "etl": true,
+        "extras": [
+            {
+                "key": "isClone",
+                "values": [
+                    {
+                        "value_type": "string",
+                        "value": "true"
+                    }
+                ]
+            }
+        ],
+        "is_clone": true,
+        "names": {
+            "default": "Bushel 56"
+        },
+        "slug": "bu56",
+        "type": "weight"
+    },
+    {
+        "_id": "665110bd800420a73a2a4498",
+        "slug": "ml",
+        "type": "volume",
+        "names": {
+            "default": "Milliliters",
+            "es": "Mililitros",
+            "en": "Milliliters",
+            "pt": "Mililitros"
+        },
+        "conversions": {
+            "ml": 1,
+            "l": 0.001,
+            "cl": 0.1,
+            "galUs": 0.0002641729,
+            "galImp": 0.0002199692,
+            "qtUs": 0.001056688,
+            "qtImp": 0.0008798789,
+            "lb": 0.0022046
+        },
+        "active": true,
+        "created_by": "60411b8806cb61006fe22a19",
+        "created_at": "2024-05-24T18:54:29.201Z",
+        "_partitionKey": "public",
+        "extras": []
+    },
+    {
+        "_id": "62d09bbbc30649ec72718a41",
+        "slug": "l",
+        "type": "volume",
+        "names": {
+            "default": "Liters",
+            "es": "Litros",
+            "en": "Liters",
+            "pt": "Litros"
+        },
+        "conversions": {
+            "l": 1,
+            "ml": 1000,
+            "cl": 100,
+            "galUs": 0.2641729,
+            "galImp": 0.2199692,
+            "qtUs": 1.056688,
+            "qtImp": 0.8798789,
+            "lb": 2.2046
+        },
+        "active": true,
+        "created_by": "60411b8806cb61006fe22a19",
+        "created_at": "2024-01-31T18:54:29.201Z",
+        "_partitionKey": "public",
+        "extras": []
+    },
+    {
+        "_id": "64557b19b49ed93b35532bc3",
+        "slug": "shortTon",
+        "type": "weight",
+        "conversions": {
+            "lb": 2000,
+            "wt100": 20,
+            "long100wt": 17.857142857,
+            "shortTon": 1,
+            "longTon": 0.89285714286,
+            "kg": 907.18474,
+            "tonne": 0.90718474,
+            "qq": 9.07185
+        },
+        "names": {
+            "default": "Short Ton",
+            "es": "Tonelada corta",
+            "en": "Short Ton"
+        },
+        "active": true,
+        "created_by": "60411b8806cb61006fe22a19",
+        "created_at": "2023-05-08T00:00:00.000Z",
+        "_partitionKey": "public",
+        "extras": []
+    },
+    {
+        "_id": "645934e375d40d50bfe49c12",
+        "slug": "longTon",
+        "type": "weight",
+        "conversions": {
+            "lb": 2240,
+            "wt100": 22.4,
+            "long100wt": 20,
+            "shortTon": 1.12,
+            "longTon": 1,
+            "kg": 1016.0469088,
+            "tonne": 1.0160469088,
+            "qq": 10.1605
+        },
+        "names": {
+            "default": "Long Ton",
+            "es": "Tonelada larga",
+            "en": "Long Ton"
+        },
+        "active": true,
+        "created_by": "60411b8806cb61006fe22a19",
+        "created_at": "2023-05-08T00:00:00.000Z",
+        "_partitionKey": "public",
+        "extras": []
+    },
+    {
+        "_id": "6130f9cd8592b2f045115918",
+        "slug": "kg",
+        "type": "weight",
+        "names": {
+            "en": "Kilogram",
+            "es": "Kilogramo",
+            "default": "kilogram",
+            "pt": "Quilos"
+        },
+        "conversions": {
+            "lb": 2.2046,
+            "wt100": 0.022046,
+            "long100wt": 0.01968410714,
+            "shortTon": 0.0011023113,
+            "longTon": 0.0009842065,
+            "kg": 1,
+            "tonne": 0.001,
+            "qq": 0.022046
+        },
+        "extras": [],
+        "active": true,
+        "created_at": "2022-09-14T12:07:26.044Z",
+        "_partitionKey": "public"
+    },
+    {
+        "_id": "62dffce0f239053612aa309b",
+        "slug": "qq",
+        "type": "weight",
+        "conversions": {
+            "lb": 100,
+            "wt100": 0.0220462,
+            "long100wt": 0.01968410714,
+            "shortTon": 0.05,
+            "longTon": 0.0446428571,
+            "kg": 45.35970244035199,
+            "tonne": 0.045359237,
+            "qq": 1
+        },
+        "names": {
+            "default": "Quintales",
+            "es": "Quintales",
+            "en": "Quintales",
+            "pt": "Quintal"
+        },
+        "active": true,
+        "created_by": "60411b8806cb61006fe22a19",
+        "created_at": "2022-07-14T18:54:29.201Z",
+        "_partitionKey": "public",
+        "extras": []
+    },
+    {
+        "_id": "62dffd09f239053612aa30a1",
+        "slug": "lb",
+        "type": "weight",
+        "conversions": {
+            "lb": 1,
+            "wt100": 0.0220462,
+            "long100wt": 0.01968410714,
+            "shortTon": 0.0005,
+            "longTon": 0.0004464286,
+            "kg": 0.45359702440352,
+            "tonne": 0.0004535924,
+            "qq": 0.01
+        },
+        "names": {
+            "default": "Libras",
+            "es": "Libras",
+            "en": "Pounds",
+            "pt": "Libras"
+        },
+        "active": true,
+        "created_by": "60411b8806cb61006fe22a19",
+        "created_at": "2022-07-14T18:54:29.201Z",
+        "_partitionKey": "public",
+        "extras": []
+    },
+    {
+        "_id": "6467ebed76ee2d5aa3349a75",
+        "slug": "tonne",
+        "type": "weight",
+        "names": {
+            "pt": "Tonelada",
+            "en": "Tone",
+            "es": "Tonelada",
+            "default": "Tone"
+        },
+        "conversions": {
+            "lb": 2204.623,
+            "shortTon": 1.102311,
+            "longTon": 0.9842035,
+            "kg": 1000,
+            "tonne": 1,
+            "qq": 10
+        },
+        "active": true,
+        "created_by": "62baa9a8fefc825705a1b814",
+        "created_at": "2022-01-07T17:10:05.498Z",
+        "_partitionKey": "public",
+        "extras": []
+    }
+]
+
+Entonces debes convertir esa respuesta en el formato 
+
+[
+   {
+       "key": "", -> este es el valor que se usara para guardar o mandar al api
+       "value": "",-> este se usara para mostrar la seleccion
+       "label": "" -> este se usara para mostrar la seleccion
+   }
+] que es el que usara todos los select, te explico como vas a mapear la info:
+
+
+key= _id 
+value= names{[en|es]} se tomara el valor dependiendo del idioma configurado en el sistema entendiendo que en ‘en’ ingles ‘es‘ espanol en caso de no existir se tomara por defecto el key default, y en caso de no existir ni siquiera el objeto se tomara de el key slug que esta en el mismo nivel del objeto 
+label= slug
+
+
+
+
+
+
+
+
+

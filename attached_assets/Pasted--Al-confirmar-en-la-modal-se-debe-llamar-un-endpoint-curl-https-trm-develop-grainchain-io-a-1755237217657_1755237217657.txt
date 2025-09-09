@@ -1,0 +1,34 @@
+
+
+
+
+Al confirmar en la modal se debe llamar un endpoint 
+
+
+curl 'https://trm-develop.grainchain.io/api/v1/contracts/sp-sub-contracts/689eb5c87a00659a224ced45' \
+  -X 'PUT' \
+  -H '_partitionkey: 68534bd2bbd1909dc855048b' \
+  -H 'accept: */*' \
+  -H 'accept-language: es-419,es;q=0.9' \
+  -H 'authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5EUkJSRVUxTXpCRVF6STRNRGd6T1RCRU1EZ3hOVGRFTlROR1JUazNORU0xTnpJeE16STROZyJ9.eyJodHRwOi8vd3d3LmdyYWluY2hhaW4uaW8vcm9sZXMiOlsicGFydGljaXBhbnQiXSwiaXNzIjoiaHR0cHM6Ly9ncmFpbmNoYWluZGV2LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2ODU0ODM0OTY5YmI1MWVlMTg1YTk3MjAiLCJhdWQiOiJodHRwczovL2dyYWluY2hhaW5kZXYuYXV0aDAuY29tL2FwaS92Mi8iLCJpYXQiOjE3NTUyMDcyMDMsImV4cCI6MTc1Nzc5OTIwMywic2NvcGUiOiJyZWFkOmN1cnJlbnRfdXNlciB1cGRhdGU6Y3VycmVudF91c2VyX21ldGFkYXRhIGRlbGV0ZTpjdXJyZW50X3VzZXJfbWV0YWRhdGEgY3JlYXRlOmN1cnJlbnRfdXNlcl9tZXRhZGF0YSBjcmVhdGU6Y3VycmVudF91c2VyX2RldmljZV9jcmVkZW50aWFscyBkZWxldGU6Y3VycmVudF91c2VyX2RldmljZV9jcmVkZW50aWFscyB1cGRhdGU6Y3VycmVudF91c2VyX2lkZW50aXRpZXMiLCJndHkiOiJwYXNzd29yZCIsImF6cCI6InNZcXh2QWcyTTJCYktyekRkOUZHa3Y1TnZhQU54UllwIn0.SqtwInpZxXN-LN04EjKtIcrT6H2miwhgGa-8aS61ANmLXtq7RmNYV1VkFmi9mHkkx7v8R3YuNiS3owf7eY2OtfDlrubZwlLzvicu9lzGVvbnmGp4kZIsDOTxF1zGkSXAlL0lZYsk9gsWqSDEMknHfSCuPIkv5EHha-tViCi0BwKD_bwN9-_7NwY14117rkIG2kT-OtLuJzcugyY0SUpWqPqKdEriZIMej9iBdtePQNyp1SFPBbeNgJU-_p7oiP2mBQ3r49NB7VEGQfYoNnLwnFgppqTqxXbXccwZiOG5eeuMVQV_x4n3fJ_ZV4__gz6uaANTtqD5SuOs7P6rmjSXIA' \
+  -H 'bt-organization: 68534bd2bbd1909dc855048b' \
+  -H 'bt-uid: 68534bd2bbd1909dc855048b' \
+  -H 'content-type: application/json; charset=utf-8' \
+  -H 'organization_id: 68534bd2bbd1909dc855048b' \
+  -H 'origin: https://contracts-develop.grainchain.io' \
+  -H 'pk-organization: 68534bd2bbd1909dc855048b' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://contracts-develop.grainchain.io/' \
+  -H 'sec-ch-ua: "Not;A=Brand";v="99", "Google Chrome";v="139", "Chromium";v="139"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "macOS"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-site' \
+  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36' \
+  --data-raw '{"contract_id":"6881171ce072414b4f1c7e91","contract_folio":"SPC-46","measurement_unit":"bu60","total_price":0,"created_by_id":"56368d8367f266adf004187a","created_by_name":"Contratos  integracion","price_schedule":[{"pricing_type":"basis","price":1500,"basis":1500,"future_price":0,"basis_operation":"add","option_month":"september","option_year":2025,"exchange":"Chicago Board of Trade","payment_currency":"usd"}],"quantity":10,"sub_contract_date":"2025-08-14","measurement_unit_id":"6840d47e60fd7f1527345265","thresholds":{"max_thresholds_percentage":10,"max_thresholds_weight":11,"min_thresholds_percentage":10,"min_thresholds_weight":9}}'
+
+
+
+
+Y se pasara la data como esta expresada en el curl de ejemplo que te pase, los thresholds  los procenateja deben estar en 0 y los weights deben tener el mismo monto que el quantity

@@ -1,0 +1,72 @@
+
+Ahora vamos a cargar caracteristicas configuracion igual con la mis estructura de todos los selects
+
+[
+   {
+       "key": "", -> este es el valor que se usara para guardar o mandar al api
+       "value": "",-> este se usara para mostrar la seleccion
+       "label": "" -> este se usara para mostrar la seleccion
+   }
+]
+
+
+Aqui esta el curl
+
+
+curl 'https://ssm-develop.grainchain.io/silosys-service/api/v1/chars-configs/summary?commodity_id=68534cd39cd9b42bbdd669fa&subcategory_id=88bfe3e90e6c1aa9f3fff882' \
+  -H '_partitionkey: 68534bd2bbd1909dc855048b' \
+  -H 'accept: */*' \
+  -H 'accept-language: es-419,es;q=0.9' \
+  -H 'authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5EUkJSRVUxTXpCRVF6STRNRGd6T1RCRU1EZ3hOVGRFTlROR1JUazNORU0xTnpJeE16STROZyJ9.eyJodHRwOi8vd3d3LmdyYWluY2hhaW4uaW8vcm9sZXMiOlsicGFydGljaXBhbnQiXSwiaXNzIjoiaHR0cHM6Ly9ncmFpbmNoYWluZGV2LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2ODU0ODM0OTY5YmI1MWVlMTg1YTk3MjAiLCJhdWQiOiJodHRwczovL2dyYWluY2hhaW5kZXYuYXV0aDAuY29tL2FwaS92Mi8iLCJpYXQiOjE3NTQ5NDI4NDgsImV4cCI6MTc1NzUzNDg0OCwic2NvcGUiOiJyZWFkOmN1cnJlbnRfdXNlciB1cGRhdGU6Y3VycmVudF91c2VyX21ldGFkYXRhIGRlbGV0ZTpjdXJyZW50X3VzZXJfbWV0YWRhdGEgY3JlYXRlOmN1cnJlbnRfdXNlcl9tZXRhZGF0YSBjcmVhdGU6Y3VycmVudF91c2VyX2RldmljZV9jcmVkZW50aWFscyBkZWxldGU6Y3VycmVudF91c2VyX2RldmljZV9jcmVkZW50aWFscyB1cGRhdGU6Y3VycmVudF91c2VyX2lkZW50aXRpZXMiLCJndHkiOiJwYXNzd29yZCIsImF6cCI6InNZcXh2QWcyTTJCYktyekRkOUZHa3Y1TnZhQU54UllwIn0.oXfH0BYhNQTgc-PD6OzEM0_lcIEuOxrAZz_5B1lHcnZQwbhBH413FdOydOzhUNo-svlNM-oaWWpUJszmv8omAzPGW--_tqDQwI24ALVZOPPljqwCuehTpd7dZgyUxHDt1T8XGmvJR6rjscmGECRaFLpFAmgybWPCXfqYtEbLFmiz0AXaLVbe7UGFsVq6m3KYO22BVJ5QbI4Bgc2rypegyxYAaLrkUWxZRk2OoCamDPsJiDs5BN1O1FlxPimgG3TUIXxoq9o9ai2IxHfkFn4P6Xt9JQnHWTqWHMX-AzD692-lDjYe_iRYYf9aQOafiIG8QwtsAD6U3m8w30eB7GkV5g' \
+  -H 'bt-organization: 68534bd2bbd1909dc855048b' \
+  -H 'bt-uid: 68534bd2bbd1909dc855048b' \
+  -H 'if-none-match: W/"168-RZnfDKQM2XOUktVhYW/4o43lNFI"' \
+  -H 'organization_id: 68534bd2bbd1909dc855048b' \
+  -H 'origin: https://contracts-develop.grainchain.io' \
+  -H 'pk-organization: 68534bd2bbd1909dc855048b' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://contracts-develop.grainchain.io/' \
+  -H 'sec-ch-ua: "Not)A;Brand";v="8", "Chromium";v="138", "Google Chrome";v="138"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "macOS"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-site' \
+  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36'
+
+Aqui debemos reemplazar el el partitionkey, el token y tambien commodity_id,y subcategory_id que provienen del llamado del endpoint de commodity, 
+
+Esta es la respuesta de este endpoint {
+    "data": [
+        {
+            "_id": "685487302f9411efba8a9f78",
+            "name": "Sección de contratos"
+        },
+        {
+            "_id": "685b35fe74275d9fc6efd4b8",
+            "name": "calidades"
+        }
+    ],
+    "path": "/silosys-service/api/v1/chars-configs/summary?commodity_id=68534cd39cd9b42bbdd669fa&subcategory_id=88bfe3e90e6c1aa9f3fff882",
+    "code": "00085",
+    "messages": {
+        "name": "default",
+        "value": "Chars configurations summary"
+    },
+    "status": 200
+}
+
+
+Y vas a mepear asi 
+
+key=_id
+value= name
+label= name
+
+Ahora commodity_id,y subcategory_id que provienen de la respuesta del  endpoint de commodity estaran mapeados de la siguiente forma 
+
+commodity_id=_id
+subcategory_id=original_name_id.subcategory._id
+
+Hay que entender que cada vez que el select de commodity cambien se llamara este endpoint y se cargara el select de configuracion con la nueva informacion
+.

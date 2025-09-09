@@ -1,0 +1,109 @@
+Vamos a desarrollar en conjunto una plataforma web para la creación de contratos de compra venta de granos y otras materias primas, solo vamos a crear en conjunto el frontend, el API para el backend será creado por un grupo de desarrolladores, es importante que trabajemos solo en el frontend del proyecto consumiendo los endpoints que te iré proporcionando más adelante. 
+Considera lo siguiente en la inicialización del proyecto y durante el desarrollo del mismo. 
+## Arquitectura
+- Estructura modular basada en features (Feature-based architecture)
+- Cada feature debe contener su propia lógica, componentes, tipos y servicios
+- Separación clara entre:
+  * Componentes UI (presentacionales)
+  * Lógica de negocio (custom hooks, servicios)
+  * Gestión de estado
+## Gestión de Estado
+- Estado global: Redux Toolkit con:
+  * Slices organizados por dominio/funcionalidad
+  * RTK Query para manejo de API
+  * Persistencia selectiva de estado (si aplica)
+- Estado local: useState/useReducer para estado específico de componentes
+## TypeScript
+- Tipado fuerte en todo el proyecto
+- Interfaces/types para:
+  * Props de componentes
+  * Respuestas de API
+  * Formularios
+  * Estado global y local
+- Generics donde sea apropiado
+- Tipado de hooks personalizados
+## Estilos
+- CSS Modules o Styled-components
+- Variables CSS para temas/colores
+- Diseño responsive mobile-first
+## Prácticas de Código
+- Componentes funcionales
+- Custom hooks para lógica reusable
+- Patrón Container-Presentational cuando sea necesario
+- Principio DRY (Don't Repeat Yourself)
+- Principio SOLID aplicado donde corresponda
+## Estructura de Archivos
+src/
+├── app/                  # Configuración de Redux, rutas, etc.
+├── assets/               # Recursos globales
+├── common/               # Componentes/hooks compartidos
+│   ├── components/       # UI reutilizable (Button, Card, etc.)
+│   ├── hooks/            # Hooks globales (useLocalStorage, etc.)
+│   ├── utils/            # Funciones helpers
+│   └── styles/           # Estilos globales
+├── features/             # Módulos funcionales
+│   ├── auth/             # Ejemplo: autenticación
+│   │   ├── components/   # Componentes específicos
+│   │   ├── hooks/        # Lógica de feature
+│   │   ├── services/     # Llamadas API
+│   │   ├── slices/       # Redux slices
+│   │   ├── types/        # Tipos específicos
+│   │   └── index.ts      # Exportaciones públicas
+│   └── ...               # Otros features
+├── services/             # Clients API, interceptors
+└── pages/                # Componentes página (opcional)
+## Requerimientos Adicionales
+- ESLint + Prettier configurados
+- Usa React Router para la navegación, y configura las rutas de manera centralizada en un archivo separado.
+- Testing básico con React Testing Library
+- Documentación mínima en JSDoc
+- Manejo de errores global (Error Boundaries)
+- Loading states para operaciones async
+- Validación de formularios con React Hook Form
+- Internacionalización (i18n) 
+- Crea un archivo .env con la configuración de las variables de entorno, es fundamental que esto funcione así.
+Lo primero que vamos a desarrollar es la pantalla de Login, visualmente debe contar con los siguientes elementos: 
+Logo en la parte superior (un icono cuadrado verde con una planta blanca).
+Título grande: Welcome Back!
+Subtítulo pequeño: Let's get started by filling out the form below.
+Formulario con los siguientes campos:
+Email: campo de texto con placeholder.
+Password: campo de contraseña con icono para mostrar/ocultar contraseña.
+Remember me: checkbox a la izquierda.
+Botón verde con texto blanco: Sign In
+Es importante contemplar lo siguiente:
+El email y el password son requeridos.
+El email debe tener un formato válido.
+El password debe estar ofuscado, y contar con un icono que le permita al usuario ver la contraseña.
+Si el usuario selecciona el checkbox “Remember me” la app debe guardar en un storage no volátil las credenciales del usuario, para que si regresa a la pantalla encuentre estos dos campos ya llenos.
+Solo guarda las credenciales en este storage no volátil si el login fue exitoso.
+Si se ingresa un segundo o tercer par de credenciales válidas por favor recuerdalas todas, de manera que el usuario cuando regrese pueda seleccionar alguna de las credenciales ya guardadas para iniciar sesión.
+En la pantalla de login toma el idioma del navegador y presenta todos los textos en el idioma detectado, una el i18n para llevar todos los textos en al menos español e inglés. 
+Dale a la pantalla un estilo moderno y minimalista.
+La autenticación la llevamos a cabo en Auth0, a continuación te detallo la información necesaria para poder hacer el login:
+URL para el login: POST https://grainchaindev.auth0.com/oauth/token
+Body para la solicitud, en formato JSON debe estar contenido los siguientes valores:
+{
+    "username": "contratos_integracion@grainchain.dev", // email ingresado por el usuario
+    "password": "Grainchain2023.", // password ingresado por el usuario
+    "audience": "https://grainchaindev.auth0.com/userinfo",
+    "grant_type": "http://auth0.com/oauth/grant-type/password-realm",
+    "realm": "Username-Password-Authentication",
+    "client_id": "f9jw9xsL2Sje2LwHsEZSxnpMupH0QiNJ",    
+    "scope": "openid offline_access"
+}
+Crea variables de entorno en el archivo .env para los keys: url_login, audience, grant_type, realm, client_id y scope y tómalas de ahí. 
+En la respuesta del llamado si su ejecución fue exitosa obtienes el estatus 200 y encontrarás: 
+ “id_token” que guardaras en el storage local como “jwt”
+“refresh_token” que guardaras en el storage local como “refresh_token” 
+“access_token” que guardas en el storage local como “access_token”
+Un ejemplo de la respuesta de este llamado es 
+{
+   "access_token": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiaXNzIjoiaHR0cHM6Ly9ncmFpbmNoYWluZGV2LmF1dGgwLmNvbS8ifQ..ui-OqhSSSDUi2Lv4.wD4YGtaGzkDpSCbIA_EixUrncsS7HrFJmpc0Z1bmDXl1tpb7U3p0SwVj2abon5EHfI5Va0zQRBZjwPZxqg_uHtNI32pK9rCgynTgpvYwQaz41w9ETonSoIdQMMiPisHV-cEohKhrFZ3InVkWxu5kZnHg1anCB-WARfbHYlI5Dxt3UcN0kVnb4CuMVh_2cFmXuH2W0HOZfmZNH3e2fvdExFTspXz5ylEGlvEeLA0OOFPw9puViTaRzs7YowCWYdG1BCjb-7WbY2gXBbbHHb0vn0vBg4b0zi3OCq1ue-Vki56AWVVJE3YGItwu1p7y9bZpGEI92U-FQQeAr5UGDzminSS_zO74FvtQKwd1cmVfoXB1RHNWaF1SNVbtdErIjRiaXTXdoDKlxk-u2P2BoXMVfT85MhMw2k5gX2pHFVftDSdZrmGRrvNHYNtceuvB.0SgqFM6tTCFjLHjMJID_oQ",
+   "refresh_token": "v05xLQCCZxTETWFV-CQqBK_jndb_pHx0xPHA-b3DipgzX",
+   "id_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5EUkJSRVUxTXpCRVF6STRNRGd6T1RCRU1EZ3hOVGRFTlROR1JUazNORU0xTnpJeE16STROZyJ9.eyJodHRwOi8vd3d3LmdyYWluY2hhaW4uaW8vcm9sZXMiOlsicGFydGljaXBhbnQiXSwiZmFtaWx5X25hbWUiOiJpbnRlZ3JhY2lvbiIsIm5pY2tuYW1lIjoiY29udHJhdG9zX2ludGVncmFjaW9uIiwibmFtZSI6IkNvbnRyYXRvcyAiLCJwaWN0dXJlIjoiaHR0cHM6Ly9zLmdyYXZhdGFyLmNvbS9hdmF0YXIvMmY3YmIwMWVmODA4NWZiMWNjNzQ2YzQ5NzM5MDc4ZWQ_cz00ODAmcj1wZyZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZjLnBuZyIsInVwZGF0ZWRfYXQiOiIyMDI1LTA3LTExVDIyOjAxOjI3Ljk4MFoiLCJlbWFpbCI6ImNvbnRyYXRvc19pbnRlZ3JhY2lvbkBncmFpbmNoYWluLmRldiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2dyYWluY2hhaW5kZXYuYXV0aDAuY29tLyIsImF1ZCI6ImY5anc5eHNMMlNqZTJMd0hzRVpTeG5wTXVwSDBRaU5KIiwic3ViIjoiYXV0aDB8Njg1NDgzNDk2OWJiNTFlZTE4NWE5NzIwIiwiaWF0IjoxNzUyMjcxMjg4LCJleHAiOjE3NTIzMDcyODh9.bOzvd8h2M3dePrOhv3Hcdg1fpKDDL4rQ-Sko67zR2HXrSNn3Ynahlr41vCUiad7e7slvITlz1_JdFukz68Bbi52SQKs7TeKfatby21UzM30sgeAQjaQ8DfJfbXHx-FnQwGloYIl3kGwVVpBuP0e2xohED4I1hMw33hmIB0bXGARlfSXHX3PfE_1TSO0Xt3WC-4PoUGOt-cbpcclYoU3Nk9qZ_4Omf27xdyY0vZ0oBhp9wt8g4lbAJBXNs2aTAS_s9VvlQxBbSriv7s1qtDj_5sRxgK0_cwsPB7q00xNCVRXbIJ7DratT2YRVaq5vWGyHM9bkNYQb8jo8Ywvvi22-KQ",
+   "scope": "openid profile email address phone offline_access",
+   "expires_in": 86400,
+   "token_type": "Bearer"
+}
+Haz tipado de la respuesta. Una vez que el login fue exitoso muestra un mensaje en pantalla de que el login fue exitoso y redirecciona una pantalla de HOME vacía, solo con un botón de cerrar sesión he implementa el proceso de cerrar sesión, caso contrario muestra un mensaje de credenciales incorrectas.

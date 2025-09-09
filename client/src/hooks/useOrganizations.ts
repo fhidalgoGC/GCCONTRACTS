@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { organizationService, OrganizationOption, Organization } from '@/services/organization.service';
+import { organizationService, OrganizationOption, Organization } from '@/services/organization/organization.service';
 import { useAuth } from '@/features/auth/hooks/useAuth';
 import { organizationLoadingStore } from '@/store/organizationLoadingStore';
 import { useUser } from '@/contexts/UserContext';

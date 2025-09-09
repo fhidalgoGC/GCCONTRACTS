@@ -1,0 +1,45 @@
+Ahora vamos a agregar un input muy similar al que acabamos de hacer para la selección del país pero para seleccionar al estado, como es sabido el estado depende del país, no se quieren listar los estados si no se ha seleccionado un país, por tal razón la regla de negocio es: si no se ha seleccionado un país se debe deshabilitar el selector de estados.
+
+El endpoint para listar los estados es: https://crm-develop.grainchain.io/api/v1/crm-locations/states/find-states?page=1&limit=10&filter={"country_slug":"COL","name":{"$regex":".*ama","$options":"i"}}&sort={"name":1} arma la url utilizando como prefijo la variable de entorno VITE_URL_CRM y como sufijo /crm-locations/states/find-states?page=1&limit=10&filter={"country_slug":"COL","name":{"$regex":".*ama","$options":"i"}}&sort={"name":1} , en este caso no importa el idioma en que se esté visualizando la plataforma se filtra por el key “name” y sin importar si el usuario ingreso o no un valor para filtrar la data debe llevar el key “country_slug” en el filtro, esta es la manera en que filtramos los estados para que solo tome los registros que le pertenecen al país seleccionado previamente, lo que significa que haya o no ingresado el usuario algún valor para filtrar el query params “filter” con el key “country_slug” debe estar presente en la invocación del endpoint.
+
+La respuesta del endpoint es la siguiente para que hagas el tipado de la misma:
+
+{
+   "data": [
+       {
+           "_id": "68700d82ff4c8f3072430056",
+           "_partitionKey": "public",
+           "active": true,
+           "code": "91",
+           "country": "68700d82ff4c8f3072430038",
+           "country_slug": "COL",
+           "created_at": "2025-07-10T20:35:45.418Z",
+           "etl": true,
+           "external": [],
+           "extras": [],
+           "name": "AMAZONAS",
+           "status": ""
+       }
+   ],
+   "_meta": {
+       "page_size": 10,
+       "page_number": 1,
+       "total_elements": 1,
+       "total_pages": 1
+   },
+   "_links": {
+       "self": "/api/v1/crm-locations/states/find-states?page=1",
+       "first": "/api/v1/crm-locations/states/find-states?page=1",
+       "prev": "/api/v1/crm-locations/states/find-states?page=1",
+       "next": "/api/v1/crm-locations/states/find-states?page=1",
+       "last": "/api/v1/crm-locations/states/find-states?page=1"
+   }
+}
+
+En la tabla solo se mostrará una columna con el key “name”.
+
+Como consideraciones finales, este modal de selección de estado sólo estará habilitado si se ha seleccionado previamente un país, del país seleccionado se debe tomar el key “country_slug” que está presente en la raiz del objeto para pasarlo como parametro a este modal y poder invocar el endpoint. 
+
+Haz que el selector de country solo ocupe una columna, para que el selector de estado ocupe la otra columna, y ambos inputs queden en la misma fila.
+
+Este input para la selección de estado no muestra la bandera de ningún país, solo muestra el nombre del estado seleccionado. 

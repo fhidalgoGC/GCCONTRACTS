@@ -1,0 +1,22 @@
+curl 'https://trm-develop.grainchain.io/api/v1/contracts/sp-sub-contracts/68af439ecfb8986129050f03' \
+  -X 'PUT' \
+  -H '_partitionkey: 68534bd2bbd1909dc855048b' \
+  -H 'accept: */*' \
+  -H 'accept-language: es-419,es;q=0.9' \
+  -H 'authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5EUkJSRVUxTXpCRVF6STRNRGd6T1RCRU1EZ3hOVGRFTlROR1JUazNORU0xTnpJeE16STROZyJ9.eyJodHRwOi8vd3d3LmdyYWluY2hhaW4uaW8vcm9sZXMiOlsicGFydGljaXBhbnQiXSwiZmFtaWx5X25hbWUiOiJpbnRlZ3JhY2lvbiIsIm5pY2tuYW1lIjoiY29udHJhdG9zX2ludGVncmFjaW9uIiwibmFtZSI6IkNvbnRyYXRvcyAiLCJwaWN0dXJlIjoiaHR0cHM6Ly9zLmdyYXZhdGFyLmNvbS9hdmF0YXIvMmY3YmIwMWVmODA4NWZiMWNjNzQ2YzQ5NzM5MDc4ZWQ_cz00ODAmcj1wZyZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZjLnBuZyIsInVwZGF0ZWRfYXQiOiIyMDI1LTA4LTI3VDE3OjQyOjAxLjgzM1oiLCJlbWFpbCI6ImNvbnRyYXRvc19pbnRlZ3JhY2lvbkBncmFpbmNoYWluLmRldiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2dyYWluY2hhaW5kZXYuYXV0aDAuY29tLyIsImF1ZCI6ImY5anc5eHNMMlNqZTJMd0hzRVpTeG5wTXVwSDBRaU5KIiwic3ViIjoiYXV0aDB8Njg1NDgzNDk2OWJiNTFlZTE4NWE5NzIwIiwiaWF0IjoxNzU2MzE2NTIyLCJleHAiOjE3NTYzNTI1MjJ9.p16lReohbNzL_CTHdSLdw-yNDOwhpk--nl3NDky4HwSkRhwWgoEFFueWrWSqn9T-yrXWmYhrQvIoystb_VaCRCs7x1UJk7PunxwZfQECICu00F199Q5vamEWyAvQqxlDxyDLcxKaboSrpMh9IalWJ4wb9Y9GpJo4R0TCmwq75LW-mNpMHh2G2s12SY700ibMe106Pz6vPSn3TtVBkTuAas_lgLt_HuKkXFtffik-rZ9vLoHbRG16SR_10spkss2nViMtOQV79eidfaHKBk7d0oBr3L1XTf60be1Ll2R1SvrlS5Mrl8DZDFLPyqcv8x0DWcFe9g6E9SQqkxhn8LkV8Q' \
+  -H 'bt-organization: 68534bd2bbd1909dc855048b' \
+  -H 'bt-uid: 68534bd2bbd1909dc855048b' \
+  -H 'content-type: application/json' \
+  -H 'organization_id: 68534bd2bbd1909dc855048b' \
+  -H 'origin: https://607bf60b-cb59-4750-9a75-c52b33967dbf-00-1irem5gufmuqp.janeway.replit.dev' \
+  -H 'pk-organization: 68534bd2bbd1909dc855048b' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://607bf60b-cb59-4750-9a75-c52b33967dbf-00-1irem5gufmuqp.janeway.replit.dev/' \
+  -H 'sec-ch-ua: "Not;A=Brand";v="99", "Google Chrome";v="139", "Chromium";v="139"' \
+  -H 'sec-ch-ua-mobile: ?1' \
+  -H 'sec-ch-ua-platform: "Android"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: cross-site' \
+  -H 'user-agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Mobile Safari/537.36' \
+  --data-raw '{"contract_id":"68ae2508cfb8986129050bfb","contract_folio":"SPC-16","measurement_unit":"68421a4060fd7f15273452f7","total_price":886,"created_by_id":"56368d8367f266adf004187a","created_by_name":"Contratos ","price_schedule":[{"pricing_type":"basis","price":886,"basis":876,"future_price":10,"basis_operation":"add","option_month":"october","option_year":2027,"exchange":"Chicago Board of Trade","payment_currency":"usd"}],"quantity":10,"sub_contract_date":"2025-08-27","measurement_unit_id":"684219e660fd7f15273452e4","thresholds":{"max_thresholds_percentage":0,"max_thresholds_weight":10,"min_thresholds_percentage":0,"min_thresholds_weight":10},"registered_by_id":"56368d8367f266adf004187a","registered_by_name":"Contratos "}'

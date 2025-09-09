@@ -1,0 +1,373 @@
+{
+    "data": {
+        "path": "/api/v1/contracts/sp-contracts/6881171ce072414b4f1c7e91",
+        "data": {
+            "id": "6881171ce072414b4f1c7e91",
+            "_partitionKey": "68534bd2bbd1909dc855048b",
+            "active": true,
+            "created_by": "56368d8367f266adf004187a",
+            "created_at": "2025-07-23T17:09:58.875Z",
+            "folio": "SPC-46",
+            "type": "purchase",
+            "sub_type": "imported",
+            "commodity": {
+                "commodity_id": "6839ef01edc3c27f091bdfb4",
+                "name": "HRW - Wheat Hard Red Winter"
+            },
+            "characteristics": {
+                "configuration_id": "683bbb8317f5aafb7814eb22",
+                "configuration_name": "683bbb8317f5aafb7814eb22"
+            },
+            "grade": 2,
+            "participants": [
+                {
+                    "people_id": "684716baa3e0f7b270d3cad1",
+                    "name": "Test Seller LLC",
+                    "role": "seller"
+                },
+                {
+                    "people_id": "6854834ae0b54f538d861d0e",
+                    "name": "Contratos  integracion",
+                    "role": "buyer"
+                }
+            ],
+            "price_schedule": [
+                {
+                    "pricing_type": "basis",
+                    "price": 0,
+                    "basis": 1500,
+                    "basis_operation": "add",
+                    "future_price": 0,
+                    "option_month": "september",
+                    "option_year": 2025,
+                    "payment_currency": "usd",
+                    "exchange": "Chicago Board of Trade"
+                }
+            ],
+            "logistic_schedule": [
+                {
+                    "logistic_payment_responsability": "buyer",
+                    "logistic_coordination_responsability": "other",
+                    "freight_cost": {
+                        "type": "variable",
+                        "min": 10,
+                        "max": 100,
+                        "cost": 0
+                    },
+                    "freight_cost_measurement_unit_id": "6840d47e60fd7f1527345265",
+                    "freight_cost_measurement_unit": "bu60",
+                    "payment_currency": "usd"
+                }
+            ],
+            "inventory": {
+                "total": 2000,
+                "open": 699,
+                "fixed": 1301,
+                "unsettled": 2000,
+                "settled": 0,
+                "reserved": 0
+            },
+            "inventory_value": {
+                "total": 1965290,
+                "open": 0,
+                "fixed": 1965290,
+                "unsettled": 1965290,
+                "settled": 0
+            },
+            "quantity": 2000,
+            "reference_number": "NA",
+            "measurement_unit_id": "6840d47e60fd7f1527345265",
+            "measurement_unit": "bu60",
+            "shipping_start_date": "2025-07-23T00:00:00.000Z",
+            "shipping_end_date": "2025-07-31T00:00:00.000Z",
+            "application_priority": 1,
+            "delivered": "In Store",
+            "transport": "Barge",
+            "weights": "submitCc",
+            "inspections": "origin",
+            "proteins": "submitCc",
+            "purchase_orders": [],
+            "thresholds": {
+                "min_thresholds_percentage": 10,
+                "min_thresholds_weight": 1260,
+                "max_thresholds_percentage": 10,
+                "max_thresholds_weight": 1540
+            },
+            "status": "in-progress",
+            "contract_date": "2025-07-31T00:00:00.000Z",
+            "extras": [],
+            "externals": [],
+            "schedule": [],
+            "sub_contracts": [],
+            "notes": [],
+            "remarks": [],
+            "updated_at": "2025-08-18T19:10:52.657Z"
+        },
+        "data_interceptor": {
+            "id": "6881171ce072414b4f1c7e91",
+            "_partitionKey": "68534bd2bbd1909dc855048b",
+            "active": true,
+            "created_by": "56368d8367f266adf004187a",
+            "created_at": "2025-07-23T17:09:58.875Z",
+            "folio": "SPC-46",
+            "type": "purchase",
+            "sub_type": "imported",
+            "commodity": {
+                "commodity_id": "6839ef01edc3c27f091bdfb4",
+                "name": "HRW - Wheat Hard Red Winter"
+            },
+            "characteristics": {
+                "configuration_id": "683bbb8317f5aafb7814eb22",
+                "configuration_name": "683bbb8317f5aafb7814eb22"
+            },
+            "grade": 2,
+            "participants": [
+                {
+                    "people_id": "684716baa3e0f7b270d3cad1",
+                    "name": "Test Seller LLC",
+                    "role": "seller"
+                },
+                {
+                    "people_id": "6854834ae0b54f538d861d0e",
+                    "name": "Contratos  integracion",
+                    "role": "buyer"
+                }
+            ],
+            "price_schedule": [
+                {
+                    "pricing_type": "basis",
+                    "price": 0,
+                    "basis": 1500,
+                    "basis_operation": "add",
+                    "future_price": 0,
+                    "option_month": "september",
+                    "option_year": 2025,
+                    "payment_currency": "usd",
+                    "exchange": "Chicago Board of Trade"
+                }
+            ],
+            "logistic_schedule": [
+                {
+                    "logistic_payment_responsability": "buyer",
+                    "logistic_coordination_responsability": "other",
+                    "freight_cost": {
+                        "type": "variable",
+                        "min": 10,
+                        "max": 100,
+                        "cost": 0
+                    },
+                    "freight_cost_measurement_unit_id": "6840d47e60fd7f1527345265",
+                    "freight_cost_measurement_unit": "bu60",
+                    "payment_currency": "usd"
+                }
+            ],
+            "inventory": {
+                "total": 2000,
+                "open": 699,
+                "fixed": 1301,
+                "unsettled": 2000,
+                "settled": 0,
+                "reserved": 0
+            },
+            "inventory_value": {
+                "total": 1965290,
+                "open": 0,
+                "fixed": 1965290,
+                "unsettled": 1965290,
+                "settled": 0
+            },
+            "quantity": 2000,
+            "reference_number": "NA",
+            "measurement_unit_id": "6840d47e60fd7f1527345265",
+            "measurement_unit": "bu60",
+            "shipping_start_date": "2025-07-23T00:00:00.000Z",
+            "shipping_end_date": "2025-07-31T00:00:00.000Z",
+            "application_priority": 1,
+            "delivered": "In Store",
+            "transport": "Barge",
+            "weights": "submitCc",
+            "inspections": "origin",
+            "proteins": "submitCc",
+            "purchase_orders": [],
+            "thresholds": {
+                "min_thresholds_percentage": 10,
+                "min_thresholds_weight": 1260,
+                "max_thresholds_percentage": 10,
+                "max_thresholds_weight": 1540
+            },
+            "status": "in-progress",
+            "contract_date": "2025-07-31T00:00:00.000Z",
+            "extras": [],
+            "externals": [],
+            "schedule": [],
+            "sub_contracts": [],
+            "notes": [],
+            "remarks": [],
+            "updated_at": "2025-08-18T19:10:52.657Z"
+        },
+        "id": "6881171ce072414b4f1c7e91",
+        "_partitionKey": "68534bd2bbd1909dc855048b",
+        "active": true,
+        "created_by": "56368d8367f266adf004187a",
+        "created_at": "2025-07-23T17:09:58.875Z",
+        "folio": "SPC-46",
+        "type": "purchase",
+        "sub_type": "imported",
+        "commodity": {
+            "commodity_id": "6839ef01edc3c27f091bdfb4",
+            "name": "HRW - Wheat Hard Red Winter"
+        },
+        "characteristics": {
+            "configuration_id": "683bbb8317f5aafb7814eb22",
+            "configuration_name": "683bbb8317f5aafb7814eb22"
+        },
+        "grade": 2,
+        "participants": [
+            {
+                "people_id": "684716baa3e0f7b270d3cad1",
+                "name": "Test Seller LLC",
+                "role": "seller"
+            },
+            {
+                "people_id": "6854834ae0b54f538d861d0e",
+                "name": "Contratos  integracion",
+                "role": "buyer"
+            }
+        ],
+        "price_schedule": [
+            {
+                "pricing_type": "basis",
+                "price": 0,
+                "basis": 1500,
+                "basis_operation": "add",
+                "future_price": 0,
+                "option_month": "september",
+                "option_year": 2025,
+                "payment_currency": "usd",
+                "exchange": "Chicago Board of Trade"
+            }
+        ],
+        "logistic_schedule": [
+            {
+                "logistic_payment_responsability": "buyer",
+                "logistic_coordination_responsability": "other",
+                "freight_cost": {
+                    "type": "variable",
+                    "min": 10,
+                    "max": 100,
+                    "cost": 0
+                },
+                "freight_cost_measurement_unit_id": "6840d47e60fd7f1527345265",
+                "freight_cost_measurement_unit": "bu60",
+                "payment_currency": "usd"
+            }
+        ],
+        "inventory": {
+            "total": 2000,
+            "open": 699,
+            "fixed": 1301,
+            "unsettled": 2000,
+            "settled": 0,
+            "reserved": 0
+        },
+        "inventory_value": {
+            "total": 1965290,
+            "open": 0,
+            "fixed": 1965290,
+            "unsettled": 1965290,
+            "settled": 0
+        },
+        "quantity": 2000,
+        "reference_number": "NA",
+        "measurement_unit_id": "6840d47e60fd7f1527345265",
+        "measurement_unit": "bu60",
+        "shipping_start_date": "2025-07-23T00:00:00.000Z",
+        "shipping_end_date": "2025-07-31T00:00:00.000Z",
+        "application_priority": 1,
+        "delivered": "In Store",
+        "transport": "Barge",
+        "weights": "submitCc",
+        "inspections": "origin",
+        "proteins": "submitCc",
+        "purchase_orders": [],
+        "thresholds": {
+            "min_thresholds_percentage": 10,
+            "min_thresholds_weight": 1260,
+            "max_thresholds_percentage": 10,
+            "max_thresholds_weight": 1540
+        },
+        "status": "in-progress",
+        "contract_date": "2025-07-31T00:00:00.000Z",
+        "extras": [],
+        "externals": [],
+        "schedule": [],
+        "sub_contracts": [],
+        "notes": [],
+        "remarks": [],
+        "updated_at": "2025-08-18T19:10:52.657Z",
+        "contractDate": "7/31/2025",
+        "contractNumber": "-",
+        "fob": "-",
+        "contact": "-",
+        "instructions": "-",
+        "instructionsPdf": "-",
+        "shipmentPeriod": "-",
+        "paymentTerms": "-",
+        "paymentTermsPdf": "-",
+        "routing": "-",
+        "premDisc": "-",
+        "premDiscPdf": "-",
+        "referenceNumber": "NA",
+        "quantityNumber": 2000,
+        "pricingType": "basis",
+        "pricingColorType": "#c8bdec",
+        "isFixed": false,
+        "isBasis": true,
+        "customerId": "684716baa3e0f7b270d3cad1",
+        "customerNumber": "d3cad1",
+        "customerName": "Test Seller LLC",
+        "customerAddress": "null",
+        "customerPhone": "+1 423423423423",
+        "ownerId": "6854834ae0b54f538d861d0e",
+        "ownerNumber": "861d0e",
+        "ownerName": "Contratos  integracion",
+        "typeContract": "Purchase",
+        "quantityUnits": "100.00 bu60",
+        "contractPrice": "$ 2,733.00",
+        "contractBasis": "$ 1,500.00",
+        "contractFuture": "$ 0.00",
+        "contractOverviewTotal": "2,000.00 bu60",
+        "contractOverviewDelivered": "1,301.00 bu60",
+        "contractOverviewOpen": "699.00 bu60",
+        "contractOverviewTotalSettled": "0.00 bu60",
+        "contractOverviewTotalUnSettled": "2,000.00 bu60",
+        "contractPaymentTotal": "$ 1,965,290.00",
+        "contractPaymentSettled": "$ 0.00",
+        "contractFixedSettled": "$ 1,965,290.00",
+        "overviewAllSettled": "$ 2000",
+        "percentageDelivered": 0.65,
+        "percentageSettled": 0,
+        "percentageFixed": 1,
+        "sellerName": "Test Seller LLC",
+        "buyerName": "Contratos  integracion",
+        "companyName": "Mi centro contratos",
+        "companyAddress": "Antigua Carretera México-Cuautla 17, Cuautla, Morelos, United Mexican States, 62748",
+        "companyPhone": "7354691326",
+        "subContractFolio": "SPC-46-SUBC-4",
+        "printDate": "18/08/2025"
+    },
+    "load_data_from": null,
+    "template_id": "5e177b2393797a28",
+    "export_type": "json",
+    "expiration": 60,
+    "output_file": "SUBCONTRACT-SPC-46-SUBC-4.pdf",
+    "is_cmyk": false,
+    "image_resample_res": 600,
+    "direct_download": 1,
+    "cloud_storage": 1,
+    "pdf_standard": "string",
+    "password_protected": false,
+    "password": "string",
+    "postaction_s3_filekey": "string",
+    "postaction_s3_bucket": "string"
+}

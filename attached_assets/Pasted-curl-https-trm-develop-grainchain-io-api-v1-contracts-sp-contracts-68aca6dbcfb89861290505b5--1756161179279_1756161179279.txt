@@ -1,0 +1,22 @@
+curl 'https://trm-develop.grainchain.io/api/v1/contracts/sp-contracts/68aca6dbcfb89861290505b5' \
+  -X 'PUT' \
+  -H '_partitionkey: 68534bd2bbd1909dc855048b' \
+  -H 'accept: */*' \
+  -H 'accept-language: en-US,en;q=0.9' \
+  -H 'authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5EUkJSRVUxTXpCRVF6STRNRGd6T1RCRU1EZ3hOVGRFTlROR1JUazNORU0xTnpJeE16STROZyJ9.eyJodHRwOi8vd3d3LmdyYWluY2hhaW4uaW8vcm9sZXMiOlsicGFydGljaXBhbnQiXSwiaXNzIjoiaHR0cHM6Ly9ncmFpbmNoYWluZGV2LmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2ODU0ODM0OTY5YmI1MWVlMTg1YTk3MjAiLCJhdWQiOiJodHRwczovL2dyYWluY2hhaW5kZXYuYXV0aDAuY29tL2FwaS92Mi8iLCJpYXQiOjE3NTU3Mjk5NjIsImV4cCI6MTc1ODMyMTk2Miwic2NvcGUiOiJyZWFkOmN1cnJlbnRfdXNlciB1cGRhdGU6Y3VycmVudF91c2VyX21ldGFkYXRhIGRlbGV0ZTpjdXJyZW50X3VzZXJfbWV0YWRhdGEgY3JlYXRlOmN1cnJlbnRfdXNlcl9tZXRhZGF0YSBjcmVhdGU6Y3VycmVudF91c2VyX2RldmljZV9jcmVkZW50aWFscyBkZWxldGU6Y3VycmVudF91c2VyX2RldmljZV9jcmVkZW50aWFscyB1cGRhdGU6Y3VycmVudF91c2VyX2lkZW50aXRpZXMiLCJndHkiOiJwYXNzd29yZCIsImF6cCI6InNZcXh2QWcyTTJCYktyekRkOUZHa3Y1TnZhQU54UllwIn0.WY8iahLgREyB8bftoLFeW3MSsTMoHrtDsmXa_75WOCqhz6C6X_5LDIFlXInF87h1boAryiu9z6rqpo2uWLKlMwqbe6qalBNdnV51UnFh0UUdV_H-YCgZHIAf198UPOilz5009CSbRRODZLxQy2NKpZlKlyOFeQN7UgagIRc9PQ8uUhS0gRCIihKTBYlS5T4Ilr7zhbGXAU7TnADMWWeIDvBFwdKJXOhu0k3WldmTMYPrrGRO9GcRjUdqRFyBUZYKxzJyZsXsaWOfYu1BHS5LppbOTi4xpYP5QLdv_1MkPgt3dQRaZk9RPFk2bbm-kfDnBA5j3fACVvy55yPUe01oUA' \
+  -H 'bt-organization: 68534bd2bbd1909dc855048b' \
+  -H 'bt-uid: 68534bd2bbd1909dc855048b' \
+  -H 'content-type: application/json; charset=utf-8' \
+  -H 'organization_id: 68534bd2bbd1909dc855048b' \
+  -H 'origin: https://contracts-develop.grainchain.io' \
+  -H 'pk-organization: 68534bd2bbd1909dc855048b' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://contracts-develop.grainchain.io/' \
+  -H 'sec-ch-ua: "Not;A=Brand";v="99", "Google Chrome";v="139", "Chromium";v="139"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "macOS"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-site' \
+  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36' \
+  --data-raw '{"type":"purchase","sub_type":"imported","contract_date":"2025-08-21T00:00:00.000Z","commodity":{"commodity_id":"6839eff8edc3c27f091bdfde","name":"YC - Yellow Corn"},"grade":2,"participants":[{"people_id":"684716baa3e0f7b270d3cad1","name":"Test Seller LLC","role":"seller"},{"people_id":"687fd60f08f8c5dadbecde0a","name":"Mi centro contratos","role":"buyer"}],"price_schedule":[{"pricing_type":"basis","price":0,"basis":12312,"future_price":0,"basis_operation":"add","option_month":"august","option_year":2026,"exchange":"Kansas City Board of  Trade","payment_currency":"mxn"}],"logistic_schedule":[{"logistic_payment_responsability":"other","logistic_coordination_responsability":"other","freight_cost":{"type":"variable","min":1,"max":22,"cost":0},"freight_cost_measurement_unit_id":"665110bd800420a73a2a4498","freight_cost_measurement_unit":"ml","payment_currency":"usd"}],"measurement_unit_id":"6840d47e60fd7f1527345265","measurement_unit":"bu60","shipping_start_date":"2025-08-25T00:00:00.000Z","shipping_end_date":"2025-08-30T00:00:00.000Z","application_priority":1,"delivered":"Dlvd Kin RanchFeedyarn","transport":"Truck/Rail","weights":"submitCc","inspections":"origin","proteins":"submitCc","registered_by_id":"56368d8367f266adf004187a","registered_by_name":"Contratos ","quantity":21,"reference_number":"12312","thresholds":{"max_thresholds_percentage":10,"max_thresholds_weight":23.1,"min_thresholds_percentage":10,"min_thresholds_weight":18.9},"characteristics":{"configuration_id":"685487302f9411efba8a9f78","configuration_name":"685487302f9411efba8a9f78"}}'

@@ -1,0 +1,38 @@
+En esta plataforma el login está constituido por un conjunto de endpoints que se deben ir llamando uno seguido del otro, ya hicimos el de login ahora seguido del login se debe llamar el  siguiente endpoint a consultar que proporcionará la información del usuario que está iniciando sesion, hay múltiples llamados que tienen el mismo prefijo, por favor guarda en una variable de entorno la  key url_identity con el valor  https://un4grlwfx2.execute-api.us-west-2.amazonaws.com/dev ten mucho cuidado de no borrar ninguna de las otras variables de entorno.
+URL: GET https://un4grlwfx2.execute-api.us-west-2.amazonaws.com/dev/identity/customers
+Este llamado solo necesita autorización “Bearer Token” que debes tomar del storage local y que se acaba de obtener en el llamado anterior y lo guardamos con el key “jwt” y al programarlo arma la URL con la variable de entorno url_identity, para poder ajustarlo luego a los otros ambientes.  
+Un ejemplo de la respuesta en caso de ser correcta status code 200 de este llamado es la siguiente {
+   "data": {
+       "firstName": "Contratos ",
+       "lastName": "integracion",
+       "address": {},
+       "auth0": "6854834969bb51ee185a9720",
+       "phone": [
+           {
+               "callingCode": "+52",
+               "role": "participant",
+               "phoneNumber": "3321284444"
+           }
+       ],
+       "companyName": "",
+       "roles": [
+           "participant"
+       ],
+       "dateOfBirth": "1997-06-04",
+       "id": "56368d8367f266adf004187a",
+       "email": "contratos_integracion@grainchain.dev",
+       "group": null
+   },
+   "meta": {
+       "links": {
+           "address": "/customers/56368d8367f266adf004187a/address"
+       },
+       "id": "56368d8367f266adf004187a"
+   }
+}
+Haz un tipado de la respuesta, y vas a guardar en el storage local los siguientes datos, sin eliminar ninguno de los datos que ya están guardados en el local storage: 
+user_name que lo tomaradas de data.firstName
+user_lastname que lo tomaras de data.lastName
+user_id que lo tomaras de data.id
+user_email que tomaras de data.email
+Recuerda después del endpoint de Login ahora llamaras este nuevo endpoint que te estoy proporcionado, una vez que obtengas la respuesta de este segundo endpoint redirecciona a la pantalla de HOME, por favor no hagas mas nada de lo que te estoy pidiendo solo agrega el endpoint para ser invocado después del llamado de Login. 

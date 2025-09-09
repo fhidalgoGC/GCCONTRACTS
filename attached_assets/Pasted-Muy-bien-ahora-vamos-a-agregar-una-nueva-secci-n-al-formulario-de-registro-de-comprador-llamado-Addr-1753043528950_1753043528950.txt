@@ -1,0 +1,133 @@
+Muy bien ahora vamos a agregar una nueva sección al formulario de registro de comprador llamado Address en inglés o Dirección en español que también es opcional, pero en caso de que se ingrese algún valor se debe validar que todos sean ingresados,   vamos a ir implementando uno a uno los inputs para este registro, lo primero que vamos a agregar es un selector para el País, este debe ocupar solo una columna, y ser un input solo de visualización en este input no se puede escribir manualmente, acompañando al input y dentro del espacio de la columna agrega un botón/icono elegante y minimalista para mandar a llamar un modal donde el usuario seleccionara el país. A continuación te detallo este componente de selección: 
+
+El endpoint que vas a consultar es el siguiente: https://crm-develop.grainchain.io/api/v1/crm-locations/countries/find-countries?page=1&limit=10&filter={"$or":[{"names.en":{"$regex":".*mex","$options":"i"}}]}&sort={"names.en":1} arma la url utilizando como prefijo el valor de la variable de entorno VITE_URL_CRM y como sufijo lo siguiente /crm-locations/countries/find-countries?page=1&limit=10&filter={"$or":[{"names.en":{"$regex":".*xxx","$options":"i"}}]}&sort={"names.en":1} 
+Como puedes ver este endpoint al igual que el que devuelve la lista de buyers cuenta con los mismos query params: page, limit, filter y sort. 
+El endpoint como respuesta cuenta con la misma metadata que el de obtener la lista de buyers (page_size, page_number, total_elements y total_pages), acá te doy un ejemplo de la respuesta para que lleves a cabo un tipado de la misma, específicamente de los objetos dentro del array de data, que es el JSON que el API devuelve para cada país. 
+
+{
+   "data": [
+       {
+           "_id": "3423662de464f9c723254315",
+           "slug": "MEX",
+           "flag": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAUlJREFUeNpiYBgFo2AUDDBgBBF8mR77iVG8tbCTwUZVD6+aL0dPMdz2jyfKcqO3NxxZoGyHgQoBpoGOglEHsFCi+fqJbQxHL95n0NE3ZrCwsKCfA96/f8awd1Elw+Uj5xlOvWBkaO34xDBz5kwGNzc3+kTBs/tnGJ59fsMgysXM8OLdN7BYc3MzfdLAzj2zGP48v84gIKbIcPnNd4ZgVU4GVWFwccJw6Ohy2jvg+7e3DDuu/WO4e/cmw9nfEgzXPn5nkBHmZXDWkGC4fWM/7R1gbODJICJ0n2HhD28Gzt+MDPc4pBieKZkzsCj/ZLCzjqK9A2TlDBi0tV0Y6ozuMmiJcTFYc3IzaEh+YHBxiGFQ1XCgTy6wsAhj0NFxZjDk28fAzMfLoGFrz8DGxknfcoCHR5jBMDB0tCgePnXBgdG22SgYBSMWAAQYAJhIVZBos27gAAAAAElFTkSuQmCC",
+           "names": {
+               "default": "Mexico",
+               "en": "Mexico",
+               "es": "México",
+               "pt": "México"
+           },
+           "nationality": [
+               {
+                   "description": "",
+                   "language": "default",
+                   "value": "Mexicano"
+               },
+               {
+                   "description": "",
+                   "language": "en",
+                   "value": "Mexican"
+               },
+               {
+                   "description": "",
+                   "language": "es",
+                   "value": "Mexicano"
+               }
+           ],
+           "capital": "Ciudad de México",
+           "currency": "MXN",
+           "currency_name": "Mexican peso",
+           "currency_symbol": "$",
+           "phone_settings": {
+               "calling_code": "+52",
+               "mask": "",
+               "max_lenght": "",
+               "min_lenght": "",
+               "pattern": ""
+           },
+           "extras": [
+               {
+                   "key": "numericCode",
+                   "updated_at": "2022-05-05T22:26:39.476Z",
+                   "values": [
+                       {
+                           "value": "484",
+                           "value_type": "numeric"
+                       }
+                   ]
+               },
+               {
+                   "key": "phoneCode",
+                   "updated_at": "2022-05-05T22:26:39.476Z",
+                   "values": [
+                       {
+                           "value": "52",
+                           "value_type": "numeric"
+                       }
+                   ]
+               },
+               {
+                   "key": "registerEnabled",
+                   "updated_at": "2022-05-05T22:26:39.476Z",
+                   "values": [
+                       {
+                           "value": "true",
+                           "value_type": "boolean"
+                       }
+                   ]
+               },
+               {
+                   "key": "flag3x4",
+                   "updated_at": "2024-04-18T22:26:39.476Z",
+                   "values": [
+                       {
+                           "value": "https://trumodity-br-assets.s3.amazonaws.com/flags/mx.svg",
+                           "value_type": "string"
+                       }
+                   ]
+               }
+           ],
+           "status": "",
+           "created_at": "2022-05-05T22:26:39.476Z",
+           "active": true,
+           "_partitionKey": "public",
+           "country_slug": "MEX",
+           "external": [
+               {
+                   "platform": "iso3",
+                   "platform_id": "MEX",
+                   "registered_at": "2022-05-05T22:26:39.476Z"
+               },
+               {
+                   "platform": "iso2",
+                   "platform_id": "MX",
+                   "registered_at": "2022-05-05T22:26:39.476Z"
+               },
+               {
+                   "platform": "countryID",
+                   "platform_id": "62744f1f609b9a94f7912895",
+                   "registered_at": "2022-05-05T22:26:39.476Z"
+               }
+           ],
+           "name": "Mexico"
+       }
+   ],
+   "_meta": {
+       "page_size": 10,
+       "page_number": 1,
+       "total_elements": 1,
+       "total_pages": 1
+   },
+   "_links": {
+       "self": "/api/v1/crm-locations/countries/find-countries?page=1",
+       "first": "/api/v1/crm-locations/countries/find-countries?page=1",
+       "prev": "/api/v1/crm-locations/countries/find-countries?page=1",
+       "next": "/api/v1/crm-locations/countries/find-countries?page=1",
+       "last": "/api/v1/crm-locations/countries/find-countries?page=1"
+   }
+}
+
+Implementa un modal moderno, elegante y minimalista basado en FLUENT UI el sistema de diseño que microsoft usa en sus interfaces más modernas con el mismo componente de tipo tabla que ya implementaste para la lista de compradores, este componente debe contar con los controles: barra de búsqueda, selector de tamaño de página, el label que indica Mostrando X de Y registros y los controles de navegación para siguiente página, página previa, primera página y última página.
+Implementa las mismas reglas y comportamiento de la tabla de buyers en esta tabla para seleccionar el país como por ejemplo el debounce de 500 ms para evitar llamadas excesivas al servidor.
+En la tabla solo mostraremos una columna con la bandera del país, este se encuentra en el key flag, es importante llevarlo de base64 a imagen para poderlo mostrar en la tabla y otra columna con el nombre del país. 
+Es importante validar que si la plataforma esta en español el nombre a mostrar es names.es y si la plataforma esta en ingles el nombre a mostrar es names.en, como puedes ver la url que te proporcione esta el query param filter que solo debes enviar en el caso de que el usuario haya ingresado algo válido en la barra de búsqueda, de la misma manera en este filter hay un key llamado “names.en” que se debe cambiar a “names.es” si la plataforma esta en español.
+Esta tabla debe implementar selección, en el momento en que el usuario seleccione una fila, el modal se cerrará y el Input tomará como valor el nombre del país ya sea names.es o names.en según el idioma en que se está visualizando.

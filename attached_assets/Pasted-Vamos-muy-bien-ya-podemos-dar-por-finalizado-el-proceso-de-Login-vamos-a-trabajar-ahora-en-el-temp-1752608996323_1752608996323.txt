@@ -1,0 +1,14 @@
+Vamos muy bien, ya podemos dar por finalizado el proceso de Login, vamos a trabajar ahora en el template/distribución de espacios que tendrá la plataforma una vez que el usuario inicia sesión. Esta interfaz debe tener los siguientes elementos:
+un menú lateral a la izquierda de la pantalla, cada opción en el menú debe tener un icono representativo y el nombre de la opción, las opciones en el menú serán:
+Buyers (en español Compradores)
+Sellers (en español Vendedores)
+Purchase Contracts (en español Contratos de Compra)
+Sale Contracts (en español Contratos de Venta)
+Una NavBar que debe contener:
+A la izquierda el nombre de la pantalla
+A la derecha un icono para cambiar el idioma entre español e inglés, el icono debe ser circular y tener la bandera del país del idioma seleccionado actualmente.
+Al hacer clic sobre el icono del idioma debe desplegar un menú contextual con las banderas y el nombre de los idiomas disponibles en este caso: español e inglés. 
+Al seleccionar alguno de los idiomas se debe cambiar el idioma de visualización a toda la interfaz y debe conservar esta selección para que si el usuario navega a otras pantallas se mantenga el mismo idioma seleccionado, crea una variable en el storage local para persistir esta selección.
+A la derecha un avatar circular con 2 letras mayúsculas representando las iniciales del nombre del usuario y al lado el nombre del usuario. El nombre del usuario lo puedes obtener del key “representative_people_full_name” en el storage local si este tiene valor, caso contrario lo puedes tomar concatenando los valores de los keys del storage local “representative_people_first_name” y “representative_people_last_name”.
+Al hacer click sobre el nombre del usuario o su avatar se debe desplegar un menú contextual con la opción cerrar sesión y la posibilidad de agregar más opciones más adelante. Mueve la funcionalidad de cerrar sesión hacia este botón.
+Es importante que ocupes todo el espacio disponible en la pantalla para distribuir estos elementos que serán base en todas las pantallas del sistema una vez hecho el login, conserva un estilo moderno y minimalista en la interfaz. 

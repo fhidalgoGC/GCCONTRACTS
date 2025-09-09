@@ -4,6 +4,16 @@ import { environment } from '@/environment/environment';
 interface CharacteristicsConfigurationData {
   _id: string;
   name: string;
+  commodity_id?: string;
+  subcategory_id?: string;
+  commodity?: {
+    _id: string;
+    name: string;
+  };
+  subcategory?: {
+    _id: string;
+    name: string;
+  };
 }
 
 interface CharacteristicsConfigurationResponse {

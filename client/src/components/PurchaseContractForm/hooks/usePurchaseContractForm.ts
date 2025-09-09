@@ -88,18 +88,81 @@ export function usePurchaseContractForm(options: UsePurchaseContractFormOptions 
       adjustments: [],
     };
     
+    // Convert API format to form format for remarks and notes
+    const convertApiDataToFormFormat = (data: any): any => {
+      const converted = { ...data };
+      
+      // Convert remarks from API format to form format
+      if (converted.remarks && Array.isArray(converted.remarks)) {
+        const convertedRemarks: string[] = [];
+        
+        converted.remarks.forEach((remark: any) => {
+          // Handle API format: { title: "contact", values: ["DATA"] }
+          if (typeof remark === 'object' && remark.title && remark.values) {
+            // Map API title back to display label
+            const titleToLabelMap: Record<string, string> = {
+              'contact': 'Contact',
+              'shipment': 'Shipment',
+              'routing': 'Routing',
+              'premDisc': 'Prem/Disc',
+              'terms': 'Terms',
+              'remarks': 'Remarks'
+            };
+            
+            const label = titleToLabelMap[remark.title] || 'Remarks';
+            
+            // Convert multiple values back to single string with line breaks
+            const content = remark.values.join('\n');
+            convertedRemarks.push(`${label}:${content}`);
+          }
+          // Handle legacy format: "Contact:DATA"
+          else if (typeof remark === 'string') {
+            convertedRemarks.push(remark);
+          }
+        });
+        
+        converted.remarks = convertedRemarks;
+      }
+      
+      // Convert notes from API format to form format (add as COMMENT: entries)
+      if (converted.notes && Array.isArray(converted.notes)) {
+        const convertedComments: string[] = [];
+        
+        converted.notes.forEach((note: any) => {
+          // Handle API format: { people_id, people_name, text, date }
+          if (typeof note === 'object' && note.text) {
+            convertedComments.push(`COMMENT:${note.text}`);
+          }
+        });
+        
+        // Add comments to remarks array
+        if (!converted.remarks) {
+          converted.remarks = [];
+        }
+        converted.remarks = [...converted.remarks, ...convertedComments];
+        
+        // Remove notes from form data since they're now in remarks
+        delete converted.notes;
+      }
+      
+      return converted;
+    };
+    
     // Deep merge initial data with defaults, giving priority to initialData
     const mergeData = (defaults: any, data: any): any => {
       const result = { ...defaults };
       
-      Object.keys(data).forEach(key => {
-        if (data[key] !== null && data[key] !== undefined) {
-          if (Array.isArray(data[key])) {
-            result[key] = data[key];
-          } else if (typeof data[key] === 'object' && !Array.isArray(data[key])) {
-            result[key] = mergeData(result[key] || {}, data[key]);
+      // Convert API data format first
+      const convertedData = convertApiDataToFormFormat(data);
+      
+      Object.keys(convertedData).forEach(key => {
+        if (convertedData[key] !== null && convertedData[key] !== undefined) {
+          if (Array.isArray(convertedData[key])) {
+            result[key] = convertedData[key];
+          } else if (typeof convertedData[key] === 'object' && !Array.isArray(convertedData[key])) {
+            result[key] = mergeData(result[key] || {}, convertedData[key]);
           } else {
-            result[key] = data[key];
+            result[key] = convertedData[key];
           }
         }
       });
@@ -425,7 +488,7 @@ export function usePurchaseContractForm(options: UsePurchaseContractFormOptions 
         payment_currency: findCurrencyValue(ls.payment_currency)
       })),
       quantity: quantity,
-      reference_number: formData.reference_number,
+      reference_number: formData.reference_number || "NA",
       measurement_unit_id: formData.measurement_unit_id, // Use the ID from form selection
       measurement_unit: formData.measurement_unit,
       shipping_start_date: new Date(formData.shipping_start_date).toISOString(),
@@ -444,8 +507,102 @@ export function usePurchaseContractForm(options: UsePurchaseContractFormOptions 
       },
       status: 'created',
       contract_date: new Date(formData.contract_date).toISOString(),
-      notes: [],
-      remarks: (formData.remarks || []).filter(remark => remark.trim() !== ''),
+      notes: (() => {
+        const processedNotes: Array<{ 
+          people_id: string; 
+          people_name: string; 
+          text: string; 
+          date: string; 
+        }> = [];
+        
+        // Get user data from localStorage
+        const userId = localStorage.getItem('user_id') || '';
+        const firstName = localStorage.getItem('user_name') || '';
+        const lastName = localStorage.getItem('user_lastname') || '';
+        const userName = `${firstName} ${lastName}`.trim();
+        
+        // Process each comment from the remarks
+        (formData.remarks || [])
+          .filter(remark => remark.startsWith('COMMENT:'))
+          .forEach(remark => {
+            const commentText = remark.replace('COMMENT:', '').trim();
+            
+            // Skip empty comments
+            if (!commentText) {
+              return;
+            }
+            
+            // Add observation with current timestamp
+            processedNotes.push({
+              people_id: userId,
+              people_name: userName,
+              text: commentText,
+              date: new Date().toISOString()
+            });
+          });
+        
+        return processedNotes;
+      })(),
+      remarks: (() => {
+        const processedRemarks: Array<{ title: string; values: string[] }> = [];
+        
+        // Process each remark from the form
+        (formData.remarks || [])
+          .filter(remark => remark.trim() !== '')
+          .forEach(remark => {
+            // Skip comments as they are not part of the remarks API structure
+            if (remark.startsWith('COMMENT:')) {
+              return;
+            }
+            
+            let title = '';
+            let content = '';
+            
+            // Extract title and content from "Label:content" format
+            if (remark.includes(':')) {
+              const parts = remark.split(':');
+              const label = parts[0].trim();
+              content = parts.slice(1).join(':').trim(); // Handle content with colons
+              
+              // Map display labels to API title values
+              const labelToTitleMap: Record<string, string> = {
+                'Contact': 'contact',
+                'Shipment': 'shipment', 
+                'Routing': 'routing',
+                'Prem/Disc': 'premDisc',
+                'Terms': 'terms',
+                'Remarks': 'remarks'
+              };
+              
+              title = labelToTitleMap[label] || label.toLowerCase();
+            } else {
+              // If no colon, treat the whole thing as content with default title
+              title = 'remarks';
+              content = remark.trim();
+            }
+            
+            // Skip if no content
+            if (!content) {
+              return;
+            }
+            
+            // Split content by line breaks to create multiple values
+            const values = content
+              .split('\n')
+              .map(line => line.trim())
+              .filter(line => line !== '');
+            
+            // Only add if we have values
+            if (values.length > 0) {
+              processedRemarks.push({
+                title,
+                values
+              });
+            }
+          });
+        
+        return processedRemarks;
+      })(),
       ...(formData.adjustments && formData.adjustments.length > 0 && { 
         adjustments: formData.adjustments 
       }),

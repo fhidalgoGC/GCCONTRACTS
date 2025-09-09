@@ -5,7 +5,7 @@ import {
   usePageTracking,
   useNavigationHandler,
 } from "@/hooks/usePageState";
-import DashboardLayout from "@/components/layout/DashboardLayout";
+import DashboardLayout from "@/layouts/DashboardLayout/view";
 import { useCommodities } from "@/hooks/useCommodities";
 import {
   GenericTable,
@@ -19,7 +19,7 @@ import {
   fetchContractsData,
   fetchContractsDataDirect,
   generateContractId,
-} from "@/services/contracts.service";
+} from "@/services/contracts/contracts.service";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -659,7 +659,11 @@ export default function PurchaseContracts() {
         </div>
 
         {/* Pricing Type Filters */}
-        <div className="flex flex-wrap gap-2">
+        <div>
+          <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            {t("contractType")}
+          </h3>
+          <div className="flex flex-wrap gap-2">
           {[
             { key: "all", value: "all", labelKey: "filters.all" },
             { key: "fixed", value: "fixed", labelKey: "filters.fixed" },
@@ -687,10 +691,15 @@ export default function PurchaseContracts() {
               {t(filter.labelKey)}
             </Button>
           ))}
+          </div>
         </div>
 
         {/* Commodity Filters */}
-        <div className="flex flex-wrap gap-2">
+        <div>
+          <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            {t("commodity")}
+          </h3>
+          <div className="flex flex-wrap gap-2">
           <Button
             variant="ghost"
             size="sm"
@@ -718,6 +727,7 @@ export default function PurchaseContracts() {
               {commodity.label}
             </Button>
           ))}
+          </div>
         </div>
 
         {/* Table without filters, title, or create button */}

@@ -1,0 +1,146 @@
+Ahora vamos a programar la pantalla con la lista de compradores en la página /buyers, está lista y cualquier otra en el sistema debe ser una tabla, por eso lo mejor es crear esta tabla como un componente reutilizable, la tabla debe contar con la siguiente características:
+Paginación, el componente debe permitir escoger el tamaño de la página de entre 10, 25, 50 y 100 elementos por página.
+Controles para la navegación entre las páginas, al menos: primera página, última página, página anterior y siguiente página. Estos controles deben tener las correctas validaciones para determinar cuando están habilitados y cuando no. 
+Ordenamiento, debe ser posible ordenar la tabla haciendo clic sobre la cabecera de alguna de las columnas, cuando la tabla esté ordenada por alguna de las columnas debe ser visible a través de un icono o algo por el estilo que la data en la tabla está siendo ordenada de manera ascendente o descendente.
+La tabla debe contar con una barra de búsqueda para filtrar la información presentada en la misma. La barra de búsqueda debe implementar un debounce de 500 ms para evitar llamadas excesivas al servidor.
+En la barra de búsqueda cuando haya un texto válido ingresado debe ser visible un icono con forma de “X” para borrar el contenido en una sola acción y refrescar de nuevo la data en la tabla.
+Procura un estilo elegante y minimalista para la tabla similar al Fluent UI que Microsoft usa en sus interfaces.
+La URL para consultar la lista de compradores la armaras usando como prefijo el valor de la variable de entorno VITE_URL_CRM y el sufijo /crm-people/people?filter={"_partitionKey":"68534bd2bbd1909dc855048b","roles.slug":"{$in:['buyer']}"}&page=1&limit=5&sort={"first_name":"1"} el valor para _partitionKey en el filtro lo debes reemplazar con el valor que tiene el key “partition_key” dentro del local storage.
+
+El query params “page” sirve para indicar la página que se quiere solicitar. 
+El query params “limit” sirve para indicar el tamaño de la página que se quiere solicitar.
+El query params “sort” sirve para indicar el ordenamiento que queremos que tenga la data, está conformado por un key-value, el key es el nombre del key en la data por el cual queremos ordenar la información y el value 1 o -1 sirve para indicar si el orden es ascendente o descendente. 
+El query params “filter” es muy importante y sirve para filtrar la información, está en formato JSON y siempre contendrá los keys “_partitionKey” y “roles.slug” debido a que estos filtran la información base necesaria para la tabla. Este es un ejemplo de este JSON base que siempre debe estar:
+{
+   "_partitionKey": "68534bd2bbd1909dc855048b",
+   "roles.slug": "{$in:['buyer']}"
+}
+
+En caso de que el usuario ingrese algún texto para filtrar, este JSON debe cambiar por el siguiente:
+
+{
+   "_partitionKey": "68534bd2bbd1909dc855048b",
+   "roles.slug": "{$in:['buyer']}",
+   "$or": [       
+       {
+           "full_name": {
+               "$regex": ".*algo",
+               "$options": "i"
+           }
+       },
+       {
+           "emails.value": {
+               "$regex": ".*algo",
+               "$options": "i"
+           }
+       },
+       {
+           "phones.phone_number": {
+               "$regex": ".*algo",
+               "$options": "i"
+           }
+       }
+   ]
+}
+
+Recuerda en ambos casos reemplazar en el JSON el key “_partitionKey” por el valor que tiene la variable “partition_key” del local storage y en el caso que se filtra reemplazar “algo” en cada una de las tres expresiones regulares por el valor ingresado por el usuario. 
+
+Al igual que en otros llamados este requiere autorización “Bearer Token” que debes tomar del storage local con el key “jwt” y el header “_partitionkey“ cuyo valor lo debes tomar del key “partition_key” del local storage. 
+
+La respuesta a este llamado y a cualquier otro que devuelva múltiples registros para mostrar en tabla tiene el siguiente formato, lo unico que cambiaria para otro llamado es el formato del objeto dentro del array de data que se adecuará al tipo de dato que está devolviendo. 
+
+{
+   "data": [
+       {
+           "_id": "684715c1a3e0f7b270d3c321",
+           "_partitionKey": "68534bd2bbd1909dc855048b",
+           "active": true,
+           "created_at": "2025-06-09T17:14:05.267Z",
+           "created_by": "68389c5d6c8d98627ee0e201",
+           "emails": [
+               {
+                   "_id": "684c878625e74497da881adb",
+                   "type": "principal",
+                   "value": "carlos001@grainchain.io",
+                   "verified": false,
+                   "created_at": "2025-06-13T20:18:14.314Z",
+                   "updated_at": "2025-06-13T20:18:14.314Z"
+               }
+           ],
+           "etl": true,
+           "externals": [
+               {
+                   "platform": "ss-desktop",
+                   "platform_id": "null",
+                   "registered_at": "2025-06-13T20:18:14.316Z"
+               }
+           ],
+           "extras": [
+               {
+                   "key": "isClone",
+                   "values": [
+                       {
+                           "value_type": "string",
+                           "value": "true"
+                       }
+                   ]
+               }
+           ],
+           "first_name": "Carlos Buyer",
+           "full_name": "Test Rol Buyer LLC",
+           "ids": [],
+           "is_clone": true,
+           "last_name": "Sanchez",
+           "organization_name": "Test Rol Buyer LLC",
+           "person_type": "juridical_person",
+           "phones": [
+               {
+                   "_id": "684c878625e74497da881ada",
+                   "calling_code": "+1",
+                   "phone_number": "234234234",
+                   "type": "principal",
+                   "verified": false,
+                   "created_at": "2025-06-13T20:18:14.314Z",
+                   "updated_at": "2025-06-13T20:18:14.314Z"
+               }
+           ],
+           "related_people": [],
+           "relationships": [],
+           "roles": [
+               {
+                   "slug": "buyer",
+                   "platforms": [],
+                   "created_at": "2025-06-13T20:18:14.314Z",
+                   "updated_at": "2025-06-13T20:18:14.314Z"
+               }
+           ],
+           "updated_at": "2025-06-13T20:18:14.338Z"
+       }
+   ],
+   "_meta": {
+       "page_size": 2,
+       "page_number": 1,
+       "total_elements": 13,
+       "total_pages": 7
+   },
+   "_links": {
+       "self": "/api/v1/crm-people/people?page=1",
+       "first": "/api/v1/crm-people/people?page=1",
+       "prev": "/api/v1/crm-people/people?page=1",
+       "next": "/api/v1/crm-people/people?page=2",
+       "last": "/api/v1/crm-people/people?page=7"
+   }}
+
+El key “data” es de tipo array y contiene la lista de objetos que debe ser mostrados en la tabla, para esta tabla en particular en las columnas vamos a mostrar la siguiente información: 
+
+Nombre de la Columna: “Id Comprador”, para conseguir este valor debes obtener el key “_id” que está en la raiz del objeto, este valor lo debes convertir a mayúsculas, y para mostrar en la tabla tomarás solo los últimos 6 caracteres, por ejemplo si el id del comprador es 6877c3b48a22c6453f67404d mostraras en la tabla “67404D”. A esta columna en particular no le aplicaremos ordenamiento. 
+Nombre de la Columna: “Nombre Completo”, para conseguir este valor debes tomar el key “full_name” de la raíz del objeto. para ordenar por esta columna en el query params “sort” debes enviar el key “full_name” acompañado de 1 o -1 dependiendo si el ordenamiento es ascendente o descendente.
+Nombre de la Columna: “Correo Electrónico”, para conseguir este valor debes obtener el key “emails” que es de tipo array y de allí obtener el primer objeto que encuentres y de ese objeto tomar el key “value”, para ordenar por esta columna en el query params “sort” debes enviar el key “emails.value” acompañado de 1 o -1 dependiendo si el ordenamiento es ascendente o descendente. Considera que el correo electrónico es opcional, por lo que puede que no exista el key “emails” de tipo array en el objeto, en cuyo caso el valor para esta columna debe quedar vacío.
+Nombre de la Columna: “Número de Teléfono”, para conseguir este valor debes obtener el key “phones” que es de tipo array, de allí obtener el primer objeto que encuentres, y de este objeto tomar los keys “calling_code” y “phone_number”, estos dos keys los debes concatenar dejando un espacio en blanco entre ellos y este valor concatenado es el que debes mostrar en pantalla. Para ordenar por esta columna en el query params “sort” debes enviar {"phones.calling_code":"1", "phones.phone_number":"1"}, solamente debes adecuar 1 o -1 dependiendo si el orden es ascendente o descendente. Considera que el teléfono es opcional, por lo que puede que no exista el key “phones” de tipo array en el objeto, en cuyo caso el valor para esta columna debe quedar vacío.
+
+Además encontrarás un key en la raíz de la respuesta llamado “_meta” con los siguientes valores que son fundamentales para la implementación de la tabla:
+
+El key “page_size” indica el tamaño que tiene la página que retorno el API.
+El key “page_number” indica el índice de la página, si es la primera, la segunda, la tercera o el número que le corresponda.
+El key “total_elements” indica el total de elementos disponibles en el API para ser consultados. 
+Finalmente el key “total_pages” indica el total de páginas disponibles según el valor de “page_size”, 

@@ -1,0 +1,22 @@
+curl 'https://trm-develop.grainchain.io/api/v1/contracts/sp-contracts/68ae1191cfb8986129050b27' \
+  -X 'PUT' \
+  -H '_partitionkey: 68534bd2bbd1909dc855048b' \
+  -H 'accept: */*' \
+  -H 'accept-language: es-419,es;q=0.9' \
+  -H 'authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5EUkJSRVUxTXpCRVF6STRNRGd6T1RCRU1EZ3hOVGRFTlROR1JUazNORU0xTnpJeE16STROZyJ9.eyJodHRwOi8vd3d3LmdyYWluY2hhaW4uaW8vcm9sZXMiOlsicGFydGljaXBhbnQiXSwiZmFtaWx5X25hbWUiOiJpbnRlZ3JhY2lvbiIsIm5pY2tuYW1lIjoiY29udHJhdG9zX2ludGVncmFjaW9uIiwibmFtZSI6IkNvbnRyYXRvcyAiLCJwaWN0dXJlIjoiaHR0cHM6Ly9zLmdyYXZhdGFyLmNvbS9hdmF0YXIvMmY3YmIwMWVmODA4NWZiMWNjNzQ2YzQ5NzM5MDc4ZWQ_cz00ODAmcj1wZyZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZjLnBuZyIsInVwZGF0ZWRfYXQiOiIyMDI1LTA4LTI3VDIxOjI3OjQ2LjczNloiLCJlbWFpbCI6ImNvbnRyYXRvc19pbnRlZ3JhY2lvbkBncmFpbmNoYWluLmRldiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2dyYWluY2hhaW5kZXYuYXV0aDAuY29tLyIsImF1ZCI6ImY5anc5eHNMMlNqZTJMd0hzRVpTeG5wTXVwSDBRaU5KIiwic3ViIjoiYXV0aDB8Njg1NDgzNDk2OWJiNTFlZTE4NWE5NzIwIiwiaWF0IjoxNzU2MzMwMDY2LCJleHAiOjE3NTYzNjYwNjZ9.HwX_x_i6uToKO_6W_d7XIka_zXyCnBW4c_jm5XC5Z6p-SsgW65Z9AsdSAmQ2BxV_qaAS-_tRMm0GCS39SRrWPIQn841r9Aa5_mMPmkpg9lmZiei2KRfJA2OazyDBKQK8PRih0xMcItQEYCFStXECGiTXK1vym2dfb47yYE_6SMh4-F99OUscgDBn_I79MXF8dhYti6nll7Ywqrp4nlpCljEvpzOvu8mF0Q1fYM6Opef8qsU1EIqinIigVtpDUI-UY6vbTXEW6mDU3rG5kBBTQWmUyMK9UU6ahuglbqHx2C-3ZQ6uT2aG-KpWT6cQAPrRI-r9anPvw7q85y8SQFRGpQ' \
+  -H 'bt-organization: 68534bd2bbd1909dc855048b' \
+  -H 'bt-uid: 68534bd2bbd1909dc855048b' \
+  -H 'content-type: application/json; charset=utf-8' \
+  -H 'organization_id: 68534bd2bbd1909dc855048b' \
+  -H 'origin: https://607bf60b-cb59-4750-9a75-c52b33967dbf-00-1irem5gufmuqp.janeway.replit.dev' \
+  -H 'pk-organization: 68534bd2bbd1909dc855048b' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://607bf60b-cb59-4750-9a75-c52b33967dbf-00-1irem5gufmuqp.janeway.replit.dev/' \
+  -H 'sec-ch-ua: "Not;A=Brand";v="99", "Google Chrome";v="139", "Chromium";v="139"' \
+  -H 'sec-ch-ua-mobile: ?1' \
+  -H 'sec-ch-ua-platform: "Android"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: cross-site' \
+  -H 'user-agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Mobile Safari/537.36' \
+  --data-raw '{"_partitionKey":"68534bd2bbd1909dc855048b","active":true,"created_by":"56368d8367f266adf004187a","created_at":"2025-08-27T21:52:54.420Z","folio":"SPC-57","type":"purchase","sub_type":"imported","commodity":{"commodity_id":"6839eff8edc3c27f091bdfde","name":"YC - Yellow Corn"},"characteristics":{"configuration_id":"685b35fe74275d9fc6efd4b8","configuration_name":"calidades"},"grade":2,"participants":[{"people_id":"684b1df450da2598917634df","name":"Alex Gama","role":"seller"},{"people_id":"6854834ae0b54f538d861d0e","name":"Contratos  integracion","role":"buyer"}],"price_schedule":[{"pricing_type":"fixed","price":600,"basis":100,"basis_operation":"add","future_price":500,"option_month":"august","option_year":2026,"payment_currency":"usd","exchange":"Chicago Board of Trade"}],"logistic_schedule":[{"logistic_payment_responsability":"buyer","logistic_coordination_responsability":"seller","freight_cost":{"type":"none","min":0,"max":0,"cost":0},"payment_currency":"usd"}],"quantity":3000,"reference_number":"300","measurement_unit_id":"684219cf60fd7f15273452dd","measurement_unit":"bu32","shipping_start_date":"2025-08-26T00:00:00.000Z","shipping_end_date":"2025-08-26T00:00:00.000Z","application_priority":5,"delivered":"pickupProgreso","transport":"truckRail","weights":"submitCc","inspections":"origin","proteins":"origin","thresholds":{"min_thresholds_percentage":0,"min_thresholds_weight":3000,"max_thresholds_percentage":0,"max_thresholds_weight":3000},"status":"created","contract_date":"2025-08-26T00:00:00.000Z","notes":[],"remarks":[],"created_by_id":"56368d8367f266adf004187a","created_by_name":"Contratos ","registered_by_id":"56368d8367f266adf004187a","registered_by_name":"Contratos "}'

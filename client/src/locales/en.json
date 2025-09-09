@@ -554,5 +554,36 @@
   },
   "common": {
     "viewMode": "View Mode"
+  },
+  "table": {
+    "actions": "Actions",
+    "create": "Create",
+    "search": "Search...",
+    "noResults": "No results found",
+    "loading": "Loading...",
+    "noDataAvailable": "No data available",
+    "rowsPerPage": "Rows per page",
+    "showingResults": "Showing {{start}} to {{end}} of {{total}} results",
+    "pageOfPages": "Page {{current}} of {{total}}",
+    "sortAscending": "Sort ascending",
+    "sortDescending": "Sort descending",
+    "emptyState": "No data to display",
+    "errorState": "Error loading data",
+    "tryAgain": "Try again",
+    "filters": {
+      "all": "All",
+      "filterBy": "Filter by:",
+      "clearAll": "Clear All Filters",
+      "showingFiltered": "Showing filtered results",
+      "basis": "Basis",
+      "fixed": "Fixed"
+    },
+    "pagination": {
+      "first": "First",
+      "previous": "Previous",
+      "next": "Next",
+      "last": "Last",
+      "goToPage": "Go to page"
+    }
   }
 }

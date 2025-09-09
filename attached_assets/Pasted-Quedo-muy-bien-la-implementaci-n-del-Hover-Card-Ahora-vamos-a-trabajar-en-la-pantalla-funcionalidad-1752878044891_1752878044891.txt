@@ -1,0 +1,85 @@
+Quedo muy bien la implementación del Hover Card, Ahora vamos a trabajar en la pantalla/funcionalidad para registrar un buyer.
+
+Crea la nueva pantalla para esta funcionalidad y agrega la validación desde el botón de agregar comprador que ya tenemos en la lista de compradores hasta esta nueva pantalla.
+
+Esta pantalla funciona con el principio de Idempotencia, al entrar a la pantalla se hace un POST para obtener un ID y luego a la hora de guardar se hace un PUT al ID generado al entrar en la pantalla, esto con el fin de evitar que si el usuario hace clic sobre el botón de registrar comprador múltiples veces se creen registros repetidos.
+
+El endpoint POST para obtener el ID idempotente es https://crm-develop.grainchain.io/api/v1/crm-people/people, arma la URL utilizando como prefijo el valor de la variable de ambiente VITE_URL_CRM y como sufijo /crm-people/people, este endpoint requiere autorización “Bearer Token” que debes tomar del storage local con el key “jwt” y el body debe contener lo siguiente: 
+
+{
+   "_partitionKey": "organization_id=xxxxx"
+}
+
+En el body reemplaza xxxxx por el key “partition_key” del storage local, el endpoint retornara lo siguiente: 
+
+{
+   "data": {
+       "key": "687aa7ac6511a114e560804f",
+       "location": "/api/v1/crm-people/people/687aa7ac6511a114e560804f"
+   }
+}
+
+Haz tipado de la respuesta y toma el key data.key guardalo como idempotent_buyer_id en el contexto de esta pantalla, lo que significa que si el usuario abandona esta pantalla se borrará y que cada vez que el usuario ingrese a esta pantalla debe generar un nuevo ID. 
+
+El endpoint que se va a invocar para registrar al buyer es PUT https://crm-develop.grainchain.io/api/v1/crm-people/people/687a71186511a114e56073b3  , arma la URL utilizando como prefijo el valor de la variable VITE_URL_CRM y como sufijo /crm-people/people/yyyyy en este sufijo remplaza yyyyy por el valor de idempotent_buyer_id. El body necesario para invocar este endpoint es el siguiente: 
+
+
+{
+  "first_name": "Marcelo",
+  "last_name": "Dominguez",
+  "full_name": "Grows Farms",
+  "organization_name": "Grows Farms",
+  "roles": [
+    {
+      "slug": "buyer"
+    }
+  ],
+  "emails": [
+    {
+      "value": "marcelom@grainchain.dev",
+      "type": "principal",
+      "verified": false
+    }
+  ],
+  "phones": [
+    {
+      "calling_code": "+1",
+      "phone_number": "6384934039",
+      "type": "principal",
+      "verified": false
+    }
+  ],
+  "externals": [
+    {
+      "platform_id": "null",
+      "platform": "ss-desktop"
+    }
+  ],
+  "_partitionKey": "68534bd2bbd1909dc855048b",
+  "active": true,
+  "person_type": "natural_person"
+}
+
+
+Haz el tipado para esta solicitud, Este endpoint requiere autorización “Bearer Token” que debes tomar del storage local con el key “jwt”, vamos a crear un formulario moderno, elegante y minimalista siguiendo los principios de diseño Fluent UI que utiliza Microsoft en sus interfaces, considera por favor los siguientes elementos:
+
+Tipo de persona: en este punto el usuario debe seleccionar si será una persona Natural o Jurídica. Utiliza un componente adecuado, minimalista y moderno para que el usuario seleccione. Dependiendo de lo que el usuario seleccione se le asigna valor al key “person_type” en la raíz del objeto, si escoge Persona Natural tomará como valor “natural_person” caso contrario si escoge Persona Jurídica tomará como valor “juridical_person”.
+
+Nombre de la organización: este input solamente será visible y requerido en caso de que el usuario haya seleccionado juridical_person al comienzo del formulario. Valida un máximo de 90 caracteres. El valor ingresado por el usuario será asignado al key “organization_name” en la raíz del objeto.
+
+Nombre: input para que el usuario indique el nombre del comprador que se está registrando, valida un máximo de 60 caracteres y es un campo requerido. El valor ingresado por el usuario será asignado al key “first_name” en la raíz del objeto.
+
+Apellido: input para que el usuario indique el apellido del comprador que se está registrando, valida un máximo de 60 caracteres y es un campo requerido. El valor ingresado por el usuario será asignado al key “last_name” en la raíz del objeto.
+
+Correo electrónico: input para que el usuario indique el email del comprador que se está registrando, este es un campo opcional, en caso de tener valor se debe validar que sea un email con formato válido. Con el valor ingresado por el usuario se debe crear un objeto dentro del key “emails” que es de tipo array, dentro de este objeto el key “value” toma el email ingresado por el usuario, el key “type” toma el valor “principal” y el key “verified” toma el valor false.
+
+Teléfono: el teléfono está compuesto por el código de llamada y por el número de teléfono, para el código de teléfono implementa un selector que incluya la bandera del país y el código de llamada con estos códigos y países: +1 Estados Unidos y +52 México. Y para el número de teléfono valida que tiene el formato correcto de acuerdo al país seleccionado. Este es un campo opcional, pero en caso de tener valor se debe validar que se seleccione un código de llamada y que el número de teléfono ingresado tenga el formato correcto.  Si hay un valor válido se debe crear un objeto para el key “phones” de tipo array, dentro de este objeto el key “calling_code” debe tomar el valor seleccionado en el código de llamada, el key “phone_number” debe tomar el valor ingresado en el input de número de teléfono, el key “type” tomará el valor “principal” y el key “verified” tomará el valor “false”.
+
+Consideraciones Especiales:
+
+El key “full_name” en la raiz del objeto tomará su valor de acuerdo a las siguientes condiciones, si se escogió natural_person se concatena el valor de first_name y last_name dejando un espacio en blanco entre los dos valores y se asigna a full_name, si se escogió juridical_person tomará el valor de organization_name y se lo asignará a full_name.
+Si el llamado fue ejecutado exitosamente, dale feedback al usuario con algún componente que luzca como los que usa el sistema de diseño Fluent UI de Microsoft para dar este tipo de feedback al usuario, de la misma manera si fallo notifica al usuario. 
+Implementa un loading mientras se hace la invocación del llamado.
+Una vez que termine la ejecución si fue exitosa redirecciona al usuario a la pantalla de la lista de compradores.
+Asegurate de que al redireccionar a la pantalla con la lista de compradores se haga el llamado de nuevo para que la lista de compradores ya incluya el registro recién creado. 
+No olvides darle a todo este formulario un estilo elegante y minimalista basado en el estilo de diseño Fluent UI que usa Microsoft en sus interfaces. 

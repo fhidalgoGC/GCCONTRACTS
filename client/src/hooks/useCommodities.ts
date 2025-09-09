@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { CommoditiesService, type CommodityOption } from '@/services/commodities.service';
+import { CommoditiesService, type CommodityOption } from '@/services/commodities/commodities.service';
 
 export const useCommodities = () => {
   const [commodities, setCommodities] = useState<CommodityOption[]>([]);

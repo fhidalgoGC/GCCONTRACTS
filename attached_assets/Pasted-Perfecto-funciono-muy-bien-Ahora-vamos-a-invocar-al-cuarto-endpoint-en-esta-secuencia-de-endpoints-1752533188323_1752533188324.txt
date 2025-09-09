@@ -1,0 +1,159 @@
+Perfecto, funciono muy bien! Ahora vamos a invocar al cuarto endpoint en esta secuencia de endpoints, ya invocamos el primero para hacer login y obtener el JWT, el segundo para obtener la información del customer y el tercero para obtener los partition_keys, ahora vamos a agregar a esta secuencia un nuevo endpoint para obtener la información de la organización a la que pertenece el usuario, ten mucho cuidado de no borrar ni reemplazar ninguno de los llamados previos ya establecidos y programados.
+Lo primero que vamos a hacer es crear una nueva variable de ambiente llamada URL_CRM que tomará el valor https://crm-develop.grainchain.io/api/v1 ten mucho cuidado al agregar esta nueva variable de ambiente de modo que no vayas a reemplazar o borrar alguna de las variables ya existentes, este nuevo endpoint es un GET cuya url estará conformada por el prefijo de la variable de entorno URL_CRM  y por el sufijo /mngm-organizations/organizations?filter={"_partitionKey":{"$in":["68534bd2bbd1909dc855048b"]}}&limit=1, es importantisimo reemplazar el valor en el $in por el partition key que se obtuvo en el llamado anterior que está guardado en el storage local con el nombre partition_key, al igual que en otros llamados este requiere autorización “Bearer Token” que debes tomar del storage local y que se acaba de obtener en el primer llamado y lo guardamos con el key “jwt”.
+La respuesta del endpoint es la siguiente: 
+{
+   "data": [
+       {
+           "_id": "68534bd2bbd1909dc855048b",
+           "_partitionKey": "68534bd2bbd1909dc855048b",
+           "active": true,
+           "addresses": [
+               {
+                   "_id": "68534bd5ce5a7c4691cee8f8",
+                   "line": "Antigua Carretera México-Cuautla 17, Cuautla, Morelos, United Mexican States, 62748",
+                   "type": "personal"
+               }
+           ],
+           "applications": [
+               {
+                   "_id": "68534cc99cd9b42bbdd6694e",
+                   "slug": "silosys-mobile"
+               }
+           ],
+           "business_name": "Mi centro contratos",
+           "business_type": "juridical_person",
+           "configuration_set": {
+               "_id": "68545c16c3df9a0fd4873ccc",
+               "name": "Configuración personalizada"
+           },
+           "created_at": "2025-06-18T23:33:29.624Z",
+           "created_by": "68534bd3e0b54f538d8614cc",
+           "emails": [
+               {
+                   "_id": "68534cc99cd9b42bbdd6694c",
+                   "type": "principal",
+                   "value": "integcontracts@grainchain.dev",
+                   "verified": true
+               }
+           ],
+           "extras": [
+               {
+                   "key": "onboarding.organization",
+                   "values": [
+                       {
+                           "value": "true",
+                           "value_id": "68534cc99cd9b42bbdd6694f",
+                           "value_type": "boolean"
+                       }
+                   ]
+               },
+               {
+                   "values": [
+                       {
+                           "value": "68534bd2bbd1909dc855048b",
+                           "value_id": "68534cc99cd9b42bbdd66950",
+                           "value_type": "string"
+                       }
+                   ],
+                   "key": "owner"
+               },
+               {
+                   "key": "reference.information",
+                   "values": [
+                       {
+                           "value": "",
+                           "value_id": "68534cc99cd9b42bbdd66951",
+                           "value_type": "string"
+                       }
+                   ]
+               },
+               {
+                   "key": "created_by",
+                   "values": [
+                       {
+                           "value": "68534bd2bbd1909dc855048b",
+                           "value_id": "68534bd2bbd1909dc855048b",
+                           "value_type": "string"
+                       }
+                   ]
+               },
+               {
+                   "key": "representativePeople_id",
+                   "values": [
+                       {
+                           "value": "6854834ae0b54f538d861d0e",
+                           "value_id": "68534bd2bbd1909dc855048b",
+                           "value_type": "string"
+                       }
+                   ]
+               }
+           ],
+           "name": "Mi centro contratos",
+           "phones": [
+               {
+                   "_id": "68534cc99cd9b42bbdd6694d",
+                   "calling_code": "+52",
+                   "phone_number": "7354691326",
+                   "type": "principal",
+                   "verified": true
+               }
+           ],
+           "status": "ready",
+           "type": "facility",
+           "updated_at": "2025-06-26T15:53:34.289Z",
+           "logs": [
+               {
+                   "executed_at": "2025-06-19T18:51:33.657Z",
+                   "executed_by": "68545c35c3df9a0fd4874203",
+                   "executed_name": "68545c35c3df9a0fd4874203",
+                   "action": "update",
+                   "_id": "68545c35c3df9a0fd48742a3"
+               },
+               {
+                   "executed_at": "2025-06-24T16:06:33.878Z",
+                   "executed_name": "",
+                   "action": "update",
+                   "_id": "685acd0939b6b46d62598b1b"
+               },
+               {
+                   "executed_at": "2025-06-25T16:20:06.196Z",
+                   "executed_name": "",
+                   "action": "update",
+                   "_id": "685c21b6b3a18513ab71f283"
+               },
+               {
+                   "executed_at": "2025-06-25T17:28:57.235Z",
+                   "executed_name": "",
+                   "action": "update",
+                   "_id": "685c31d96d7b1cbfa36b8716"
+               },
+               {
+                   "executed_at": "2025-06-26T15:53:34.288Z",
+                   "executed_name": "",
+                   "action": "update",
+                   "_id": "685d6cfeec2f7bc949f667e0"
+               }
+           ],
+           "images": [],
+           "ids": [],
+           "relationships": [],
+           "reports": [],
+           "externals": [],
+           "id": "68534cc99cd9b42bbdd66952"
+       }
+   ],
+   "_meta": {
+       "page_size": 1,
+       "page_number": 1,
+       "total_elements": 1,
+       "total_pages": 1
+   },
+   "_links": {
+       "self": "/api/v1/mngm-organizations/organizations?page=1",
+       "first": "/api/v1/mngm-organizations/organizations?page=1",
+       "prev": "/api/v1/mngm-organizations/organizations?page=1",
+       "next": "/api/v1/mngm-organizations/organizations?page=1",
+       "last": "/api/v1/mngm-organizations/organizations?page=1"
+   }
+}
+Tipea la respuesta, como puedes ver dentro hay un key llamado data que es de tipo array, trabajaremos con el primer objeto dentro del array, dentro de este primer objeto se encuentra el key extras que también es de tipo array, debes iterar este array de extras para encontrar el objeto correcto, el objeto correcto es el que tiene el key “key” con el valor “representativePeople_id”, una vez que lo encuentres, podrás ver que dentro del objeto hay un array llamado values, de ahí se espera que solo haya un objeto, debes tomar el valor del key “value” y guardarlo dentro del storage local con el key “representative_people_id”. Es importante que solo agregues este nuevo key al storage local, ten mucho cuidado de no borrar o reemplazar ningún otro key. 

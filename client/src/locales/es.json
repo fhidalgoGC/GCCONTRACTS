@@ -561,5 +561,36 @@
   },
   "common": {
     "viewMode": "Modo Vista"
+  },
+  "table": {
+    "actions": "Acciones",
+    "create": "Crear",
+    "search": "Buscar...",
+    "noResults": "No se encontraron resultados",
+    "loading": "Cargando...",
+    "noDataAvailable": "No hay datos disponibles",
+    "rowsPerPage": "Filas por página",
+    "showingResults": "Mostrando {{start}} a {{end}} de {{total}} resultados",
+    "pageOfPages": "Página {{current}} de {{total}}",
+    "sortAscending": "Ordenar ascendente",
+    "sortDescending": "Ordenar descendente",
+    "emptyState": "No hay datos para mostrar",
+    "errorState": "Error al cargar datos",
+    "tryAgain": "Intentar de nuevo",
+    "filters": {
+      "all": "Todos",
+      "filterBy": "Filtrar por:",
+      "clearAll": "Limpiar Filtros",
+      "showingFiltered": "Mostrando resultados filtrados",
+      "basis": "Basis",
+      "fixed": "Fijo"
+    },
+    "pagination": {
+      "first": "Primero",
+      "previous": "Anterior",
+      "next": "Siguiente",
+      "last": "Último",
+      "goToPage": "Ir a página"
+    }
   }
 }

@@ -1,0 +1,153 @@
+curl --location 'https://api.craftmypdf.com/v1/create' \
+--header 'accept: */*' \
+--header 'accept-language: es-419,es;q=0.9' \
+--header 'content-type: application/json; charset=utf-8' \
+--header 'origin: https://contracts-develop.grainchain.io' \
+--header 'priority: u=1, i' \
+--header 'referer: https://contracts-develop.grainchain.io/' \
+--header 'sec-ch-ua: "Not;A=Brand";v="99", "Google Chrome";v="139", "Chromium";v="139"' \
+--header 'sec-ch-ua-mobile: ?0' \
+--header 'sec-ch-ua-platform: "macOS"' \
+--header 'sec-fetch-dest: empty' \
+--header 'sec-fetch-mode: cors' \
+--header 'sec-fetch-site: cross-site' \
+--header 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36' \
+--header 'x-api-key: 3364MTI3MTk6MTI3NzI6TDMwNjZMaG9odGhNMFg1bA=' \
+--data ' {
+  "data": {
+    "path": "/api/v1/contracts/sp-contracts/6881171ce072414b4f1c7e91",
+    "id": "689cc8467a00659a224ccd93",
+    "_partitionKey": "68534bd2bbd1909dc855048b",
+    "active": true,
+    "created_by": "Contratos  integracion",
+    "created_at": "2025-08-13T17:16:00.882Z",
+    "folio": "SPC-46-SUBC-1",
+    "contract_id": "6881171ce072414b4f1c7e91",
+    "contract_folio": "SPC-46",
+    "type": "purchase",
+    "sub_type": "",
+    "commodity": {
+      "commodity_id": "6839ef01edc3c27f091bdfb4",
+      "name": "HRW - Wheat Hard Red Winter"
+    },
+    "characteristics": {
+      "configuration_id": "",
+      "configuration_name": ""
+    },
+    "grade": 0,
+    "participants": [],
+    "price_schedule": [
+      {
+        "pricing_type": "basis",
+        "price": 500,
+        "basis": 800,
+        "basis_operation": "add",
+        "future_price": 200,
+        "option_month": "september",
+        "option_year": 2025,
+        "payment_currency": "usd",
+        "exchange": "Chicago Board of Trade"
+      }
+    ],
+    "logistic_schedule": [],
+    "inventory": {
+      "total": 200,
+      "open": 0,
+      "fixed": 200,
+      "unsettled": 0,
+      "settled": 200,
+      "reserved": 200
+    },
+    "inventory_value": {
+      "total": 340000,
+      "open": 0,
+      "fixed": 340000,
+      "unsettled": 340000,
+      "settled": 0
+    },
+    "quantity": 200,
+    "measurement_unit_id": "6840d47e60fd7f1527345265",
+    "measurement_unit": "qq",
+    "total_price": 340000,
+    "thresholds": {
+      "min_thresholds_percentage": 0,
+      "min_thresholds_weight": 199,
+      "max_thresholds_percentage": 0,
+      "max_thresholds_weight": 201
+    },
+    "status": "closed",
+    "sub_contract_date": "2025-08-13T00:00:00.000Z",
+    "purchase_orders": [],
+    "reference_number": "",
+    "shipping_start_date": "",
+    "shipping_end_date": "",
+    "location_id": "",
+    "location_name": "",
+    "application_priority": 0,
+    "delivered": "",
+    "transport": "",
+    "weights": "",
+    "inspections": "",
+    "proteins": "",
+    "contract_date": "",
+    "extras": [],
+    "externals": [],
+    "schedule": [],
+    "sub_contracts": [],
+    "notes": [],
+    "remarks": [],
+    "updated_at": "",
+    "contractDate": "8/12/2025",
+    "contractNumber": "-",
+    "fob": "-",
+    "contact": "-",
+    "instructions": "-",
+    "instructionsPdf": "-",
+    "shipmentPeriod": "-",
+    "paymentTerms": "-",
+    "paymentTermsPdf": "-",
+    "routing": "-",
+    "premDisc": "-",
+    "premDiscPdf": "-",
+    "referenceNumber": "",
+    "quantityNumber": 200,
+    "pricingType": "basis",
+    "pricingColorType": "#c8bdec",
+    "isFixed": false,
+    "isBasis": true,
+    "customerId": "",
+    "customerNumber": "",
+    "customerName": "",
+    "customerAddress": "",
+    "customerPhone": "",
+    "ownerId": "",
+    "ownerNumber": "",
+    "ownerName": "",
+    "typeContract": "Sub-Contract",
+    "quantityUnits": "200.00 HRW - Wheat Hard Red Winter",
+    "contractPrice": "$ 500.00",
+    "contractBasis": "$ 800.00",
+    "contractFuture": "$ 200.00",
+    "sellerName": "",
+    "buyerName": "",
+    "companyName": "Mi centro contratos",
+    "companyAddress": "Antigua Carretera México-Cuautla 17, Cuautla, Morelos, United Mexican States, 62748",
+    "companyPhone": "7354691326",
+    "subContractFolio": "SPC-46-SUBC-1",
+    "printDate": "18/08/2025"
+  },
+  "load_data_from": null,
+  "template_id": "5e177b2393797a28",
+  "export_type": "json",
+  "expiration": 60,
+  "output_file": "SPC-46-SUBC-1.pdf",
+  "is_cmyk": false,
+  "image_resample_res": 600,
+  "direct_download": 1,
+  "cloud_storage": 1,
+  "pdf_standard": "string",
+  "password_protected": false,
+  "password": "string",
+  "postaction_s3_filekey": "string",
+  "postaction_s3_bucket": "string"
+}'

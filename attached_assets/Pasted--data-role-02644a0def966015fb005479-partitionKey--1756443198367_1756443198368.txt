@@ -1,0 +1,63 @@
+{
+    "data": [
+        {
+            "role": "02644a0def966015fb005479",
+            "partitionKey": "66e35f1fd357cff52f521bdb",
+            "organization": "El centro ",
+            "registered": "2024-11-06 18:22:46.985964+00",
+            "id": "1292b724795a496e21964ff6",
+            "externals": [],
+            "type": "Organizational",
+            "idCustomer": "a328b9b8f1996eadd36d375f"
+        },
+        {
+            "role": "02644a0def966015fb005479",
+            "partitionKey": "aa7c6bd53a449c5f1395f1d9",
+            "organization": "la norra",
+            "registered": "2024-05-09 23:16:19.51696+00",
+            "id": "2b1e2aecf64fd82ccfea5304",
+            "externals": [],
+            "type": "Organizational",
+            "idCustomer": "a328b9b8f1996eadd36d375f"
+        },
+        {
+            "role": "02644a0def966015fb005479",
+            "partitionKey": "5a16d3583ca5cf4f2d260bd4",
+            "organization": "Cooperativa y Exportadora Café con Aroma de Mujer",
+            "registered": "2024-05-15 00:24:40.792162+00",
+            "id": "105250cc1f1ac766e029c848",
+            "externals": [],
+            "type": "Organizational",
+            "idCustomer": "a328b9b8f1996eadd36d375f"
+        },
+        {
+            "role": "02644a0def966015fb005479",
+            "partitionKey": "663d5942d10c152b19f9355d",
+            "registered": "2024-05-13 02:58:57.526263+00",
+            "id": "49a278fef4d4f9e1da6d6fe0",
+            "externals": [],
+            "type": "Personal",
+            "idCustomer": "a328b9b8f1996eadd36d375f"
+        },
+        {
+            "role": "02644a0def966015fb005479",
+            "partitionKey": "41b85b4ba09bd33fd4fd19df",
+            "organization": "Nicolas Coffee",
+            "registered": "2024-08-26 17:42:36.627716+00",
+            "id": "24ea94ee1879567d9c5247a2",
+            "externals": [],
+            "type": "Organizational",
+            "idCustomer": "a328b9b8f1996eadd36d375f"
+        },
+        {
+            "role": "02644a0def966015fb005479",
+            "partitionKey": "dc6354271a1b97fa0ec083cc",
+            "organization": "oro de cobre",
+            "registered": "2024-05-13 02:58:57.607312+00",
+            "id": "357ab2703f9d3a38b22c46dd",
+            "externals": [],
+            "type": "Organizational",
+            "idCustomer": "a328b9b8f1996eadd36d375f"
+        }
+    ]
+}

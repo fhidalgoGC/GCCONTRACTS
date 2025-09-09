@@ -1,0 +1,14 @@
+curl 'https://un4grlwfx2.execute-api.us-west-2.amazonaws.com/dev/identity/v2/customers/a328b9b8f1996eadd36d375f/partition_keys' \
+  -H 'accept: */*' \
+  -H 'accept-language: en-US,en;q=0.9' \
+  -H 'authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5EUkJSRVUxTXpCRVF6STRNRGd6T1RCRU1EZ3hOVGRFTlROR1JUazNORU0xTnpJeE16STROZyJ9.eyJodHRwOi8vd3d3LmdyYWluY2hhaW4uaW8vcm9sZXMiOlsiQXVkaXRvciIsInBhcnRpY2lwYW50IiwiU2lsb3N5cy1Vc2VyIl0sImZhbWlseV9uYW1lIjoiSmFtYXJpbGxvIENhbWFyZW5hIiwibmlja25hbWUiOiJjYXJtZW5fYSIsIm5hbWUiOiJKdWFuIFBhYmxvIiwicGljdHVyZSI6Imh0dHBzOi8vcy5ncmF2YXRhci5jb20vYXZhdGFyL2ZlNGIwMGVhMzdiMzI5ZTRlYjZmMGFiNDdlYzE5ZTAzP3M9NDgwJnI9cGcmZD1odHRwcyUzQSUyRiUyRmNkbi5hdXRoMC5jb20lMkZhdmF0YXJzJTJGY2EucG5nIiwidXBkYXRlZF9hdCI6IjIwMjUtMDgtMjhUMTg6NDI6NTQuMTAxWiIsImVtYWlsIjoiY2FybWVuX2FAZ3JhaW5jaGFpbi5kZXYiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaXNzIjoiaHR0cHM6Ly9ncmFpbmNoYWluZGV2LmF1dGgwLmNvbS8iLCJhdWQiOiJmOWp3OXhzTDJTamUyTHdIc0VaU3hucE11cEgwUWlOSiIsInN1YiI6ImF1dGgwfDY2M2Q1OTQyZDEwYzE1MmIxOWY5MzU1ZCIsImlhdCI6MTc1NjQwNjU3NCwiZXhwIjoxNzU2NDQyNTc0fQ.EUwZ01gR98a2lWJtKQJ1DHfeJ4f0PwIWej56LG91rbJbswEjEdxhimnD0AO9dqGqpaIg0-p_CaqdEtf7PG2RcB0g3GCvepih-VztQ7_dmWubfSKph_tMtx0K3gOU2WVkhXy7dp4UNKHXypnTQS_cvprqV7ePwB2kIp1sVwZ-C_6NmlWPIwxe7fZY1mJLbXUerIzEkXYwTxpiU4wvX_n5Gsw01jPMrTcEJ7nmb604kD11vpQIg38TUgirFk4kBAlQ_y97_irXGpiTtnB28-IUTs9wsONlkMO38J3kg6xe-t1fLBRvTDA4Aq3mK6CpNR71W55aotmD0SKRA7LFgdWZ_Q' \
+  -H 'origin: https://607bf60b-cb59-4750-9a75-c52b33967dbf-00-1irem5gufmuqp.janeway.replit.dev' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://607bf60b-cb59-4750-9a75-c52b33967dbf-00-1irem5gufmuqp.janeway.replit.dev/' \
+  -H 'sec-ch-ua: "Not;A=Brand";v="99", "Google Chrome";v="139", "Chromium";v="139"' \
+  -H 'sec-ch-ua-mobile: ?1' \
+  -H 'sec-ch-ua-platform: "Android"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: cross-site' \
+  -H 'user-agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Mobile Safari/537.36'

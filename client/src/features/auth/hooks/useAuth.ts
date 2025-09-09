@@ -32,10 +32,15 @@ export const useAuth = () => {
       localStorage.setItem("id_token", result.id_token); // Also store as id_token for characteristics endpoint
       localStorage.setItem("refresh_token", result.refresh_token);
       localStorage.setItem("access_token", result.access_token);
+      // Set initial login time and last activity time
+      const loginTime = Date.now().toString();
+      localStorage.setItem("login_time", loginTime);
+      localStorage.setItem("last_activity", loginTime);
+      console.log('🚀 LOGIN: Sesión iniciada - timestamps guardados:', new Date(parseInt(loginTime)).toLocaleString());
 
       // After successful login, fetch user identity using organization service
       const { organizationService } = await import(
-        "@/services/organization.service"
+        "@/services/organization/organization.service"
       );
       const identityData = await (organizationService as any).getCustomerInfo();
 
@@ -106,9 +111,18 @@ export const useAuth = () => {
         description: t("loginSuccessMessage"),
       });
 
-      setTimeout(() => {
-        setLocation("/home");
-      }, 1000);
+      // Navegar al home inmediatamente
+      setLocation("/home");
+      
+      // Notificar a otras pestañas que se completó el login
+      try {
+        const channel = new BroadcastChannel('session_sync');
+        channel.postMessage({ type: 'LOGIN_COMPLETED', timestamp: Date.now() });
+        channel.close();
+        console.log('📡 LOGIN: Login completado - notificando a otras pestañas');
+      } catch (error) {
+        console.log('📻 LOGIN: No se pudo notificar a otros tabs:', error);
+      }
 
       return true;
     } catch (err: any) {
@@ -131,7 +145,7 @@ export const useAuth = () => {
     try {
       // Get organization information using organization service
       const { organizationService } = await import(
-        "@/services/organization.service"
+        "@/services/organization/organization.service"
       );
       const organizationResponse =
         await organizationService.getOrganizationsRaw(partitionKey);
@@ -193,7 +207,7 @@ export const useAuth = () => {
       }
 
       // Get representative people information using crm-people service
-      const { getPersonById } = await import("@/services/crm-people.service");
+      const { getPersonById } = await import("@/services/crm-people/crm-people.service");
       try {
         const peopleData = await getPersonById(representativePeopleId);
 
@@ -285,6 +299,8 @@ export const useAuth = () => {
     localStorage.removeItem("current_organization_id");
     localStorage.removeItem("current_organization_name");
     localStorage.removeItem("organization_details");
+    localStorage.removeItem("last_activity");
+    localStorage.removeItem("login_time");
 
     // Clear session context
     clearSession();

@@ -1,0 +1,103 @@
+  // Helper function to format number for display (2-4 decimals)
+  // Use centralized number formatting from environment configuration
+
+  // Helper function to handle number input change with strict validation
+  const handleNumberChange = (field: 'quantity' | 'min_thresholds_percentage' | 'max_thresholds_percentage', inputValue: string) => {
+    // Only allow numbers and one decimal point
+    const validChars = /^[0-9.]*$/;
+    
+    if (!validChars.test(inputValue)) {
+      return; // Reject invalid characters
+    }
+    
+    // Prevent multiple decimal points
+    const decimalCount = (inputValue.match(/\./g) || []).length;
+    if (decimalCount > 1) {
+      return;
+    }
+    
+    // Check decimal places limit (max 4)
+    const parts = inputValue.split('.');
+    if (parts[1] && parts[1].length > 4) {
+      // Truncate to 4 decimals (round down)
+      const truncated = parts[0] + '.' + parts[1].substring(0, 4);
+      const numericValue = parseFloat(truncated);
+      setValue(field, numericValue);
+      return;
+    }
+    
+    // Allow empty string or valid number format
+    if (inputValue === '' || /^\d*\.?\d*$/.test(inputValue)) {
+      const numericValue = inputValue === '' ? 0 : parseFloat(inputValue);
+      setValue(field, numericValue);
+    }
+  };
+
+  // Helper function to handle threshold validation (0-100)
+  const handleThresholdChange = (field: 'min_thresholds_percentage' | 'max_thresholds_percentage', inputValue: string) => {
+    // Only allow numbers and one decimal point
+    const validChars = /^[0-9.]*$/;
+    
+    if (!validChars.test(inputValue)) {
+      return; // Reject invalid characters
+    }
+    
+    // Prevent multiple decimal points
+    const decimalCount = (inputValue.match(/\./g) || []).length;
+    if (decimalCount > 1) {
+      return;
+    }
+    
+    // Allow empty string or valid number format
+    if (inputValue === '' || /^\d*\.?\d*$/.test(inputValue)) {
+      let numericValue = inputValue === '' ? 0 : parseFloat(inputValue);
+      
+      // Limit to 0-100 range
+      if (numericValue > 100) {
+        numericValue = 100;
+      } else if (numericValue < 0) {
+        numericValue = 0;
+      }
+      
+      setValue(field, numericValue);
+    }
+  };
+
+  // Helper function to format threshold on blur (0-100 with 2 decimals)
+  const handleThresholdBlur = (field: 'min_thresholds_percentage' | 'max_thresholds_percentage', e: React.FocusEvent<HTMLInputElement>) => {
+    let value = parseFloat(e.target.value.replace(/,/g, '')) || 0;
+    
+    // Ensure value is within 0-100 range
+    if (value > 100) value = 100;
+    if (value < 0) value = 0;
+    
+    // Format with 2 decimal places
+    const formatted = value.toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+    
+    e.target.value = formatted;
+    setValue(field, value);
+  };
+
+  // Helper function to format number on blur
+  const handleNumberBlur = (field: 'quantity', e: React.FocusEvent<HTMLInputElement>) => {
+    let value = parseFloat(e.target.value.replace(/,/g, '')) || 0;
+    
+    // Truncate to 4 decimals (round down)
+    const factor = Math.pow(10, 4);
+    value = Math.floor(value * factor) / factor;
+    
+    // Determine how many decimal places to show (2-4)
+    const decimalString = value.toString().split('.')[1] || '';
+    const decimalPlaces = Math.min(Math.max(decimalString.length, 2), 4);
+    
+    const formatted = value.toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: decimalPlaces
+    });
+    
+    e.target.value = formatted;
+    setValue(field, value);
+  };

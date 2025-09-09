@@ -1,0 +1,96 @@
+{
+  "folio": "",
+  "type": "purchase",
+  "sub_type": "imported",
+  "commodity": {
+    "commodity_id": "68630d39816c1a2299609907",
+    "name": "Soya 2025"
+  },
+  "characteristics": {
+    "configuration_id": "6863114d816c1a2299609c34",
+    "configuration_name": "Contrato soya 2025"
+  },
+  "grade": 2,
+  "quantity": 400,
+  "reference_number": "das",
+  "measurement_unit_id": "",
+  "measurement_unit": "lb",
+  "contract_date": "2025-08-26",
+  "thresholds": {
+    "min_thresholds_percentage": 0,
+    "min_thresholds_weight": 400,
+    "max_thresholds_percentage": 0,
+    "max_thresholds_weight": 400
+  },
+  "seller": "",
+  "contact_vendor": "",
+  "trader": "",
+  "participants": [
+    {
+      "people_id": "687d278bef229b75f66755b3",
+      "name": "Arnoldo Vieira",
+      "role": "contactVendor"
+    },
+    {
+      "people_id": "685b2f67ca51c8f284775f83",
+      "name": "Andrés  bandera",
+      "role": "seller"
+    },
+    {
+      "people_id": "687d278bef229b75f66755b3",
+      "name": "Arnoldo Vieira",
+      "role": "trader"
+    }
+  ],
+  "price_schedule": [
+    {
+      "pricing_type": "fixed",
+      "price": 46,
+      "basis": 23,
+      "basis_operation": "add",
+      "future_price": 23,
+      "option_month": "october",
+      "option_year": 2025,
+      "payment_currency": "MXN",
+      "exchange": "Chicago Board of Trade"
+    }
+  ],
+  "logistic_schedule": [
+    {
+      "logistic_payment_responsability": "seller",
+      "logistic_coordination_responsability": "seller",
+      "freight_cost": {
+        "type": "fixed",
+        "cost": 324,
+        "min": 0,
+        "max": 0
+      },
+      "freight_cost_measurement_unit_id": "qq",
+      "freight_cost_measurement_unit": "Quintales",
+      "payment_currency": "USD"
+    }
+  ],
+  "shipping_start_date": "2025-08-26",
+  "shipping_end_date": "2025-08-26",
+  "application_priority": 1,
+  "delivered": "dlvdToCorpusChristiTx",
+  "transport": "barge",
+  "weights": "submitCc",
+  "inspections": "origin",
+  "proteins": "origin",
+  "remarks": [],
+  "adjustments": [
+    {
+      "_id": "6",
+      "name": "Ajuste Temporal"
+    },
+    {
+      "_id": "3",
+      "name": "Ajuste por Impurezas"
+    },
+    {
+      "_id": "2",
+      "name": "Ajuste por Humedad"
+    }
+  ]
+}

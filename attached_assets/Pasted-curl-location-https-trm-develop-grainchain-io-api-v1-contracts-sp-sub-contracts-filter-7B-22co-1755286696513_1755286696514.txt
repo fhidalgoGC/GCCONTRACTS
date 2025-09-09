@@ -1,0 +1,19 @@
+curl --location 'https://trm-develop.grainchain.io/api/v1/contracts/sp-sub-contracts?filter=%7B%22contract_id%22%3A%226881171ce072414b4f1c7e91%22%7D&limit=100' \
+--header '_partitionkey: 68534bd2bbd1909dc855048b' \
+--header 'accept: */*' \
+--header 'accept-language: es-419,es;q=0.9' \
+--header 'authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5EUkJSRVUxTXpCRVF6STRNRGd6T1RCRU1EZ3hOVGRFTlROR1JUazNORU0xTnpJeE16STROZyJ9.eyJodHRwOi8vd3d3LmdyYWluY2hhaW4uaW8vcm9sZXMiOlsicGFydGljaXBhbnQiXSwiZmFtaWx5X25hbWUiOiJpbnRlZ3JhY2lvbiIsIm5pY2tuYW1lIjoiY29udHJhdG9zX2ludGVncmFjaW9uIiwibmFtZSI6IkNvbnRyYXRvcyAiLCJwaWN0dXJlIjoiaHR0cHM6Ly9zLmdyYXZhdGFyLmNvbS9hdmF0YXIvMmY3YmIwMWVmODA4NWZiMWNjNzQ2YzQ5NzM5MDc4ZWQ_cz00ODAmcj1wZyZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZjLnBuZyIsInVwZGF0ZWRfYXQiOiIyMDI1LTA4LTE1VDE5OjMzOjM3LjIxMloiLCJlbWFpbCI6ImNvbnRyYXRvc19pbnRlZ3JhY2lvbkBncmFpbmNoYWluLmRldiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2dyYWluY2hhaW5kZXYuYXV0aDAuY29tLyIsImF1ZCI6ImY5anc5eHNMMlNqZTJMd0hzRVpTeG5wTXVwSDBRaU5KIiwic3ViIjoiYXV0aDB8Njg1NDgzNDk2OWJiNTFlZTE4NWE5NzIwIiwiaWF0IjoxNzU1Mjg2NDE3LCJleHAiOjE3NTUzMjI0MTd9.KVRXHiUcpOy1Bf8LdnzlrGWzN0Vdop9JXFefTXN83Q8jrR-WNjR1V3VUGrwSFtABF_twluKmgGyDYsG360ShLJb-k4d41dO3PG63jftIon3wufRP4qmYmoEXLsD4uJ7e7NsvwPYekbdgiBe5dKi9lXxdlZDobk7Yqae8BUi__VkKkg1_Wsf51HJIokP6A92zYN5cAFoYA9BOrVYiUard87xy9wr-GfrWf4N7XiW4PbrbWtUE9Qe4W2Z4gMX6Qj3T1Uy1lIDCpw18HuurPQ8xghPR7RuBYXFA9DP1s_E-ExIWLonClNBZQbFHVVu3Ya33294MiRtbOWRGXFuA5qeckQ' \
+--header 'bt-organization: 68534bd2bbd1909dc855048b' \
+--header 'bt-uid: 68534bd2bbd1909dc855048b' \
+--header 'organization_id: 68534bd2bbd1909dc855048b' \
+--header 'origin: https://607bf60b-cb59-4750-9a75-c52b33967dbf-00-1irem5gufmuqp.janeway.replit.dev' \
+--header 'pk-organization: 68534bd2bbd1909dc855048b' \
+--header 'priority: u=1, i' \
+--header 'referer: https://607bf60b-cb59-4750-9a75-c52b33967dbf-00-1irem5gufmuqp.janeway.replit.dev/' \
+--header 'sec-ch-ua: "Not;A=Brand";v="99", "Google Chrome";v="139", "Chromium";v="139"' \
+--header 'sec-ch-ua-mobile: ?0' \
+--header 'sec-ch-ua-platform: "macOS"' \
+--header 'sec-fetch-dest: empty' \
+--header 'sec-fetch-mode: cors' \
+--header 'sec-fetch-site: cross-site' \
+--header 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36'

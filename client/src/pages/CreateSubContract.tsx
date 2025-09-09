@@ -6,7 +6,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useSelector } from 'react-redux';
-import DashboardLayout from '@/components/layout/DashboardLayout';
+import DashboardLayout from '@/layouts/DashboardLayout/view';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -20,7 +20,7 @@ import { useMeasurementUnits } from '@/hooks/useMeasurementUnits';
 import { DatePicker } from '@/components/ui/datepicker';
 import { formatNumber } from '@/lib/numberFormatter';
 import { NUMBER_FORMAT_CONFIG } from '@/environment/environment';
-import { SubContractService, CreateSubContractPayload } from '@/services/subContract.service';
+import { SubContractService, CreateSubContractPayload } from '@/services/subContract/subContract.service';
 import { QuantityActualOverview } from '@/components/contracts/QuantityActualOverview';
 
 // Sub-contract form validation schema with business rules
@@ -447,7 +447,7 @@ export default function CreateSubContract() {
 
   return (
     <DashboardLayout title="Crear Sub-Contrato">
-      <div className="max-w-7xl mx-auto p-6 space-y-8">
+      <div className="max-w-7xl mx-auto space-y-8">
         
 
 

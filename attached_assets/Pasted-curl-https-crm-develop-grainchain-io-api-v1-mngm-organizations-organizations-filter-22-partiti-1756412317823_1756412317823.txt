@@ -1,0 +1,15 @@
+curl 'https://crm-develop.grainchain.io/api/v1/mngm-organizations/organizations?filter=\{%22_partitionKey%22:\{%22$in%22:\[%2268534bd2bbd1909dc855048b%22\]\}\}' \
+  -H 'accept: */*' \
+  -H 'accept-language: en-US,en;q=0.9' \
+  -H 'authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik5EUkJSRVUxTXpCRVF6STRNRGd6T1RCRU1EZ3hOVGRFTlROR1JUazNORU0xTnpJeE16STROZyJ9.eyJodHRwOi8vd3d3LmdyYWluY2hhaW4uaW8vcm9sZXMiOlsicGFydGljaXBhbnQiXSwiZmFtaWx5X25hbWUiOiJpbnRlZ3JhY2lvbiIsIm5pY2tuYW1lIjoiY29udHJhdG9zX2ludGVncmFjaW9uIiwibmFtZSI6IkNvbnRyYXRvcyAiLCJwaWN0dXJlIjoiaHR0cHM6Ly9zLmdyYXZhdGFyLmNvbS9hdmF0YXIvMmY3YmIwMWVmODA4NWZiMWNjNzQ2YzQ5NzM5MDc4ZWQ_cz00ODAmcj1wZyZkPWh0dHBzJTNBJTJGJTJGY2RuLmF1dGgwLmNvbSUyRmF2YXRhcnMlMkZjLnBuZyIsInVwZGF0ZWRfYXQiOiIyMDI1LTA4LTI4VDIwOjE3OjI0LjE3NVoiLCJlbWFpbCI6ImNvbnRyYXRvc19pbnRlZ3JhY2lvbkBncmFpbmNoYWluLmRldiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2dyYWluY2hhaW5kZXYuYXV0aDAuY29tLyIsImF1ZCI6ImY5anc5eHNMMlNqZTJMd0hzRVpTeG5wTXVwSDBRaU5KIiwic3ViIjoiYXV0aDB8Njg1NDgzNDk2OWJiNTFlZTE4NWE5NzIwIiwiaWF0IjoxNzU2NDEyMjQ0LCJleHAiOjE3NTY0NDgyNDR9.AnHxWpl5iYjVky1qSrhlKqpd_jY5IneP0ZdKuHKVN8z7ODToK8E9Lzbt7cCGetLEEsFbjC3470nBPzg5-1E9YudoWneUnIjxlGDq9ZNN1gSsv-bubsi8rHH1huPsRqKpKd-AyLYIcRvptCy-KyY_Gt1Iw5EekZAWh47qZ29sHBNEVU6sA9q3GPAX4dsacPhSmFk1hYu7fQNR_beSfEGECj9WYeb8OUWTIPLGPlF6cvH9DluE71YIFWsqu8KbrUSDLQtgiBh4qr8XXFMGf4tCfuOrUe-Wnt-iM5jIVZJ1HVFVV4W5GzE5yZMYsfYyi24EPj1GKBYeD6iRjLCVZj_XmQ' \
+  -H 'if-none-match: W/"dcf-tS3urHYZApBDz3QI/qi8nTEML9w"' \
+  -H 'origin: https://607bf60b-cb59-4750-9a75-c52b33967dbf-00-1irem5gufmuqp.janeway.replit.dev' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://607bf60b-cb59-4750-9a75-c52b33967dbf-00-1irem5gufmuqp.janeway.replit.dev/' \
+  -H 'sec-ch-ua: "Not;A=Brand";v="99", "Google Chrome";v="139", "Chromium";v="139"' \
+  -H 'sec-ch-ua-mobile: ?1' \
+  -H 'sec-ch-ua-platform: "Android"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: cross-site' \
+  -H 'user-agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Mobile Safari/537.36'

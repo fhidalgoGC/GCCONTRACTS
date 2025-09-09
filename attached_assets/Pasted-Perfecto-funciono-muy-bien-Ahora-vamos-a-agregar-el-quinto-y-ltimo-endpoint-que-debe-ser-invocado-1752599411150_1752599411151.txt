@@ -1,0 +1,74 @@
+Perfecto, funciono muy bien! Ahora vamos a agregar el quinto y último endpoint que debe ser invocado durante el proceso de login, ya invocamos el primero para hacer login y obtener el JWT, el segundo para obtener la información del customer, el tercero para obtener los partition_keys, el cuarto para obtener la configuración de la organización y de allí el id del representante de la organización y ahora vamos a implementar el quinto y último endpoint para obtener la información del representante de la organización. Ten mucho cuidado de no reemplazar o eliminar ninguno de los 4 llamados que ya están implementados en el proceso de login. 
+El método será GET y la URL la armaras tomando como prefijo el valor que tiene la variable de entorno VITE_URL_CRM con el sufijo /crm-people/people/{people_id}, el people_id lo tomaras del key representative_people_id que está en el storage local y que se obtuvo en el endpoint anterior,  al igual que en otros llamados este requiere autorización “Bearer Token” que debes tomar del storage local y que se acaba de obtener en el primer llamado y lo guardamos con el key “jwt”. Recuerda que este quinto endpoint lo agregaras a los otros 4, ten mucho cuidado de no remover ni reemplazar nada. 
+La respuesta del endpoint es la siguiente 
+{
+   "data": {
+       "_id": "6854834ae0b54f538d861d0e",
+       "first_name": "Contratos ",
+       "last_name": "integracion",
+       "full_name": "Contratos  integracion",
+       "birthdate": "1997-06-04T00:00:00.000Z",
+       "person_type": "natural_person",
+       "roles": [
+           {
+               "slug": "participant",
+               "platforms": [],
+               "created_at": "2025-06-19T21:38:18.669Z",
+               "updated_at": "2025-06-19T21:38:18.669Z"
+           }
+       ],
+       "emails": [
+           {
+               "_id": "6854834ae0b54f538d861d0a",
+               "type": "principal",
+               "value": "contratos_integracion@grainchain.dev",
+               "verified": true,
+               "created_at": "2025-06-19T21:38:18.670Z",
+               "updated_at": "2025-06-19T21:38:18.670Z"
+           }
+       ],
+       "phones": [
+           {
+               "_id": "6854834ae0b54f538d861d0b",
+               "calling_code": "+52",
+               "phone_number": "3321284444",
+               "type": "principal",
+               "verified": true,
+               "created_at": "2025-06-19T21:38:18.670Z",
+               "updated_at": "2025-06-19T21:38:18.670Z"
+           }
+       ],
+       "externals": [
+           {
+               "_id": "6854834ae0b54f538d861d0c",
+               "platform": "auth0",
+               "platform_id": "6854834969bb51ee185a9720",
+               "registered_at": "2025-06-19T21:38:18.644Z"
+           },
+           {
+               "_id": "6854834ae0b54f538d861d0d",
+               "platform": "identity",
+               "platform_id": "56368d8367f266adf004187a",
+               "registered_at": "2025-06-19T21:38:18.644Z"
+           }
+       ],
+       "created_by": "6854834ae0b54f538d861d0f",
+       "active": true,
+       "status": "ready",
+       "_partitionKey": "68534bd2bbd1909dc855048b",
+       "created_at": "2025-06-19T21:38:18.644Z",
+       "updated_at": "2025-06-19T21:38:18.644Z",
+       "related_people": [],
+       "ids": [],
+       "relationships": [],
+       "extras": []
+   }
+}
+Tipea la respuesta, de aquí tomaremos varios keys para resistirlos en el storage local.
+Toma el key “full_name” y guárdalo dentro del storage local con el key “representative_people_full_name”.
+Toma el key “first_name” y guárdalo dentro del storage local con el key “representative_people_first_name”.
+Toma el key “last_name” y guárdalo dentro del storage local con el key “representative_people_last_name”.
+Itera el key “emails” que es de tipo array y de ahí trabajaremos con el primer objeto que encuentres, de este objeto tomarás el key “value” y lo guardarás dentro del storage local con el key “representative_people_email”.
+Itera el key “phones” que es de tipo array y de ahí trabajaremos con el primer objeto que encuentres, de este objeto tomarás el key “calling_code” y lo guardarás dentro del storage local con el key “representative_people_calling_code” tambien tomarás el key “phone_number” y lo guardarás dentro del storage local con el key “representative_people_phone_number”.
+Ten mucho cuidado a la hora de agregar los key al storage local para que no borres ni reemplaces ninguno de los key ya existentes. Por favor no hagas más nada con la data obtenida, sigue mis instrucciones al pie de la letra. 
+Con este último endpoint ahora si podemos considerar que los llamados que se deben hacer durante el proceso de registro están completados. 

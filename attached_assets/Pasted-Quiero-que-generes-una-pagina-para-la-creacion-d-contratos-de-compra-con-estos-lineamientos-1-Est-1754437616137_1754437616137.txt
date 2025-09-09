@@ -1,0 +1,220 @@
+Quiero que generes una pagina para la creacion d contratos de compra con estos lineamientos
+
+1️⃣ Estructura de Carpetas
+
+src/
+ ├─ components/
+ │   └─ PurchaseContractForm/
+ │       ├─ PurchaseContractForm.tsx        # Form principal con las 5 secciones
+ │       ├─ sections/
+ │       │   ├─ ContractInfoSection.tsx
+ │       │   ├─ PriceSection.tsx
+ │       │   ├─ LogisticSection.tsx
+ │       │   ├─ ShipmentSection.tsx
+ │       │   └─ RemarksSection.tsx
+ │       └─ hooks/
+ │           └─ usePurchaseContractForm.ts  # Manejo de arrays dinámicos y lógica
+ │
+ ├─ validation/
+ │   └─ purchaseContract.schema.ts          # Esquema Yup de validación
+ │
+ └─ types/
+     └─ purchaseContract.types.ts           # Tipado basado en JSON de validación
+
+
+2️⃣ Componente Principal (PurchaseContractForm.tsx)
+Usar react-hook-form + Yup resolver para validación.
+
+
+Dividir el formulario en 5 secciones:
+
+
+Contract Info
+
+
+Price Contract Per (Bushel 56)
+
+
+Logistic Contract
+
+
+Shipment & Delivery
+
+
+Remarks & Observation
+
+
+Al final del formulario:
+
+
+Botón Cancelar → reset() limpia el formulario.
+
+
+Botón Crear → dispara validación y genera un JSON con la estructura que muestro abajo.
+
+
+Interfaz visual:
+
+
+Campos obligatorios con asterisco rojo discreto en el label.
+
+
+Si se presiona Crear con un campo obligatorio vacío →
+
+
+Borde rojo en el input
+
+
+Mensaje de error debajo
+
+
+Al llenar correctamente el campo → se quita el borde rojo automáticamente.
+
+
+
+3️⃣ Validación en purchaseContract.schema.ts
+Crear un esquema Yup completo con:
+
+
+required, enum, minLength, maxLength, range
+
+
+Dependencias condicionales (depends_on)
+
+
+Comparaciones (shipping_end_date >= shipping_start_date)
+
+
+Validación de arrays con _config:
+
+
+participants → mínimo 2, debe incluir 1 buyer y 1 seller
+
+
+price_schedule → mínimo 1
+
+
+logistic_schedule → mínimo 1
+
+
+
+4️⃣ Comportamiento del Submit
+Cuando el usuario hace click en Crear:
+
+
+Se valida todo el formulario.
+
+
+Si hay errores, se marcan inputs con borde rojo y mensajes de error.
+
+
+Si todo es válido, se genera un JSON con la estructura exacta de ejemplo que te muestro abajo.
+
+
+Los valores del JSON provienen de los inputs disponibles; los campos no llenados pueden omitirse o inicializarse vacíos según corresponda.
+
+
+
+5️⃣ Ejemplo de JSON que debe generarse al hacer submit
+json
+CopiarEditar
+{
+  "id": "6881299ebbfa0cfed1ec89b4",
+  "_partitionKey": "68534bd2bbd1909dc855048b",
+  "active": true,
+  "created_by": "56368d8367f266adf004187a",
+  "created_at": "2025-07-23T18:29:07.967Z",
+  "folio": "SPC-48",
+  "type": "purchase",
+  "sub_type": "imported",
+  "commodity": {
+    "commodity_id": "6839ef25edc3c27f091bdfc0",
+    "name": "SRW - Wheat Soft Red Winter"
+  },
+  "characteristics": {
+    "configuration_id": "683bbb8317f5aafb7814eb22",
+    "configuration_name": "683bbb8317f5aafb7814eb22"
+  },
+  "grade": 3,
+  "participants": [
+    {
+      "people_id": "685b2f67ca51c8f284775f83",
+      "name": "Andrés  bandera",
+      "role": "seller"
+    },
+    {
+      "people_id": "6854834ae0b54f538d861d0e",
+      "name": "Contratos  integracion",
+      "role": "buyer"
+    }
+  ],
+  "price_schedule": [
+    {
+      "pricing_type": "fixed",
+      "price": 370,
+      "basis": 0,
+      "basis_operation": "add",
+      "future_price": 370,
+      "option_month": "june",
+      "option_year": 2026,
+      "payment_currency": "mxn",
+      "exchange": "Kansas City Board of  Trade"
+    }
+  ],
+  "logistic_schedule": [
+    {
+      "logistic_payment_responsability": "other",
+      "logistic_coordination_responsability": "other",
+      "freight_cost": {
+        "type": "none",
+        "min": 0,
+        "max": 0,
+        "cost": 0
+      },
+      "payment_currency": "usd"
+    }
+  ],
+  "inventory": {
+    "total": 1700,
+    "open": 0,
+    "fixed": 1700,
+    "unsettled": 1700,
+    "settled": 0,
+    "reserved": 0
+  },
+  "inventory_value": {
+    "total": 629000,
+    "open": 0,
+    "fixed": 629000,
+    "unsettled": 629000,
+    "settled": 0
+  },
+  "quantity": 1700,
+  "reference_number": "NA",
+  "measurement_unit_id": "6840d42d60fd7f152734525e",
+  "measurement_unit": "bu56",
+  "shipping_start_date": "2025-07-23T00:00:00.000Z",
+  "shipping_end_date": "2025-07-31T00:00:00.000Z",
+  "application_priority": 1,
+  "delivered": "IMPORTER Progreso",
+  "transport": "BUS",
+  "weights": "notAppliance",
+  "inspections": "submitCc",
+  "proteins": "notAppliance",
+  "purchase_orders": [],
+  "thresholds": {
+    "min_thresholds_percentage": 10,
+    "min_thresholds_weight": 1530,
+    "max_thresholds_percentage": 10,
+    "max_thresholds_weight": 1870
+  },
+  "status": "created",
+  "contract_date": "2025-07-23T00:00:00.000Z",
+  "extras": [],
+  "externals": [],
+  "schedule": [],
+  "sub_contracts": [],
+  "notes": [],
+  "remarks": []
+}
+

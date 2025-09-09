@@ -12,9 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { DatePicker } from "@/components/ui/datepicker";
-import { SellerSelectionModal } from "../modals/SellerSelectionModal";
-import { ContactVendorSelectionModal } from "../modals/ContactVendorSelectionModal";
-import { TraderSelectionModal } from "../modals/TraderSelectionModal";
+import { PersonSelectionModal } from "../../general/listInModal";
 import type { PurchaseContractFormData } from "@/validation/purchaseContract.schema";
 import { NUMBER_FORMAT_CONFIG } from "@/environment/environment";
 import { formatNumber } from "@/lib/numberFormatter";
@@ -430,17 +428,18 @@ export function ContractInfoSection({
                 {contractType === "sale" ? t("buyer") : t("seller")}{" "}
                 <span className="text-red-500">{t("requiredField")}</span>
               </Label>
-              <SellerSelectionModal
+              <PersonSelectionModal
+                personType={contractType === "sale" ? "buyers" : "sellers"}
                 contractType={contractType}
-                selectedSeller={
+                selectedPersonId={
                   watch("participants")?.find((p: any) => p.role === (contractType === "sale" ? "buyer" : "seller"))
                     ?.people_id || ""
                 }
-                selectedSellerName={
+                selectedPersonName={
                   watch("participants")?.find((p: any) => p.role === (contractType === "sale" ? "buyer" : "seller"))
                     ?.name || ""
                 }
-                onSelect={(seller) => {
+                onSelect={(person) => {
                   // Add to participants array with appropriate role
                   const targetRole = contractType === "sale" ? "buyer" : "seller";
                   const currentParticipants = watch("participants") || [];
@@ -450,15 +449,15 @@ export function ContractInfoSection({
 
                   // Add selected participant with appropriate role
                   updatedParticipants.push({
-                    people_id: seller.id,
-                    name: seller.name,
+                    people_id: person.id,
+                    name: person.name,
                     role: targetRole,
                   });
                   setValue("participants", updatedParticipants);
 
                   console.log(
                     `${targetRole} selected and added to participants with ${targetRole} role:`,
-                    seller,
+                    person,
                   );
                   console.log("Updated participants:", updatedParticipants);
                 }}
@@ -485,18 +484,19 @@ export function ContractInfoSection({
                 Contact Vendor{" "}
                 <span className="text-red-500">{t("requiredField")}</span>
               </Label>
-              <ContactVendorSelectionModal
-                selectedContactVendor={
+              <PersonSelectionModal
+                personType="contactVendors"
+                selectedPersonId={
                   watch("participants")?.find(
                     (p: any) => p.role === "contactVendor",
                   )?.people_id || ""
                 }
-                selectedContactVendorName={
+                selectedPersonName={
                   watch("participants")?.find(
                     (p: any) => p.role === "contactVendor",
                   )?.name || ""
                 }
-                onSelect={(vendor) => {
+                onSelect={(person) => {
                   // Add to participants array with contactVendor role
                   const currentParticipants = watch("participants") || [];
                   const updatedParticipants = currentParticipants.filter(
@@ -505,15 +505,15 @@ export function ContractInfoSection({
 
                   // Add selected contact vendor with contactVendor role
                   updatedParticipants.push({
-                    people_id: vendor.id,
-                    name: vendor.name,
+                    people_id: person.id,
+                    name: person.name,
                     role: "contactVendor" as const,
                   });
                   setValue("participants", updatedParticipants);
 
                   console.log(
                     "Contact Vendor selected and added to participants with contactVendor role:",
-                    vendor,
+                    person,
                   );
                   console.log("Updated participants:", updatedParticipants);
                 }}
@@ -525,16 +525,17 @@ export function ContractInfoSection({
                 Trader{" "}
                 <span className="text-red-500">{t("requiredField")}</span>
               </Label>
-              <TraderSelectionModal
-                selectedTrader={
+              <PersonSelectionModal
+                personType="traders"
+                selectedPersonId={
                   watch("participants")?.find((p: any) => p.role === "trader")
                     ?.people_id || ""
                 }
-                selectedTraderName={
+                selectedPersonName={
                   watch("participants")?.find((p: any) => p.role === "trader")
                     ?.name || ""
                 }
-                onSelect={(trader) => {
+                onSelect={(person) => {
                   // Add to participants array with trader role
                   const currentParticipants = watch("participants") || [];
                   const updatedParticipants = currentParticipants.filter(
@@ -543,15 +544,15 @@ export function ContractInfoSection({
 
                   // Add selected trader with trader role
                   updatedParticipants.push({
-                    people_id: trader.id,
-                    name: trader.name,
+                    people_id: person.id,
+                    name: person.name,
                     role: "trader" as const,
                   });
                   setValue("participants", updatedParticipants);
 
                   console.log(
                     "Trader selected and added to participants with trader role:",
-                    trader,
+                    person,
                   );
                   console.log("Updated participants:", updatedParticipants);
                 }}

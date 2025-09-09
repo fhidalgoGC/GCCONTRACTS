@@ -1,0 +1,58 @@
+  // Función para toggle de filtros
+  const toggleFilter = (filterKey: string, value: any) => {
+    setSelectedFilters(prev => {
+      // Comportamiento especial para pricingType: solo un valor a la vez
+      if (filterKey === 'pricingType') {
+        const currentValues = prev[filterKey] || [];
+        // Si ya está seleccionado, lo deseleccionamos (permitir quitar el filtro)
+        const newValues = currentValues.includes(value) 
+          ? [] 
+          : [value]; // Solo un valor seleccionado a la vez
+        
+        return { ...prev, [filterKey]: newValues };
+      }
+      
+      // Comportamiento especial para commodity: "All" es mutuamente exclusivo
+      if (filterKey === 'commodity') {
+        const currentValues = prev[filterKey] || [];
+        
+        // Si se selecciona "all"
+        if (value === 'all') {
+          // Si "all" ya está seleccionado, no hacer nada (mantenerlo seleccionado)
+          if (currentValues.includes('all')) {
+            return prev;
+          }
+          // Si "all" no está seleccionado, seleccionarlo y deseleccionar todo lo demás
+          return { ...prev, [filterKey]: ['all'] };
+        }
+        
+        // Si se selecciona cualquier valor que no es "all"
+        // Primero remover "all" si está presente
+        let newValues = currentValues.filter((v: any) => v !== 'all');
+        
+        // Luego aplicar la lógica normal de toggle
+        if (newValues.includes(value)) {
+          newValues = newValues.filter((v: any) => v !== value);
+          // Si no queda ningún valor seleccionado, volver a "all"
+          if (newValues.length === 0) {
+            newValues = ['all'];
+          }
+        } else {
+          newValues = [...newValues, value];
+        }
+        
+        return { ...prev, [filterKey]: newValues };
+      }
+      
+      // Comportamiento por defecto para otros filtros (múltiple selección)
+      const currentValues = prev[filterKey] || [];
+      const newValues = Array.isArray(currentValues)
+        ? (currentValues.includes(value) 
+            ? currentValues.filter(v => v !== value)
+            : [...currentValues, value])
+        : [value];
+      
+      return { ...prev, [filterKey]: newValues };
+    });
+    setCurrentPage(1);
+  };
