@@ -5,6 +5,7 @@ import { logout as logoutAction, login as loginAction } from '@/features/auth/sl
 import { useUser } from '@/contexts/UserContext';
 import { useToast } from '@/hooks/use-toast';
 import { environment } from '@/environment/environment';
+import { getTabId } from '@/utils/tabId';
 
 interface SessionValidatorOptions {
   // Si se debe mostrar un toast cuando la sesión expira
@@ -25,6 +26,9 @@ export const useSessionValidator = (options: SessionValidatorOptions = {}) => {
   const { clearSession } = useUser();
   const { toast } = useToast();
   const isValidatingRef = useRef(false);
+
+  // Obtener ID único para esta pestaña para evitar eventos redundantes
+  const tabId = useRef(getTabId());
 
   // Función para verificar si los tokens están presentes y son válidos
   const validateTokens = useCallback((): boolean => {
@@ -198,7 +202,13 @@ export const useSessionValidator = (options: SessionValidatorOptions = {}) => {
         // Notificar a otros tabs que se restauró el contexto
         try {
           const channel = new BroadcastChannel('session_sync');
-          channel.postMessage({ type: 'CONTEXT_RESTORED', timestamp: Date.now() });
+          const restoreMessage = { 
+            type: 'CONTEXT_RESTORED', 
+            timestamp: Date.now(),
+            tabId: tabId.current 
+          };
+          console.log('📻 SENDING RESTORE: Enviando evento desde tabId:', tabId.current, restoreMessage);
+          channel.postMessage(restoreMessage);
           channel.close();
         } catch (error) {
           console.log('📻 BROADCAST: No se pudo notificar a otros tabs:', error);
@@ -214,7 +224,7 @@ export const useSessionValidator = (options: SessionValidatorOptions = {}) => {
   }, [dispatch]);
 
   // Función para limpiar la sesión
-  const clearSessionData = useCallback(() => {
+  const clearSessionData = useCallback((silent: boolean = false) => {
     if (isValidatingRef.current) return;
     isValidatingRef.current = true;
 
@@ -258,24 +268,42 @@ export const useSessionValidator = (options: SessionValidatorOptions = {}) => {
       console.log('🏠 Redirigiendo al login...');
       setLocation('/');
       
-      // DESPUÉS de redirigir: Notificar a otros tabs sobre el logout completado
-      console.log('📡 Notificando a otros tabs sobre el logout completado...');
-      
-      // Método 1: Usar BroadcastChannel para comunicación directa entre tabs
-      const channel = new BroadcastChannel('session_sync');
-      channel.postMessage({ type: 'FORCE_LOGOUT', timestamp: Date.now() });
-      channel.close();
+      // DESPUÉS de redirigir: Notificar a otros tabs sobre el logout completado (solo si no es silencioso)
+      if (!silent) {
+        console.log('📡 Notificando a otros tabs sobre el logout completado...');
+        
+        // Método 1: Usar BroadcastChannel para comunicación directa entre tabs
+        const channel = new BroadcastChannel('session_sync');
+        const logoutMessage = { 
+          type: 'FORCE_LOGOUT', 
+          timestamp: Date.now(),
+          tabId: tabId.current 
+        };
+        console.log('📻 SENDING LOGOUT: Enviando evento desde tabId:', tabId.current, logoutMessage);
+        channel.postMessage(logoutMessage);
+        channel.close();
 
-      // Método 2: Disparar evento customizado en la misma ventana
-      window.dispatchEvent(new CustomEvent('session_force_logout', { 
-        detail: { timestamp: Date.now() } 
-      }));
+        // Método 2: Disparar evento customizado en la misma ventana
+        const customEventDetail = { 
+          timestamp: Date.now(),
+          tabId: tabId.current 
+        };
+        console.log('🎯 SENDING CUSTOM EVENT: Enviando evento desde tabId:', tabId.current, customEventDetail);
+        window.dispatchEvent(new CustomEvent('session_force_logout', { 
+          detail: customEventDetail
+        }));
 
-      // Método 3: Usar localStorage como fallback
-      localStorage.setItem('session_logout', Date.now().toString());
-      setTimeout(() => {
-        localStorage.removeItem('session_logout');
-      }, 100);
+        // Método 3: Usar localStorage como fallback
+        localStorage.setItem('session_logout', JSON.stringify({
+          timestamp: Date.now(),
+          tabId: tabId.current
+        }));
+        setTimeout(() => {
+          localStorage.removeItem('session_logout');
+        }, 100);
+      } else {
+        console.log('🔇 SILENT LOGOUT: No enviando eventos (modo silencioso)');
+      }
       
       console.log('✅ LOGOUT COMPLETE: Limpieza de sesión completada');
     } finally {
@@ -328,7 +356,7 @@ export const useSessionValidator = (options: SessionValidatorOptions = {}) => {
         restoreReduxStateFromStorage();
       } else if (!hasTokens && isAuthenticated) {
         // Redux dice que está autenticado pero no hay tokens - limpiar
-        clearSessionData();
+        clearSessionData(true); // Modo silencioso: respuesta a evento
       } else if (hasTokens && isAuthenticated) {
         // Ambos tienen datos - validar sesión
         validateSession();
@@ -347,9 +375,27 @@ export const useSessionValidator = (options: SessionValidatorOptions = {}) => {
     const channel = new BroadcastChannel('session_sync');
     const handleBroadcastMessage = (event: MessageEvent) => {
       console.log('📻 BROADCAST MESSAGE:', event.data);
+      console.log('🏷️ TAB ID COMPARISON: Mi tabId:', tabId.current, 'Evento tabId:', event.data.tabId);
+      
+      // Verificar si el evento viene de la misma pestaña
+      if (event.data.tabId && event.data.tabId === tabId.current) {
+        console.log('🚫 IGNORED: Evento de la misma pestaña, ignorando...', {
+          myTabId: tabId.current,
+          eventTabId: event.data.tabId,
+          eventType: event.data.type
+        });
+        return;
+      }
+      
+      console.log('✅ PROCESSING: Evento de otra pestaña, procesando...', {
+        myTabId: tabId.current,
+        eventTabId: event.data.tabId,
+        eventType: event.data.type
+      });
+      
       if (event.data.type === 'FORCE_LOGOUT') {
         console.log('🔗 SYNC TABS: Logout forzado por BroadcastChannel');
-        clearSessionData();
+        clearSessionData(true); // Modo silencioso: respuesta a evento
       } else if (event.data.type === 'CONTEXT_RESTORED') {
         console.log('🔗 SYNC TABS: Contexto restaurado en otro tab, sincronizando...');
         // Solo restaurar si esta pestaña no está autenticada pero hay tokens
@@ -373,21 +419,41 @@ export const useSessionValidator = (options: SessionValidatorOptions = {}) => {
       // Si otro tab removió los tokens, cerrar sesión aquí también
       if (event.key === 'access_token' && !event.newValue && isAuthenticated) {
         console.log('🔗 SYNC TABS: Token removido en otro tab, cerrando sesión aquí...');
-        clearSessionData();
+        clearSessionData(true); // Modo silencioso: respuesta a evento
         return;
       }
 
       // Si otro tab removió cualquier token crítico
       if (['jwt', 'id_token', 'refresh_token'].includes(event.key as string) && !event.newValue && isAuthenticated) {
         console.log(`🔗 SYNC TABS: Token crítico ${event.key} removido en otro tab, cerrando sesión aquí...`);
-        clearSessionData();
+        clearSessionData(true); // Modo silencioso: respuesta a evento
         return;
       }
 
       // Si se disparó un evento de logout desde otro tab
       if (event.key === 'session_logout' && event.newValue && isAuthenticated) {
-        console.log('🔗 SYNC TABS: Logout detectado en otro tab, cerrando sesión aquí...');
-        clearSessionData();
+        try {
+          const logoutData = JSON.parse(event.newValue);
+          // Verificar si el evento viene de la misma pestaña
+          console.log('📋 STORAGE EVENT: Logout detectado', {
+            myTabId: tabId.current,
+            eventTabId: logoutData.tabId,
+            logoutData: logoutData
+          });
+          if (logoutData.tabId && logoutData.tabId === tabId.current) {
+            console.log('🚫 IGNORED: Storage event de la misma pestaña, ignorando...', {
+              myTabId: tabId.current,
+              eventTabId: logoutData.tabId
+            });
+            return;
+          }
+          console.log('✅ PROCESSING: Storage event de otra pestaña, procesando logout...');
+          clearSessionData(true); // Modo silencioso: respuesta a evento
+        } catch (error) {
+          // Fallback para formato anterior (solo timestamp)
+          console.log('🔗 SYNC TABS: Logout detectado en otro tab (formato anterior), cerrando sesión aquí...');
+          clearSessionData(true); // Modo silencioso: respuesta a evento
+        }
         return;
       }
 
@@ -398,9 +464,24 @@ export const useSessionValidator = (options: SessionValidatorOptions = {}) => {
     };
 
     // Método 3: Eventos personalizados (para la misma ventana)
-    const handleCustomLogout = () => {
-      console.log('🔗 SYNC TABS: Logout custom event detectado');
-      clearSessionData();
+    const handleCustomLogout = (event: any) => {
+      console.log('🔗 CUSTOM EVENT: Logout detectado', {
+        myTabId: tabId.current,
+        eventTabId: event.detail?.tabId,
+        eventDetail: event.detail
+      });
+      
+      // Verificar si el evento viene de la misma pestaña
+      if (event.detail?.tabId && event.detail.tabId === tabId.current) {
+        console.log('🚫 IGNORED: Custom event de la misma pestaña, ignorando...', {
+          myTabId: tabId.current,
+          eventTabId: event.detail.tabId
+        });
+        return;
+      }
+      
+      console.log('✅ PROCESSING: Custom event de otra pestaña, procesando logout...');
+      clearSessionData(true); // Modo silencioso: respuesta a evento
     };
 
     window.addEventListener('storage', handleStorageChange);

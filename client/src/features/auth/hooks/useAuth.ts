@@ -9,6 +9,7 @@ import {
 import { useLoginMutation, useGetIdentityQuery } from "../services/authApi";
 import { useToast } from "@/hooks/use-toast";
 import { useUser } from "@/contexts/UserContext";
+import { getTabId } from "@/utils/tabId";
 
 export const useAuth = () => {
   const [, setLocation] = useLocation();
@@ -117,7 +118,14 @@ export const useAuth = () => {
       // Notificar a otras pestañas que se completó el login
       try {
         const channel = new BroadcastChannel('session_sync');
-        channel.postMessage({ type: 'LOGIN_COMPLETED', timestamp: Date.now() });
+        const tabId = getTabId();
+        const loginMessage = { 
+          type: 'LOGIN_COMPLETED', 
+          timestamp: Date.now(),
+          tabId: tabId 
+        };
+        console.log('📻 SENDING LOGIN: Enviando evento desde tabId:', tabId, loginMessage);
+        channel.postMessage(loginMessage);
         channel.close();
         console.log('📡 LOGIN: Login completado - notificando a otras pestañas');
       } catch (error) {

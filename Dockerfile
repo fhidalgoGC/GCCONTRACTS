@@ -24,7 +24,7 @@ COPY . .
 RUN npx update-browserslist-db@latest
 
 # Build the application
-RUN npm run build:client
+RUN npm run build
 
 # Clean up after build - keep vite and related dependencies for runtime
 RUN npm cache clean --force
