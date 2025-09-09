@@ -13,8 +13,10 @@ export interface InterceptorOptions {
  * Emite un evento personalizado para que los componentes de React manejen la redirección
  */
 export const performAutoLogout = () => {
-  console.log('🔐 AUTO-LOGOUT: Sesión expirada (401), realizando logout automático...');
-  
+  console.log(
+    "🔐 AUTO-LOGOUT: Sesión expirada (401), realizando logout automático...",
+  );
+
   // Clear tokens from localStorage
   localStorage.removeItem("jwt");
   localStorage.removeItem("id_token");
@@ -41,7 +43,7 @@ export const performAutoLogout = () => {
   localStorage.removeItem("company_calling_code");
   localStorage.removeItem("company_phone_number");
   localStorage.removeItem("company_address_line");
-  
+
   // Clear organization data from localStorage
   localStorage.removeItem("current_organization_id");
   localStorage.removeItem("current_organization_name");
@@ -51,27 +53,26 @@ export const performAutoLogout = () => {
 
   // Notificar a otras pestañas sobre el logout
   try {
-    const channel = new BroadcastChannel('session_sync');
-    channel.postMessage({ type: 'AUTO_LOGOUT', timestamp: Date.now() });
+    const channel = new BroadcastChannel("session_sync");
+    channel.postMessage({ type: "AUTO_LOGOUT", timestamp: Date.now() });
     channel.close();
-    console.log('📡 AUTO-LOGOUT: Logout notificado a otras pestañas');
+    console.log("📡 AUTO-LOGOUT: Logout notificado a otras pestañas");
   } catch (error) {
-    console.log('📻 AUTO-LOGOUT: No se pudo notificar a otros tabs:', error);
+    console.log("📻 AUTO-LOGOUT: No se pudo notificar a otros tabs:", error);
   }
 
   // Emitir evento personalizado para que los componentes React manejen la redirección con Wouter
-  const autoLogoutEvent = new CustomEvent('autoLogout', {
-    detail: { reason: 'unauthorized', timestamp: Date.now() }
+  const autoLogoutEvent = new CustomEvent("autoLogout", {
+    detail: { reason: "unauthorized", timestamp: Date.now() },
   });
   window.dispatchEvent(autoLogoutEvent);
-  console.log('🔄 AUTO-LOGOUT: Evento emitido para redirección con Wouter');
+  console.log("🔄 AUTO-LOGOUT: Evento emitido para redirección con Wouter");
 };
 
 /**
  * Interceptor que agrega JWT token y partition key automáticamente
  * a las peticiones HTTP, excepto para endpoints específicos que no los necesitan
  */
-
 
 export const addJwtPk = (
   url: string,
@@ -114,6 +115,7 @@ export const addJwtPk = (
       headers.set("bt-uid", partitionKey);
       headers.set("organization_id", partitionKey);
       headers.set("pk-organization", partitionKey);
+      headers.set("Content-Type", "application/json");
     }
   }
 
@@ -154,7 +156,6 @@ export const authenticatedFetch = async (
       // Obtener datos del usuario del localStorage
       const createdById = localStorage.getItem("user_id") || "";
       const createdByName = localStorage.getItem("user_name") || "";
-
 
       // Si hay un body existente, parsearlo y agregar los campos
       if (modifiedOptions.body) {
@@ -198,21 +199,19 @@ export const authenticatedFetch = async (
 
   // Interceptar respuestas 401 (Unauthorized) para logout automático
   if (response.status === 401 && !shouldExcludeAuth) {
-    console.error('🚫 UNAUTHORIZED: Recibido 401 desde', url);
-    
+    console.error("🚫 UNAUTHORIZED: Recibido 401 desde", url);
+
     // Ejecutar logout automático de forma async para no bloquear
     setTimeout(() => {
       performAutoLogout();
     }, 100);
-    
+
     // Retornar la respuesta original para que el código cliente pueda manejarla
     return response;
   }
 
   return response;
 };
-
-
 
 /**
  * Fetch sin autenticación para endpoints públicos
