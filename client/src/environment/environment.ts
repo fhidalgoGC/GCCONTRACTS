@@ -58,6 +58,10 @@ export const environment = {
   PRICE_THRESHOLD_MAX: Number(import.meta.env.VITE_PRICE_THRESHOLD_MAX) || 0,
 
   SHOW_THRESHOLDS: import.meta.env.VITE_SHOW_THRESHOLDS === "true" || false,
+
+  // Session timeout configuration (in minutes)
+  MAX_SESSION_DURATION_MINUTES: 24 * 60, // 24 horas = 1440 minutos
+  INACTIVITY_TIMEOUT_MINUTES: 8 * 60, // 8 horas = 480 minutos
 };
 
 export const APP_CONFIG = environment;

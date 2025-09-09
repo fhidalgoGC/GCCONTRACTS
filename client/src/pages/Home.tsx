@@ -3,7 +3,7 @@ import { useLocation } from 'wouter';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../features/auth/hooks/useAuth';
 import { usePageTracking, useNavigationHandler } from '@/hooks/usePageState';
-import DashboardLayout from '@/components/layout/DashboardLayout';
+import DashboardLayout from '@/layouts/DashboardLayout/view';
 
 export default function Home() {
   const [, setLocation] = useLocation();

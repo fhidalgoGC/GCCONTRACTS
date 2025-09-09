@@ -11,7 +11,7 @@ import {
   updateCreateSubContractState,
   updateEditSubContractState,
 } from "@/store/slices/pageStateSlice";
-import DashboardLayout from "@/components/layout/DashboardLayout";
+import DashboardLayout from "@/layouts/DashboardLayout/view";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -63,7 +63,7 @@ import {
   settleParentContract,
   settleSubContract,
   generateAndDownloadPDF,
-} from "@/services/contracts.service";
+} from "@/services/contracts/contracts.service";
 
 export default function ContractDetail() {
   const { t } = useTranslation();

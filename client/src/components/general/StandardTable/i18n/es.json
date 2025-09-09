@@ -1,0 +1,61 @@
+{
+  "actions": "Acciones",
+  "create": "Crear",
+  "view": "Ver",
+  "edit": "Editar",
+  "delete": "Eliminar",
+  "duplicate": "Duplicar",
+  "print": "Imprimir",
+  "settle": "Cerrar",
+  "search": "Buscar...",
+  "noResults": "No se encontraron resultados",
+  "loading": "Cargando...",
+  "noDataAvailable": "No hay datos disponibles",
+  "rowsPerPage": "Filas por página",
+  "showingResults": "Mostrando {{start}} a {{end}} de {{total}} resultados",
+  "pageOfPages": "Página {{current}} de {{total}}",
+  "sortAscending": "Ordenar ascendente",
+  "sortDescending": "Ordenar descendente",
+  "emptyState": "No hay datos para mostrar",
+  "errorState": "Error al cargar datos",
+  "tryAgain": "Intentar de nuevo",
+  "refreshData": "Actualizar datos",
+  "filters": {
+    "all": "Todos",
+    "basis": "Basis",
+    "fixed": "Fijo",
+    "filterBy": "Filtrar por:",
+    "clearAll": "Limpiar Filtros",
+    "showingFiltered": "Mostrando resultados filtrados",
+    "activeFilters": "Filtros activos",
+    "noFiltersActive": "No hay filtros activos"
+  },
+  "pagination": {
+    "first": "Primero",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "last": "Último",
+    "goToPage": "Ir a página",
+    "itemsPerPage": "Elementos por página",
+    "totalItems": "Total de elementos"
+  },
+  "columns": {
+    "id": "ID",
+    "name": "Nombre",
+    "status": "Estado",
+    "type": "Tipo",
+    "date": "Fecha",
+    "quantity": "Cantidad",
+    "price": "Precio",
+    "total": "Total"
+  },
+  "export": {
+    "exportData": "Exportar Datos",
+    "exportCSV": "Exportar a CSV",
+    "exportExcel": "Exportar a Excel",
+    "exportPDF": "Exportar a PDF",
+    "exporting": "Exportando...",
+    "exportSuccess": "Exportación completada exitosamente",
+    "exportError": "Error durante la exportación"
+  }
+}

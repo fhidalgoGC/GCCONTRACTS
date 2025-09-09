@@ -1,0 +1,19 @@
+curl 'https://crm-staging.grainchain.io/api/v1/crm-people/people?filter=%7B%22_partitionKey%22%3A%22685ae587df5efbd36821c1f6%22%2C%22roles.slug%22%3A%7B%22%24in%22%3A%5B%22seller%22%5D%7D%2C%22%24or%22%3A%5B%7B%22full_name%22%3A%7B%22%24regex%22%3A%22.*Alfr%22%2C%22%24options%22%3A%22i%22%7D%7D%2C%7B%22first_name%22%3A%7B%22%24regex%22%3A%22.*Alfr%22%2C%22%24options%22%3A%22i%22%7D%7D%2C%7B%22last_name%22%3A%7B%22%24regex%22%3A%22.*Alfr%22%2C%22%24options%22%3A%22i%22%7D%7D%2C%7B%22emails.value%22%3A%7B%22%24regex%22%3A%22.*Alfr%22%2C%22%24options%22%3A%22i%22%7D%7D%5D%7D&all=false&page=1&limit=10&sort%5Bfirst_name%5D=1' \
+  -H '_partitionkey: 685ae587df5efbd36821c1f6' \
+  -H 'accept: */*' \
+  -H 'accept-language: en-US,en;q=0.9' \
+  -H 'authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik1rRTVORFZETVRrMVJqUXdNekV3TlVReU16Z3lSVFF4UkVZM09ESkdORGRFTWpjMU9UQkJRUSJ9.eyJodHRwOi8vd3d3LmdyYWluY2hhaW4uaW8vcm9sZXMiOlsicGFydGljaXBhbnQiXSwiaXNzIjoiaHR0cHM6Ly9ncmFpbmNoYWlucWEuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDY4NjZhODVlNGEwMjg3NmNlYzVkZjI0NSIsImF1ZCI6Imh0dHBzOi8vZ3JhaW5jaGFpbnFhLmF1dGgwLmNvbS9hcGkvdjIvIiwiaWF0IjoxNzU3NDM0MTUyLCJleHAiOjE3NjAwMjYxNTIsInNjb3BlIjoicmVhZDpjdXJyZW50X3VzZXIgdXBkYXRlOmN1cnJlbnRfdXNlcl9tZXRhZGF0YSBkZWxldGU6Y3VycmVudF91c2VyX21ldGFkYXRhIGNyZWF0ZTpjdXJyZW50X3VzZXJfbWV0YWRhdGEgY3JlYXRlOmN1cnJlbnRfdXNlcl9kZXZpY2VfY3JlZGVudGlhbHMgZGVsZXRlOmN1cnJlbnRfdXNlcl9kZXZpY2VfY3JlZGVudGlhbHMgdXBkYXRlOmN1cnJlbnRfdXNlcl9pZGVudGl0aWVzIiwiZ3R5IjoicGFzc3dvcmQiLCJhenAiOiJTMTRZOHI3SDFjSU9BbDJVZEhFMUdmbU1nNm0xSVlSdiJ9.V-9RqcTFZg7s6S8Opxnwm5NsmPAjdAmaSLLk0a0PoQoWk1mQ_7woVdD5KFmAlHv_qGvhMsPbKePGnX8fStZkx3y0iY_amFQgqU-2tASgMQ7pdK7bwUm9IAyUvTXpJMSvHwjzYlsMz8YxmluaJTuQcjLrZY-r73HAPzGBJ8DpE5Fq9LehBL4n2IkHjQRWCH73htJuzbTEUPsGo3OON8kxgpI7Lr5TfUQsEXfZUZvdB2uqtB_TLRVj_dZ6y8yqocBIlpXvaz_s72Ki-PbpFl1x65249oxlF3P0xiOLDX7TUIYiMmee_nfR8Y7b18OfpMtK6pPvsxEqkY_a6EJMayGjpw' \
+  -H 'bt-organization: 685ae587df5efbd36821c1f6' \
+  -H 'bt-uid: 685ae587df5efbd36821c1f6' \
+  -H 'organization_id: 685ae587df5efbd36821c1f6' \
+  -H 'origin: https://contracts-staging.grainchain.io' \
+  -H 'pk-organization: 685ae587df5efbd36821c1f6' \
+  -H 'priority: u=1, i' \
+  -H 'referer: https://contracts-staging.grainchain.io/' \
+  -H 'sec-ch-ua: "Chromium";v="140", "Not=A?Brand";v="24", "Google Chrome";v="140"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "macOS"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-site' \
+  -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36'

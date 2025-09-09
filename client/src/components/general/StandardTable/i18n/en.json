@@ -1,0 +1,61 @@
+{
+  "actions": "Actions",
+  "create": "Create",
+  "view": "View",
+  "edit": "Edit",
+  "delete": "Delete",
+  "duplicate": "Duplicate",
+  "print": "Print",
+  "settle": "Settle",
+  "search": "Search...",
+  "noResults": "No results found",
+  "loading": "Loading...",
+  "noDataAvailable": "No data available",
+  "rowsPerPage": "Rows per page",
+  "showingResults": "Showing {{start}} to {{end}} of {{total}} results",
+  "pageOfPages": "Page {{current}} of {{total}}",
+  "sortAscending": "Sort ascending",
+  "sortDescending": "Sort descending",
+  "emptyState": "No data to display",
+  "errorState": "Error loading data",
+  "tryAgain": "Try again",
+  "refreshData": "Refresh data",
+  "filters": {
+    "all": "All",
+    "basis": "Basis",
+    "fixed": "Fixed",
+    "filterBy": "Filter by:",
+    "clearAll": "Clear All Filters",
+    "showingFiltered": "Showing filtered results",
+    "activeFilters": "Active filters",
+    "noFiltersActive": "No filters active"
+  },
+  "pagination": {
+    "first": "First",
+    "previous": "Previous",
+    "next": "Next",
+    "last": "Last",
+    "goToPage": "Go to page",
+    "itemsPerPage": "Items per page",
+    "totalItems": "Total items"
+  },
+  "columns": {
+    "id": "ID",
+    "name": "Name",
+    "status": "Status",
+    "type": "Type",
+    "date": "Date",
+    "quantity": "Quantity",
+    "price": "Price",
+    "total": "Total"
+  },
+  "export": {
+    "exportData": "Export Data",
+    "exportCSV": "Export to CSV",
+    "exportExcel": "Export to Excel",
+    "exportPDF": "Export to PDF",
+    "exporting": "Exporting...",
+    "exportSuccess": "Export completed successfully",
+    "exportError": "Error during export"
+  }
+}

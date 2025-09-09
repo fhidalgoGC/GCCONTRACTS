@@ -1,0 +1,175 @@
+/* PersonSelectionModal Styles */
+
+.person-selection-trigger {
+  @apply w-full justify-start text-left font-normal;
+}
+
+.person-selection-trigger.error {
+  @apply border-red-500 bg-red-50 dark:bg-red-950/10;
+}
+
+.person-selection-trigger.selected {
+  @apply text-gray-900 dark:text-gray-100;
+}
+
+.person-selection-trigger.placeholder {
+  @apply text-gray-500 dark:text-gray-400;
+}
+
+.person-selection-dialog {
+  @apply sm:max-w-4xl w-full max-w-4xl h-[80vh] max-h-[80vh] flex flex-col p-6;
+}
+
+.person-selection-container {
+  @apply flex-1 flex flex-col space-y-4 min-h-0 overflow-hidden;
+}
+
+.person-selection-search {
+  @apply pl-10 pr-10;
+}
+
+.person-selection-loading {
+  @apply flex-1 flex flex-col items-center justify-center min-h-0;
+}
+
+.person-selection-loading-spinner {
+  @apply inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600;
+}
+
+.person-selection-loading-text {
+  @apply mt-4 text-lg font-medium;
+}
+
+.person-selection-loading-subtext {
+  @apply mt-2 text-sm text-gray-500;
+}
+
+.person-selection-results {
+  @apply relative flex-1 min-h-0 overflow-y-auto pr-2;
+}
+
+.person-selection-search-overlay {
+  @apply absolute inset-0 bg-white/80 dark:bg-gray-900/80 flex items-center justify-center z-10;
+}
+
+.person-selection-search-loading {
+  @apply flex flex-col items-center;
+}
+
+.person-selection-search-spinner {
+  @apply animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600;
+}
+
+.person-selection-search-text {
+  @apply mt-2 text-sm text-gray-600 dark:text-gray-400;
+}
+
+.person-selection-empty {
+  @apply text-center py-8 text-gray-500;
+}
+
+.person-selection-empty-icon {
+  @apply h-12 w-12 mx-auto mb-3 opacity-50;
+}
+
+.person-selection-grid {
+  @apply grid grid-cols-1 gap-4;
+}
+
+.person-selection-card {
+  @apply border rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer bg-white dark:bg-gray-800 dark:border-gray-700;
+}
+
+.person-selection-card-content {
+  @apply flex items-start space-x-3;
+}
+
+.person-selection-avatar {
+  @apply flex-shrink-0 w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-full flex items-center justify-center;
+}
+
+.person-selection-avatar-icon {
+  @apply h-5 w-5 text-blue-600 dark:text-blue-400;
+}
+
+.person-selection-info {
+  @apply flex-1 min-w-0;
+}
+
+.person-selection-header {
+  @apply flex items-center space-x-2 mb-1;
+}
+
+.person-selection-name {
+  @apply text-sm font-medium text-gray-900 dark:text-gray-100 truncate;
+}
+
+.person-selection-organization {
+  @apply text-xs text-gray-600 dark:text-gray-400 mb-1 truncate;
+}
+
+.person-selection-email {
+  @apply text-xs text-gray-600 dark:text-gray-400 truncate;
+}
+
+.person-selection-load-more {
+  @apply flex justify-center items-center py-4;
+}
+
+.person-selection-load-more-spinner {
+  @apply inline-block animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600;
+}
+
+.person-selection-load-more-text {
+  @apply ml-2 text-sm text-gray-500;
+}
+
+/* Additional specific styles */
+
+.person-selection-trigger-icon {
+  @apply mr-2 h-4 w-4;
+}
+
+.person-selection-trigger-content {
+  @apply flex flex-col items-start;
+}
+
+.person-selection-trigger-text {
+  @apply text-sm;
+}
+
+.person-selection-trigger-subtext {
+  @apply text-xs text-gray-500 dark:text-gray-400 mt-1;
+}
+
+.person-selection-title {
+  @apply flex items-center space-x-2;
+}
+
+.person-selection-title-icon {
+  @apply h-5 w-5;
+}
+
+.person-selection-search-container {
+  @apply relative;
+}
+
+.person-selection-search-icon {
+  @apply absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4;
+}
+
+.person-selection-search-loading-container {
+  @apply absolute right-3 top-1/2 transform -translate-y-1/2;
+}
+
+.person-selection-search-loading-icon {
+  @apply animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600;
+}
+
+.person-selection-organization-icon {
+  @apply inline h-3 w-3 mr-1;
+}
+
+.person-selection-email-icon {
+  @apply inline h-3 w-3 mr-1;
+}

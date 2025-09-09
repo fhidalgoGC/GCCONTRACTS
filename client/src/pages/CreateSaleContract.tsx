@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'wouter';
-import DashboardLayout from '@/components/layout/DashboardLayout';
+import DashboardLayout from '@/layouts/DashboardLayout/view';
 import { PurchaseContractForm } from '@/components/PurchaseContractForm/PurchaseContractForm';
-import { generateContractId, submitContract } from '@/services/contracts.service';
+import { generateContractId, submitContract } from '@/services/contracts/contracts.service';
 import {
   AlertDialog,
   AlertDialogAction,
