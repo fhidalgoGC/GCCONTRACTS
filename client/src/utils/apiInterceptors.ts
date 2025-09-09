@@ -178,10 +178,6 @@ export const authenticatedFetch = async (
 
   // Lista de endpoints que NO deben usar autenticación JWT (excluidos)
   const excludedEndpoints = [
-    "/identity/customers", // Token endpoint
-    "/identity/v2/customers", // Customer endpoint
-    "/partition_keys", // Partition keys endpoint
-    "/organizations", // Organization endpoint (some variations)
     "/oauth/token", // Auth0 token endpoint
   ];
 
