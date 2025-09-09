@@ -72,55 +72,6 @@ export const performAutoLogout = () => {
  * a las peticiones HTTP, excepto para endpoints específicos que no los necesitan
  */
 
-export const addAuthInHeader = (
-  url: string,
-  options: RequestInit & InterceptorOptions = {},
-): RequestInit => {
-  const { excludeAuth = false, customHeaders = {}, ...fetchOptions } = options;
-
-  // Lista de endpoints que NO deben usar autenticación JWT
-  const excludedEndpoints = [
-    "/oauth/token", // Auth0 token endpoint
-  ];
-
-  // Verificar si el URL debe ser excluido de autenticación
-  const shouldExcludeAuth =
-    excludeAuth || excludedEndpoints.some((endpoint) => url.includes(endpoint));
-
-  // Preparar headers base
-  const headers = new Headers(fetchOptions.headers);
-
-  // Agregar headers personalizados
-  Object.entries(customHeaders).forEach(([key, value]) => {
-    headers.set(key, value);
-  });
-
-  // Solo agregar autenticación si no está excluida
-  if (!shouldExcludeAuth) {
-    // Obtener tokens del localStorage
-    const jwt = localStorage.getItem("jwt") || localStorage.getItem("id_token");
-    const partitionKey = localStorage.getItem("partition_key");
-
-    // Agregar JWT token si está disponible
-    if (jwt) {
-      headers.set("authorization", `Bearer ${jwt}`);
-    }
-
-    // Agregar partition key si está disponible
-    if (partitionKey) {
-      headers.set("_partitionkey", partitionKey);
-      headers.set("bt-organization", partitionKey);
-      headers.set("bt-uid", partitionKey);
-      headers.set("organization_id", partitionKey);
-      headers.set("pk-organization", partitionKey);
-    }
-  }
-
-  return {
-    ...fetchOptions,
-    headers,
-  };
-};
 
 export const addJwtPk = (
   url: string,
@@ -151,21 +102,9 @@ export const addJwtPk = (
     const jwt = localStorage.getItem("jwt") || localStorage.getItem("id_token");
     const partitionKey = localStorage.getItem("partition_key");
 
-    console.log("🔍 DEBUG INTERCEPTOR:", {
-      url,
-      shouldExcludeAuth,
-      jwt: jwt ? "✅ Token presente" : "❌ No token",
-      partitionKey: partitionKey ? "✅ PartitionKey presente" : "❌ No partitionKey",
-      jwtLength: jwt?.length || 0,
-      partitionKeyValue: partitionKey
-    });
-
     // Agregar JWT token si está disponible
     if (jwt) {
       headers.set("authorization", `Bearer ${jwt}`);
-      console.log("✅ Header Authorization agregado");
-    } else {
-      console.log("❌ No se pudo agregar Authorization header - no hay JWT token");
     }
 
     // Agregar partition key si está disponible
@@ -175,12 +114,7 @@ export const addJwtPk = (
       headers.set("bt-uid", partitionKey);
       headers.set("organization_id", partitionKey);
       headers.set("pk-organization", partitionKey);
-      console.log("✅ Headers de PartitionKey agregados");
-    } else {
-      console.log("❌ No se pudieron agregar headers de PartitionKey - no hay partitionKey");
     }
-  } else {
-    console.log("🚫 AUTH EXCLUIDA para URL:", url);
   }
 
   return {
@@ -281,74 +215,6 @@ export const authenticatedFetch = async (
 };
 
 
-
-export const authenticatedAddTokenFetch = (
-  url: string,
-  options: RequestInit & InterceptorOptions = {},
-): Promise<Response> => {
-  const { excludeAuth = false, ...fetchOptions } = options;
-
-  // Lista de endpoints que NO deben usar autenticación JWT (excluidos)
-  const excludedEndpoints = [
-    "/oauth/token", // Auth0 token endpoint
-  ];
-
-  // Verificar si el URL debe ser excluido
-  const shouldExcludeAuth =
-    excludeAuth || excludedEndpoints.some((endpoint) => url.includes(endpoint));
-
-  let modifiedOptions = addAuthInHeader(url, options);
-
-  // Solo agregar created_by para métodos PUT/POST en endpoints no excluidos
-  if (
-    !shouldExcludeAuth &&
-    (fetchOptions.method === "PUT" || fetchOptions.method === "POST")
-  ) {
-    try {
-      // Obtener datos del usuario del localStorage
-      const createdById = localStorage.getItem("user_id") || "";
-      const createdByName = localStorage.getItem("user_name") || "";
-
-
-      // Si hay un body existente, parsearlo y agregar los campos
-      if (modifiedOptions.body) {
-        let bodyData: any = {};
-
-        // Intentar parsear el body si es string
-        if (typeof modifiedOptions.body === "string") {
-          try {
-            bodyData = JSON.parse(modifiedOptions.body);
-          } catch (e) {
-            // Si no se puede parsear, crear objeto nuevo
-            bodyData = {};
-          }
-        }
-
-        // Agregar created_by_id y created_by_name al body
-        bodyData.created_by_id = createdById;
-        bodyData.created_by_name = createdByName;
-
-        // Agregar registered_by_id y registered_by_name al body
-        bodyData.registered_by_id = createdById;
-        bodyData.registered_by_name = createdByName;
-
-        // Convertir de vuelta a string
-        modifiedOptions.body = JSON.stringify(bodyData);
-
-        // Asegurar Content-Type para JSON
-        const headers = new Headers(modifiedOptions.headers);
-        if (!headers.has("Content-Type")) {
-          headers.set("Content-Type", "application/json");
-        }
-        modifiedOptions.headers = headers;
-      }
-    } catch (error) {
-      console.warn("⚠️ Error adding created_by fields:", error);
-    }
-  }
-
-  return fetch(url, modifiedOptions);
-};
 
 /**
  * Fetch sin autenticación para endpoints públicos
