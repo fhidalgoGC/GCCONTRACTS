@@ -224,27 +224,9 @@ export const publicFetch = (
     InterceptorOptions);
 };
 
-/**
- * Utilitie para verificar si hay tokens de autenticación disponibles
- */
-export const hasAuthTokens = (): {
-  hasJwt: boolean;
-  hasPartition: boolean;
-  isAuthenticated: boolean;
-} => {
-  const jwt = localStorage.getItem("jwt") || localStorage.getItem("id_token");
-  const partitionKey = localStorage.getItem("partition_key");
-
-  return {
-    hasJwt: !!jwt,
-    hasPartition: !!partitionKey,
-    isAuthenticated: !!jwt && !!partitionKey,
-  };
-};
 
 export default {
   addJwtPk,
   authenticatedFetch,
   publicFetch,
-  hasAuthTokens,
 };

@@ -53,7 +53,6 @@ import {
   FieldConfig,
   ProgressBarConfig,
 } from "@/components/contracts/SubContractCard";
-import { hasAuthTokens } from "@/utils/apiInterceptors";
 import {
   deleteSubContract,
   getContractById,
@@ -178,16 +177,7 @@ export default function ContractDetail() {
   // Función para cargar la dirección del participante usando el interceptor addJwtPk
   const loadParticipantAddress = async (participantId: string) => {
     try {
-      const authCheck = hasAuthTokens();
-      if (!authCheck.isAuthenticated) {
-        console.error(
-          "❌ No se encontraron tokens de autenticación o partition key",
-        );
-        setParticipantAddress("Address requires authentication");
-        return;
-      }
-
-      // Usar el servicio contracts.service
+      // Usar el servicio contracts.service (el interceptor maneja auth automáticamente)
       const response = await getParticipantLocation(participantId);
 
       if (response.ok) {
@@ -240,11 +230,6 @@ export default function ContractDetail() {
     try {
       console.log("🔄 Full refresh started for contract:", contractId);
 
-      const authCheck = hasAuthTokens();
-      if (!authCheck.isAuthenticated) {
-        console.error("❌ No authentication tokens available for full refresh");
-        return;
-      }
 
       // Ejecutar ambos endpoints en paralelo para mejor rendimiento
       const [contractResponse, subContractsResponse] = await Promise.all([
@@ -426,13 +411,6 @@ export default function ContractDetail() {
     try {
       console.log("🗑️ Deleting contract:", contractId);
 
-      const authCheck = hasAuthTokens();
-      if (!authCheck.isAuthenticated) {
-        console.error(
-          "❌ No authentication tokens available for delete operation",
-        );
-        return;
-      }
 
       // Call delete endpoint using the service
       const response = await deleteContract(contractId);
@@ -1071,16 +1049,6 @@ export default function ContractDetail() {
     try {
       setLoadingSubContracts(true);
 
-      const authCheck = hasAuthTokens();
-      console.log("🔐 Auth check para sub-contratos:", authCheck);
-
-      if (!authCheck.isAuthenticated) {
-        console.log(
-          "🔐 Sin autenticación válida - no se cargarán sub-contratos",
-        );
-        setSubContractsData([]);
-        return;
-      }
 
       // Usar el servicio para obtener sub-contratos
       const response = await getSubContractsByContractId(contractId);
